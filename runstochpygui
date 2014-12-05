@@ -1,0 +1,11 @@
+from PyQt4 import QtCore, QtGui
+from pstochpyf import *
+import sys
+
+if __name__ == "__main__":
+     import sys
+     app = QtGui.QApplication(sys.argv)
+     f = pstochpyf()
+     f.show()
+     app.setMainWidget(f)
+     app.exec_loop()
