@@ -1,0 +1,9 @@
+Run tests from the top ebolaproject directory:
+
+$ python ebolaopt/tests/test_parse_input.py
+
+-------------
+
+For documentation, edit/create .rst files. Then type "make html"
+to make html or "make latex" to make the latex. To make a pdf from
+the latex, cd _build/latex and type "make".
