@@ -3,9 +3,9 @@ CXXFLAGS = -g -Wall -std=c++11
 .PHONY: all clean
 all: StochCalc
 
-StochCalc: StochCalc.o
+StochCalc: StochCalc.cc
 	$(CXX) $(CXXFLAGS) -o StochCalc StochCalc.cc
 
 clean:
-	$(RM) *.o
+	$(RM) *.o *.out
 	$(RM) StochCalc
