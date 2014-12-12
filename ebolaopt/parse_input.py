@@ -31,3 +31,25 @@ def parse_data(filename, country):
         cases = numpy.array(cases)
 
     return days, cases
+
+
+#XXX To do: map recognizable names like "drugs" to model parameter names like "delta_2"
+def parse_resources(filename):
+    """Parse a csv file of total budget constraint and cost of each
+    intervention."""
+    
+    resource_dict = {"interventions":{}}
+    
+    with open(filename, 'rb') as csvfile:
+        datareader = csv.reader(csvfile)
+        # Iterate over rows
+        for row in datareader:
+            if row[0].lower() == "total":
+                resource_dict["total"] = float(row[1])
+            else:
+                resource_dict["interventions"][row[0]] = (float(row[1]), float(row[2]))
+    #XXX To do: check inputs
+
+    return resource_dict
+
+
