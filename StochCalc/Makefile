@@ -1,11 +1,12 @@
-CXXFLAGS = -g -Wall -std=c++11
-
+Args=StochCalc.cc StochCalc.h StochParams.cc StochParams.h
+Args2=ModelParams.cc ModelParams.h setup.py StochLib.pyx
 .PHONY: all clean
-all: StochCalc
+all: StochLib.so
 
-StochCalc: StochCalc.cc
-	$(CXX) $(CXXFLAGS) -o StochCalc StochCalc.cc
+StochLib.so: $(Args) $(Args2)
+	python setup.py build_ext --inplace
 
 clean:
 	$(RM) *.o *.out
-	$(RM) StochCalc
+	$(RM) -r build
+	$(RM) StochLib.so StochLib.cpp

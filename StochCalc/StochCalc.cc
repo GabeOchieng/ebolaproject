@@ -1,11 +1,20 @@
+#include "StochCalc.h"
+#include "StochParams.h"
+#include "ModelParams.h"
+#include <string>
 #include <stdio.h>
 #include <stdlib.h>
 #include <random>
 #include <math.h>
 
-int main() {
+float StochCalc(StochParams *myStochParams, ModelParams *myModel,
+                ModelParams *interventions, float t_interventions,
+                std::string OutputFileName) {
   FILE * outFile;
-  outFile = fopen ("StochCalc.out", "w");
+
+  if (OutputFileName != "NONE") {
+    outFile = fopen (OutputFileName.c_str(), "w");
+  }
 
   int Trajectories;
   double beta_I, beta_H, beta_F, alpha, gamma_h, theta_1, gamma_dh;
@@ -15,30 +24,31 @@ int main() {
   double t = 0.0;
   double t_final;
   int N_samples;
+  double Damage = 0;  // Total number of deaths.
 
   /* Parameter Definitions. */
-  N_samples = 200;       // Total number of times to sample the data.
-  t_final = 250.0;       // Final time.
-  Trajectories = 10;      // Number of trajectories to run.
-  I_init = 3;            // Initial number of infected.
-  S_init = 199997;       // Initial number of susceptible.
-  H_init = 0;            // Initial number in the hosptial.
-  F_init = 0;            // Initial number at funeral.
-  R_init = 0;            // Initial number of recovered.
-  E_init = 0;            // Initial number of exposed.
+  N_samples = myStochParams->N_samples;
+  t_final = myStochParams->t_final;
+  Trajectories = myStochParams->Trajectories;
+  I_init = myStochParams->I_init;
+  S_init = myStochParams->S_init;
+  H_init = myStochParams->H_init;
+  F_init = myStochParams->F_init;
+  R_init = myStochParams->R_init;
+  E_init = myStochParams->E_init;
 
   /* Stochastic rate parameters. */
-  beta_I = 0.084;
-  beta_H = 0.11342857;
-  beta_F = 1.0932857;
-  alpha = 0.142857;
-  gamma_h = 0.2;
-  theta_1 = 0.67;
-  delta_1 = 0.8;
-  delta_2 = 0.8;
-  gamma_f = 0.5;
-  gamma_i = 0.1;
-  gamma_d = 0.104167;
+  beta_I = myModel->beta_I;
+  beta_H = myModel->beta_H;
+  beta_F = myModel->beta_F;
+  alpha = myModel->alpha;
+  gamma_h = myModel->gamma_h;
+  theta_1 = myModel->theta_1;
+  delta_1 = myModel->delta_1;
+  delta_2 = myModel->delta_2;
+  gamma_f = myModel->gamma_f;
+  gamma_i = myModel->gamma_i;
+  gamma_d = myModel->gamma_d;
 
   /* Initialize arrays to store the compartment values at the sample
      times and arrays to store the average and standard deviations
@@ -119,6 +129,21 @@ int main() {
 
     /* Step forward through the reactions until the final time is reached. */
     while (t < t_final) {
+
+      if (t > t_interventions) {
+        /* Activate the interventions. */
+        beta_I = interventions->beta_I;
+        beta_H = interventions->beta_H;
+        beta_F = interventions->beta_F;
+        alpha = interventions->alpha;
+        gamma_h = interventions->gamma_h;
+        theta_1 = interventions->theta_1;
+        delta_1 = interventions->delta_1;
+        delta_2 = interventions->delta_2;
+        gamma_f = interventions->gamma_f;
+        gamma_i = interventions->gamma_i;
+        gamma_d = interventions->gamma_d;
+      }
 
       /* Total reaction rate. */
       double R_tot;
@@ -257,6 +282,12 @@ int main() {
       R_avg[j] = (R_avg[j] * (i - 1) + R_array[j]) / i;
     }
 
+    /* Calculate the total number of deaths. */
+    for (int j = 0; j < N_samples+1; ++j) {
+      Damage += F_avg[j];
+    }
+    Damage = Damage / (N_samples + 1);
+
     /* Calculate the standard deviations in two passes. */
     for (int j = 0; j < N_samples+1; ++j) {
       S_sigma[j] += (S_array[j] - S_avg[j]) * (S_array[j] - S_avg[j]);
@@ -277,24 +308,26 @@ int main() {
     }
   }
 
-  /* Print results to the output file. */
-  fprintf(outFile, "t (days), S(avg), E(avg), I(avg), H(avg), F(avg), R(avg)\n");
-  for (int i = 0; i < N_samples; ++i) {
-    fprintf(outFile, "%.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f\n", t_array[i], \
-           S_avg[i], E_avg[i], I_avg[i], H_avg[i], F_avg[i], R_avg[i]);
+  if (OutputFileName != "NONE") {
+    /* Print results to the output file. */
+    fprintf(outFile, "t (days), S(avg), E(avg), I(avg), H(avg), F(avg), R(avg)\n");
+    for (int i = 0; i < N_samples; ++i) {
+      fprintf(outFile, "%.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f\n", t_array[i], \
+              S_avg[i], E_avg[i], I_avg[i], H_avg[i], F_avg[i], R_avg[i]);
+    }
+    
+    fprintf(outFile,"\n");
+    
+    fprintf(outFile, "t (days), S(std dev), E(std dev), I(std dev), H(std dev), "
+            "F(std dev), R(std dev)\n");
+    for (int i = 0; i < N_samples; ++i) {
+      fprintf(outFile, "%.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f\n", t_array[i], \
+              S_sigma[i], E_sigma[i], I_sigma[i], H_sigma[i], F_sigma[i], \
+              R_sigma[i]);
+    }
+
+    fclose(outFile);
   }
 
-  fprintf(outFile,"\n");
-
-  fprintf(outFile, "t (days), S(std dev), E(std dev), I(std dev), H(std dev), "
-         "F(std dev), R(std dev)\n");
-  for (int i = 0; i < N_samples; ++i) {
-    fprintf(outFile, "%.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f\n", t_array[i], \
-           S_sigma[i], E_sigma[i], I_sigma[i], H_sigma[i], F_sigma[i], \
-           R_sigma[i]);
-  }
-
-  fclose(outFile);
-
-  return 0;
+  return Damage * t_final * gamma_f;
 }
