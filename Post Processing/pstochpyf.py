@@ -11,7 +11,6 @@ from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar 
 from matplotlib.figure import Figure 
 
-
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
@@ -26,54 +25,40 @@ except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName(_fromUtf8("Dialog"))
-        Dialog.resize(2080, 1401)
-        self.layoutWidget = QtGui.QWidget(Dialog)
-        self.layoutWidget.setGeometry(QtCore.QRect(630, 1200, 844, 40))
-        self.layoutWidget.setObjectName(_fromUtf8("layoutWidget"))
-        self.horizontalLayout = QtGui.QHBoxLayout(self.layoutWidget)
-        self.horizontalLayout.setMargin(0)
-        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
-        self.radioButton_4 = QtGui.QRadioButton(self.layoutWidget)
-        self.radioButton_4.setObjectName(_fromUtf8("radioButton_4"))
-        self.horizontalLayout.addWidget(self.radioButton_4)
-        self.radioButton_5 = QtGui.QRadioButton(self.layoutWidget)
-        self.radioButton_5.setObjectName(_fromUtf8("radioButton_5"))
-        self.horizontalLayout.addWidget(self.radioButton_5)
-        self.radioButton_6 = QtGui.QRadioButton(self.layoutWidget)
-        self.radioButton_6.setObjectName(_fromUtf8("radioButton_6"))
-        self.horizontalLayout.addWidget(self.radioButton_6)
-        self.layoutWidget1 = QtGui.QWidget(Dialog)
-        self.layoutWidget1.setGeometry(QtCore.QRect(30, 120, 1841, 1041))
-        self.layoutWidget1.setObjectName(_fromUtf8("layoutWidget1"))
-        self.formLayout_2 = QtGui.QFormLayout(self.layoutWidget1)
-        self.formLayout_2.setFieldGrowthPolicy(QtGui.QFormLayout.AllNonFixedFieldsGrow)
-        self.formLayout_2.setMargin(0)
-        self.formLayout_2.setObjectName(_fromUtf8("formLayout_2"))
-        self.pushButton_4 = QtGui.QPushButton(self.layoutWidget1)
-        self.pushButton_4.setObjectName(_fromUtf8("pushButton_4"))
-        self.formLayout_2.setWidget(0, QtGui.QFormLayout.LabelRole, self.pushButton_4)
-        self.EbolaPlot = QtGui.QLabel(self.layoutWidget1)
-        self.EbolaPlot.setMinimumSize(QtCore.QSize(1637, 1000))
-        self.EbolaPlot.setMaximumSize(QtCore.QSize(1640, 16777215))
-        self.EbolaPlot.setObjectName(_fromUtf8("EbolaPlot"))
-        self.formLayout_2.setWidget(0, QtGui.QFormLayout.FieldRole, self.EbolaPlot)
-        self.layoutWidget2 = QtGui.QWidget(Dialog)
-        self.layoutWidget2.setGeometry(QtCore.QRect(34, 23, 1841, 59))
-        self.layoutWidget2.setObjectName(_fromUtf8("layoutWidget2"))
-        self.horizontalLayout_2 = QtGui.QHBoxLayout(self.layoutWidget2)
-        self.horizontalLayout_2.setMargin(0)
-        self.horizontalLayout_2.setObjectName(_fromUtf8("horizontalLayout_2"))
-        self.InputFile = QtGui.QPushButton(self.layoutWidget2)
-        self.InputFile.setMaximumSize(QtCore.QSize(187, 500))
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName(_fromUtf8("MainWindow"))
+        MainWindow.resize(1406, 800)
+        MainWindow.setMaximumSize(QtCore.QSize(16777215, 800))
+        self.centralwidget = QtGui.QWidget(MainWindow)
+        self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
+        self.formLayout = QtGui.QFormLayout(self.centralwidget)
+        self.formLayout.setObjectName(_fromUtf8("formLayout"))
+        self.InputFile = QtGui.QPushButton(self.centralwidget)
+        self.InputFile.setMaximumSize(QtCore.QSize(241, 16777215))
         self.InputFile.setObjectName(_fromUtf8("InputFile"))
-        self.horizontalLayout_2.addWidget(self.InputFile)
-        self.label = QtGui.QLabel(self.layoutWidget2)
-        self.label.setMaximumSize(QtCore.QSize(1751, 60))
+        self.formLayout.setWidget(0, QtGui.QFormLayout.LabelRole, self.InputFile)
+        self.label = QtGui.QLabel(self.centralwidget)
         self.label.setObjectName(_fromUtf8("label"))
-        self.horizontalLayout_2.addWidget(self.label)
+        self.formLayout.setWidget(0, QtGui.QFormLayout.FieldRole, self.label)
+        self.pushButton_2 = QtGui.QPushButton(self.centralwidget)
+        self.pushButton_2.setMaximumSize(QtCore.QSize(241, 91))
+        self.pushButton_2.setObjectName(_fromUtf8("pushButton_2"))
+        self.formLayout.setWidget(1, QtGui.QFormLayout.LabelRole, self.pushButton_2)
+        self.label_2 = QtGui.QLabel(self.centralwidget)
+        #self.label_2.setMaximumSize(QtCore.QSize(1381, 891))
+        self.label_2.setObjectName(_fromUtf8("label_2"))
+        self.formLayout.setWidget(1, QtGui.QFormLayout.FieldRole, self.label_2)
+        self.radioButton = QtGui.QRadioButton(self.centralwidget)
+        self.radioButton.setObjectName(_fromUtf8("radioButton"))
+        self.formLayout.setWidget(2, QtGui.QFormLayout.FieldRole, self.radioButton)
+        self.radioButton_2 = QtGui.QRadioButton(self.centralwidget)
+        self.radioButton_2.setObjectName(_fromUtf8("radioButton_2"))
+        self.formLayout.setWidget(3, QtGui.QFormLayout.FieldRole, self.radioButton_2)
+        self.radioButton_3 = QtGui.QRadioButton(self.centralwidget)
+        self.radioButton_3.setObjectName(_fromUtf8("radioButton_3"))
+        self.formLayout.setWidget(4, QtGui.QFormLayout.FieldRole, self.radioButton_3)
+        MainWindow.setCentralWidget(self.centralwidget)
 
 	def setLabelText():
 		pathname = os.path.dirname(sys.argv[0]) 
@@ -91,33 +76,33 @@ class Ui_Dialog(object):
 		#plt.plot(my_matrix[:,0], my_matrix[:,1])
 		#plt.show()
 		plt.savefig('Graph1.png')
-		self.EbolaPlot.setPixmap(QtGui.QPixmap(_fromUtf8("Graph1.png")))
-		self.EbolaPlot.setScaledContents(True)
-		
-        self.retranslateUi(Dialog)
-        QtCore.QObject.connect(self.pushButton_4, QtCore.SIGNAL(_fromUtf8("clicked()")), showGraph)
-        QtCore.QObject.connect(self.InputFile, QtCore.SIGNAL(_fromUtf8("clicked()")), setLabelText)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
-
-    def retranslateUi(self, Dialog):
-        Dialog.setWindowTitle(_translate("Dialog", "Ebola Data Projections", None))
-        self.radioButton_4.setText(_translate("Dialog", "Import Data CSV", None))
-        self.radioButton_5.setText(_translate("Dialog", "Import Data ACII", None))
-        self.radioButton_6.setText(_translate("Dialog", "Import Data Binary", None))
-        self.pushButton_4.setWhatsThis(_translate("Dialog", "Data Plots", None))
-        self.pushButton_4.setText(_translate("Dialog", "Graph", None))
-        self.InputFile.setWhatsThis(_translate("Dialog", "Imports File for Analysis", None))
-        self.InputFile.setText(_translate("Dialog", "Import File", None))
-        self.label.setText(_translate("Dialog", "TextLabel", None))
-
+		self.label_2.setPixmap(QtGui.QPixmap(_fromUtf8("Graph1.png")))
+		self.label_2.setScaledContents(True)
 			
+	
+        self.retranslateUi(MainWindow)
+        QtCore.QObject.connect(self.InputFile, QtCore.SIGNAL(_fromUtf8("clicked()")), setLabelText)
+        QtCore.QObject.connect(self.pushButton_2, QtCore.SIGNAL(_fromUtf8("clicked()")), showGraph)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
+        self.InputFile.setText(_translate("MainWindow", "Import File", None))
+        self.label.setText(_translate("MainWindow", "TextLabel", None))
+        self.pushButton_2.setText(_translate("MainWindow", "Graph", None))
+        self.label_2.setText(_translate("MainWindow", "TextLabel", None))
+        self.radioButton.setText(_translate("MainWindow", "Import Data CSV", None))
+        self.radioButton_2.setText(_translate("MainWindow", "Import Data ASCII", None))
+        self.radioButton_3.setText(_translate("MainWindow", "Import Data Binary", None))
+
+
 	def Import_CSV(self):
 		f = open('heat_omp.out', 'r')
 		f1 = open('EbolaDataProjection.csv', 'w')
 		f1.write(f.read())
 		f1.close()
 		f.close()
-	self.radioButton_4.clicked.connect(Import_CSV)
+	self.radioButton.clicked.connect(Import_CSV)
 
 	def Import_ASCII(self):
 		f = open('heat_omp.out', 'r')
@@ -125,7 +110,7 @@ class Ui_Dialog(object):
 		f1.write(f.read())
 		f1.close()
 		f.close()
-	self.radioButton_5.clicked.connect(Import_ASCII)
+	self.radioButton_2.clicked.connect(Import_ASCII)
 
 	
 	def Import_Binary(self):
@@ -134,15 +119,14 @@ class Ui_Dialog(object):
 		f1.write(f.read())
 		f1.close()
 		f.close()
-	self.radioButton_6.clicked.connect(Import_Binary)
-	
+	self.radioButton_3.clicked.connect(Import_Binary)
 
 if __name__ == "__main__":
     import sys
     app = QtGui.QApplication(sys.argv)
-    Dialog = QtGui.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
+    MainWindow = QtGui.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
     sys.exit(app.exec_())
 
