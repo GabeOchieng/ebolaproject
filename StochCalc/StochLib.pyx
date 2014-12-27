@@ -27,36 +27,69 @@ cdef class pyModelParams:
 
     def setBeta_I(self, val):
         self.thisptr.beta_I = val
+        
+    def getBeta_I(self):
+        return self.thisptr.beta_I
 
     def setBeta_H(self, val):
         self.thisptr.beta_H = val
+        
+    def getBeta_H(self):
+        return self.thisptr.beta_H
     
     def setBeta_F(self, val):
         self.thisptr.beta_F = val
+        
+    def getBeta_F(self):
+        return self.thisptr.beta_F
 
     def setAlpha(self, val):
         self.thisptr.alpha = val
 
+    def getAlpha(self):
+        return self.thisptr.alpha
+
     def setGamma_h(self, val):
         self.thisptr.gamma_h = val
+                
+    def getGamma_h(self):
+        return self.thisptr.gamma_h
 
     def setGamma_f(self, val):
         self.thisptr.gamma_f = val
+        
+    def getGamma_f(self):
+        return self.thisptr.gamma_f
 
     def setGamma_i(self, val):
         self.thisptr.gamma_i = val
+    
+    def getGamma_i(self):
+        return self.thisptr.gamma_i
 
     def setGamma_d(self, val):
         self.thisptr.gamma_d = val
+    
+    def getGamma_d(self):
+        return self.thisptr.gamma_d
 
     def setTheta_1(self, val):
         self.thisptr.theta_1 = val
 
+    def getTheta_1(self):
+        return self.thisptr.theta_1
+
     def setDelta_1(self, val):
         self.thisptr.delta_1 = val
+        
+    def getDelta_1(self):
+        return self.thisptr.delta_1
 
     def setDelta_2(self, val):
         self.thisptr.delta_2 = val
+                
+    def getDelta_2(self):
+        return self.thisptr.delta_2
 
 cdef class pyStochParams:
     cdef StochParams* thisptr # hold a c++ instance
