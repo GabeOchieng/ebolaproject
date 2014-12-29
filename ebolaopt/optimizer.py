@@ -1,37 +1,36 @@
 # Python2.7
 import scipy.optimize
 import numpy
-from ebolaopt.parse_input import parse_data, parse_resources
+from ebolaopt.parse_input import parse_data
 from ebolaopt.cost_function import CostFunction
-
-# Intervention parameters: convert from array to dict
-def params_array2dict(params_array):
-    var_names = ['beta_H', 'delta_2', 'theta_1']
-    var_names.sort() # dict keys and values are sorted
-    params_dict = {}
-    for i, val in enumerate(params_array):
-        params_dict[var_names[i]] = val
-    return params_dict
-
-# Intervention parameters: convert from dict to array
-def params_dict2array(params_dict):
-    return numpy.array(params_dict.values())
+import StochCalc.StochLib as StochLib
+from ebolaopt.constraints import Constraints
 
 ##############
 #XXX Placeholder function for now for Yile's code, which should be imported
 def fit_params(data):
-    orig_params = {'beta_H': 0.062, 'delta_2': 0.5, 'theta_1': 0.197}
-    return params_dict2array(orig_params)
+    OrigParams = StochLib.pyModelParams()
+    OrigParams.setBeta_I(0.084)
+    OrigParams.setBeta_H(0.11342857)
+    OrigParams.setBeta_F(1.0932857)
+    OrigParams.setAlpha(0.142857)
+    OrigParams.setGamma_h(0.2)
+    OrigParams.setGamma_f(0.5)
+    OrigParams.setGamma_i(0.1)
+    OrigParams.setGamma_d(0.104167)
+    OrigParams.setTheta_1(0.67)
+    OrigParams.setDelta_1(0.8)
+    OrigParams.setDelta_2(0.8)
+    return OrigParams
 ##############
 
 # Default values
 default_data = numpy.loadtxt("ebolaopt/data/default_data.txt")
-default_resources = {'total': 5000.0, 'interventions': {'beta_H': (100.0, -0.0001), 'delta_2': (500.0, -1e-05), 'theta_1': (2.0, 0.0001)}}
 
 class Optimizer:
     """This is the main overall wrapper class."""
 
-    def __init__(self, data_file=None, resources_file=None, country="Liberia"):
+    def __init__(self, data_file=None, constraints_file=None, country="Liberia"):
         """Initialize optimizer object and parse input files."""
         # Use default values if none are provided
         if data_file is None:
@@ -39,32 +38,50 @@ class Optimizer:
         else:
             self.data = parse_data(data_file, country)
         
-        if resources_file is None:
-            self.resources_dict = default_resources
-        else:
-            self.resources_dict = parse_resources(resources_file)
-
-        return
+        # Create constraints object
+        self.Constraints = Constraints(constraints_file)
 
     def initialize_model(self):
         """Fit the deterministic model parameters."""
-        self.orig_params = fit_params(self.data) #XXX first time self.orig_params is defined
-        return
+        self.OrigParams = fit_params(self.data) #XXX first time self.OrigParams is defined
+        self.Constraints.check_total(self.OrigParams)
+    
+    def initialize_stoch_solver(self, N_samples=200, trajectories=10, \
+                               t_final=250., I_init=3, S_init=199997):
+        """Initialize stochastic calculation parameters"""
+        self.StochParams = StochLib.pyStochParams()
+        self.StochParams.setN_samples(N_samples)
+        self.StochParams.setTrajectories(trajectories)
+        self.StochParams.setI_init(I_init)
+        self.StochParams.setS_init(S_init)
+        self.StochParams.setH_init(0)
+        self.StochParams.setF_init(0)
+        self.StochParams.setR_init(0)
+        self.StochParams.setE_init(0)
+        self.StochParams.setT_final(t_final)
 
-    def run_optimization(self, final_time):
+    def run_optimization(self):
         """Call the Scipy optimization function."""
-        #XXX Need to warn if self.orig_params is not initialized
-        costfunc_object = CostFunction(final_time, self.orig_params, self.resources_dict)
-        n = len(self.resources_dict["interventions"].keys())
+        #XXX Need to check that setup was done properly
+        costfunc_object = CostFunction(self.StochParams, self.OrigParams, \
+                                       self.Constraints)
+        n = len(self.Constraints.interventions.keys())
         x0 = numpy.ones(n)*1./float(n) # Start by distributing resources uniformly
-        
-        # Set up constraints
-        eqcons = [lambda x: numpy.sum(x) - 1.]
         def ineq_maker(index):
             return lambda x: x[index]
-        ieqcons = [ineq_maker(i) for i in range(n)]
-        xmin = scipy.optimize.fmin_slsqp(costfunc_object, x0, eqcons=eqcons, ieqcons=ieqcons, disp=0)
-        return xmin
+        cons = [ineq_maker(i) for i in range(n)]
+        # Sum of resource allocation fractions must be less than 1
+        def sum1func(x):
+            return 1. - numpy.sum(x)
+        cons.append(sum1func)
+        self.xmin = scipy.optimize.fmin_cobyla(costfunc_object, x0, cons, disp=0)
+        return self.xmin
+    
+    def represent_allocation(self, resource_alloc):
+        """Pretty print the final result."""
+        print "Resource allocation:"
+        for i, param in enumerate(self.Constraints.interventions):
+            print param, "should get", resource_alloc[i]*100., "percent of the allocation"
 
     def plot_optimum(self):
         """Do plotting."""

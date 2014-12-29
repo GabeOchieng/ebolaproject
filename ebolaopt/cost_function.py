@@ -1,45 +1,46 @@
 # Python2.7
 import numpy
-
-##############
-#XXX Placeholder function for now for stochastic calculation
-# Later, import Jesse's code through cython
-def stoch_calc(orig_params, modified_params, final_time):
-    cases = modified_params[0] + modified_params[1] - modified_params[2]
-    return cases
-#############
+import StochCalc.StochLib as StochLib
 
 class CostFunction:
     """This is what we want to minimize. Callable object."""
     
-    def __init__(self, final_time, orig_params, resources_dict):
-        self.final_time = final_time
-        self.orig_params = orig_params
-        self.costs = numpy.array([x[0] for x in resources_dict["interventions"].values()])
-        self.effects = numpy.array([x[1] for x in resources_dict["interventions"].values()])
-        self.total = resources_dict["total"]
-        return
+    def __init__(self, StochParams, OrigParams, Constraints):
+        # Objects for passing into stochastic calculator
+        self.StochParams = StochParams
+        self.OrigParams = OrigParams
+        self.Constraints = Constraints
+        
+        # Unfortunately copy.deepcopy doesn't work with cython, so do it manually
+        self.ModifiedParams = StochLib.pyModelParams()
+        for method in dir(self.OrigParams):
+            if method[:3] == 'get':
+                methodname = method[3:]
+                val = eval("self.OrigParams.get%s()" % methodname)
+                eval("self.ModifiedParams.set%s(%f)" % (methodname, val))
     
     def __call__(self, resource_alloc):
-        """Run stochastic simulation and apply metric to results.
-            Input is array, output is a scalar number. 
-            Note: resource_alloc has dimension n_resource_types - 1 due to
-            constraint that the sum of all the fractions must equal 1."""
-        modified_params = self.calc_interventions(resource_alloc)
-        output_data = stoch_calc(self.orig_params, modified_params, self.final_time)
-        cost = self._metric(output_data)
+        """Convert resource allocation to model parameters and run simulation.
+            Input is array, output is a scalar number."""
+        self.calc_interventions(resource_alloc)
+        cost = StochLib.StochCalc(self.StochParams, self.OrigParams, self.ModifiedParams,
+                               self.Constraints.t_interventions, "NONE")
         return cost
-    
-    def _metric(self, output_data):
-        """Perhaps do some additional calculation on stoch_calc output."""
-        return output_data # For now, just give back what was put in
 
     def calc_interventions(self, resource_alloc):
-        """Given orig_params = initial parameters (fixed),
-            x = fraction of budget per intervention, B = total budget (fixed),
-            costs = cost of each intervention (fixed)."""
-        units_iv = resource_alloc*self.total/self.costs
-        modified_params = self.orig_params + self.effects*units_iv
-        return modified_params
+        """Calculate the ModifiedParams that correspond to resource_alloc. """
+        total = self.Constraints.total
+        for i, param in enumerate(self.Constraints.interventions):
+            cost, effect = self.Constraints.interventions[param]
+            difference = effect*resource_alloc[i]*total/cost
+            method_name = param[0].upper() + param[1:]
+            newval = eval("self.OrigParams.get%s()" % method_name) + difference
+            # Fractions must stay between 0 and 1, and times must not be negative
+            #XXX So far only consider fractions
+            if newval < 0:
+                newval = 0
+            if newval > 1:
+                newval = 1.
+            eval("self.ModifiedParams.set%s(%f)" % (method_name, newval))
 
 

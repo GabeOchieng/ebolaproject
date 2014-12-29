@@ -49,10 +49,14 @@ class TestOpt(unittest.TestCase):
     def test_optimization(self):
         """Test the overall optimization."""
         data_file = "ebolaopt/data/ebola-case-counts-and-deaths-fro.csv"
-        resources_file = "ebolaopt/data/resources.csv"
-        myopt = Optimizer(data_file=data_file, resources_file=resources_file) # Create a new optimizer object
+        constraints_file = "ebolaopt/data/resources.csv"
+        myopt = Optimizer(data_file=data_file, constraints_file=constraints_file) # Create a new optimizer object
         myopt.initialize_model() # Do the deterministic fitting
-        optimum = myopt.run_optimization(100) # Calculate!
+        myopt.initialize_stoch_solver() # Initialize stochastic model
+        optimum = myopt.run_optimization() # Calculate!
+        myopt.represent_allocation(optimum)
+        myopt.plot_optimum()
+
         #XXX To do: Check that the answer makes sense?
 
 if __name__ == '__main__':
