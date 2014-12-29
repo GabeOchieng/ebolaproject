@@ -102,30 +102,58 @@ cdef class pyStochParams:
 
     def setN_samples(self, val):
         self.thisptr.N_samples = val
+        
+    def getN_samples(self):
+        return self.thisptr.N_samples
 
     def setTrajectories(self, val):
         self.thisptr.Trajectories = val
+        
+    def getTrajectories(self):
+        return self.thisptr.Trajectories
 
     def setI_init(self, val):
         self.thisptr.I_init = val
+        
+    def getI_init(self):
+        return self.thisptr.I_init
 
     def setS_init(self, val):
         self.thisptr.S_init = val
+        
+    def getS_init(self):
+        return self.thisptr.S_init
 
     def setH_init(self, val):
         self.thisptr.H_init = val
+        
+    def getH_init(self):
+        return self.thisptr.H_init
 
     def setF_init(self, val):
         self.thisptr.F_init = val
+        
+    def getF_init(self):
+        return self.thisptr.F_init
 
     def setR_init(self, val):
         self.thisptr.R_init = val
 
+    def getR_init(self):
+        return self.thisptr.R_init
+
     def setE_init(self, val):
         self.thisptr.E_init = val
+        
+    def getE_init(self):
+        return self.thisptr.E_init
 
     def setT_final(self, val):
         self.thisptr.t_final = val
+
+    def getT_final(self):
+        return self.thisptr.t_final
+
 
 cdef extern from "StochCalc.h":
     float c_StochCalc "StochCalc" (StochParams *myStochParams,
