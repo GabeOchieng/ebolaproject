@@ -24,9 +24,6 @@ def fit_params(data):
     return OrigParams
 ##############
 
-# Default values
-default_data = numpy.loadtxt("ebolaopt/data/default_data.txt")
-
 class Optimizer:
     """This is the main overall wrapper class."""
 
@@ -34,7 +31,7 @@ class Optimizer:
         """Initialize optimizer object and parse input files."""
         # Use default values if none are provided
         if data_file is None:
-            self.data = default_data
+            self.data = numpy.loadtxt("ebolaopt/data/default_data.txt")
         else:
             self.data = parse_data(data_file, country)
         
@@ -43,12 +40,12 @@ class Optimizer:
 
     def initialize_model(self):
         """Fit the deterministic model parameters."""
-        self.OrigParams = fit_params(self.data) #XXX first time self.OrigParams is defined
-        self.Constraints.check_total(self.OrigParams)
+        self.OrigParams = fit_params(self.data)
+        self.need_opt, self.needed_resources = self.Constraints.check_total(self.OrigParams)
     
     def initialize_stoch_solver(self, N_samples=200, trajectories=10, \
                                t_final=250., I_init=3, S_init=199997):
-        """Initialize stochastic calculation parameters"""
+        """Initialize stochastic calculation parameters."""
         self.StochParams = StochLib.pyStochParams()
         self.StochParams.setN_samples(N_samples)
         self.StochParams.setTrajectories(trajectories)
@@ -62,11 +59,26 @@ class Optimizer:
 
     def run_optimization(self):
         """Call the Scipy optimization function."""
-        #XXX Need to check that setup was done properly
-        costfunc_object = CostFunction(self.StochParams, self.OrigParams, \
+        
+        if 'StochParams' not in dir(self):
+            print "Please run initialize_stoch_solver() first. Aborting."
+            return
+        if 'OrigParams' not in dir(self):
+            print "Please run initialize_model() first. Aborting."
+            return
+        
+        self.costfunc_object = CostFunction(self.StochParams, self.OrigParams, \
                                        self.Constraints)
         n = len(self.Constraints.interventions.keys())
-        x0 = numpy.ones(n)*1./float(n) # Start by distributing resources uniformly
+        
+        if self.need_opt:
+            x0 = numpy.ones(n)*1./float(n) # Start by distributing resources uniformly
+            maxfun = 1000 # XXX Matches default of fmin_cobyla. arbitrary...
+        else:
+            x0 = self.needed_resources/self.Constraints.total
+            maxfun = 1 # Just run it once with parameters maxed out
+        
+        # Each fraction of resource allocation must be >= 0
         def ineq_maker(index):
             return lambda x: x[index]
         cons = [ineq_maker(i) for i in range(n)]
@@ -74,14 +86,18 @@ class Optimizer:
         def sum1func(x):
             return 1. - numpy.sum(x)
         cons.append(sum1func)
-        self.xmin = scipy.optimize.fmin_cobyla(costfunc_object, x0, cons, disp=0)
+        
+        self.xmin = scipy.optimize.fmin_cobyla(self.costfunc_object, x0, cons, \
+                                               disp=0, maxfun=maxfun)
+        
         return self.xmin
     
     def represent_allocation(self, resource_alloc):
         """Pretty print the final result."""
         print "Resource allocation:"
         for i, param in enumerate(self.Constraints.interventions):
-            print param, "should get", resource_alloc[i]*100., "percent of the allocation"
+            p = resource_alloc[i]*100.
+            print param, "should get %.2f percent of the allocation" % p
 
     def plot_optimum(self):
         """Do plotting."""

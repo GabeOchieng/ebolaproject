@@ -16,7 +16,6 @@ class Constraints:
                                   
         if filename:
             # Parse the input file
-            # TODO: check inputs
             with open(filename, 'rb') as csvfile:
                 datareader = csv.reader(csvfile)
                 # Iterate over rows
@@ -25,28 +24,35 @@ class Constraints:
                         self.total = float(row[1])
                     elif row[0].lower() == "time":
                         self.t_interventions = float(row[1])
-                    else:
+                    elif row[0] in self.interventions.keys():
                         self.interventions[row[0]] = (float(row[1]), float(row[2]))
+                    else:
+                        print "WARNING: Ignoring unrecognized input in %s." % filename
     
         return
 
     def check_total(self, OrigParams):
         """Check that the total is not so large that optimization is pointless."""
-        # Calculate the total necessary to max out each intervention parameter
-        total_needed = 0.
+        needed_resources = []
         for param in self.interventions:
-            #XXX There's probably a more efficient way to do this
             cost, effects = self.interventions[param]
             method_name = param[0].upper() + param[1:]
             origval = eval("OrigParams.get%s()" % method_name)
+            #XXX This only considers beta_H, delta_2, and theta_1
             if param == 'beta_H' or param == 'delta_2':
-                total_needed += -origval/effects*cost
+                needed = -origval/effects*cost
             if param == 'theta_1':
-                total_needed += (1.-origval)/effects*cost
+                needed = (1.-origval)/effects*cost
+            needed_resources.append(needed)
+        needed_resources = numpy.array(needed_resources)
+        
+        # Compare total needed with total resources given as constraint
+        total_needed = numpy.sum(needed_resources)
+        need_opt = True
         if self.total > total_needed:
-            print "Warning! There are extra resources. The resources \
-                    needed for each intervention are: and their effects are:"
-            #XXX Finish this! set maxfun=1 in optimization?
-        return
+            print """WARNING: There are enough resources to maximize all interventions.
+No optimization will be performed."""
+            need_opt = False
+        return need_opt, needed_resources
 
 

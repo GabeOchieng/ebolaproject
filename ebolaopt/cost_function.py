@@ -11,7 +11,8 @@ class CostFunction:
         self.OrigParams = OrigParams
         self.Constraints = Constraints
         
-        # Unfortunately copy.deepcopy doesn't work with cython, so do it manually
+        # Unfortunately copy.deepcopy doesn't work with cython, so manually
+        # copy OrigParams to ModifiedParams.
         self.ModifiedParams = StochLib.pyModelParams()
         for method in dir(self.OrigParams):
             if method[:3] == 'get':
@@ -21,7 +22,8 @@ class CostFunction:
     
     def __call__(self, resource_alloc):
         """Convert resource allocation to model parameters and run simulation.
-            Input is array, output is a scalar number."""
+            Input is array representing resource allocation, 
+            output is a scalar number representing cost (e.g. cases/deaths)."""
         self.calc_interventions(resource_alloc)
         cost = StochLib.StochCalc(self.StochParams, self.OrigParams, self.ModifiedParams,
                                self.Constraints.t_interventions, "NONE")
