@@ -25,71 +25,53 @@ cdef class pyModelParams:
     def __dealloc__(self):
         del self.thisptr
 
-    def setBeta_I(self, val):
-        self.thisptr.beta_I = val
-        
-    def getBeta_I(self):
-        return self.thisptr.beta_I
+    def set(self, var, val):
+        if var == "beta_I":
+            self.thisptr.beta_I = val
+        elif var == "beta_H":
+            self.thisptr.beta_H = val
+        elif var == "beta_F":
+            self.thisptr.beta_F = val
+        elif var == "alpha":
+            self.thisptr.alpha = val
+        elif var == "gamma_h":
+            self.thisptr.gamma_h = val
+        elif var == "gamma_f":
+            self.thisptr.gamma_f = val
+        elif var == "gamma_i":
+            self.thisptr.gamma_i = val
+        elif var == "gamma_d":
+            self.thisptr.gamma_d = val
+        elif var == "theta_1":
+            self.thisptr.theta_1 = val
+        elif var == "delta_1":
+            self.thisptr.delta_1 = val
+        elif var == "delta_2":
+            self.thisptr.delta_2 = val
 
-    def setBeta_H(self, val):
-        self.thisptr.beta_H = val
-        
-    def getBeta_H(self):
-        return self.thisptr.beta_H
-    
-    def setBeta_F(self, val):
-        self.thisptr.beta_F = val
-        
-    def getBeta_F(self):
-        return self.thisptr.beta_F
-
-    def setAlpha(self, val):
-        self.thisptr.alpha = val
-
-    def getAlpha(self):
-        return self.thisptr.alpha
-
-    def setGamma_h(self, val):
-        self.thisptr.gamma_h = val
-                
-    def getGamma_h(self):
-        return self.thisptr.gamma_h
-
-    def setGamma_f(self, val):
-        self.thisptr.gamma_f = val
-        
-    def getGamma_f(self):
-        return self.thisptr.gamma_f
-
-    def setGamma_i(self, val):
-        self.thisptr.gamma_i = val
-    
-    def getGamma_i(self):
-        return self.thisptr.gamma_i
-
-    def setGamma_d(self, val):
-        self.thisptr.gamma_d = val
-    
-    def getGamma_d(self):
-        return self.thisptr.gamma_d
-
-    def setTheta_1(self, val):
-        self.thisptr.theta_1 = val
-
-    def getTheta_1(self):
-        return self.thisptr.theta_1
-
-    def setDelta_1(self, val):
-        self.thisptr.delta_1 = val
-        
-    def getDelta_1(self):
-        return self.thisptr.delta_1
-
-    def setDelta_2(self, val):
-        self.thisptr.delta_2 = val
-                
-    def getDelta_2(self):
-        return self.thisptr.delta_2
+    def get(self, var, val):
+        if var == "beta_I":
+            return self.thisptr.beta_I
+        elif var == "beta_H":
+            return self.thisptr.beta_H
+        elif var == "beta_F":
+            return self.thisptr.beta_F
+        elif var == "alpha":
+            return self.thisptr.alpha
+        elif var == "gamma_h":
+            return self.thisptr.gamma_h
+        elif var == "gamma_f":
+            return self.thisptr.gamma_f
+        elif var == "gamma_i":
+            return self.thisptr.gamma_i
+        elif var == "gamma_d":
+            return self.thisptr.gamma_d
+        elif var == "theta_1":
+            return self.thisptr.theta_1
+        elif var == "delta_1":
+            return self.thisptr.delta_1
+        elif var == "delta_2":
+            return self.thisptr.delta_2
 
 cdef class pyStochParams:
     cdef StochParams* thisptr # hold a c++ instance
@@ -100,60 +82,45 @@ cdef class pyStochParams:
     def __dealloc__(self):
         del self.thisptr
 
-    def setN_samples(self, val):
-        self.thisptr.N_samples = val
-        
-    def getN_samples(self):
-        return self.thisptr.N_samples
+    def set(self, var, val):
+        if var == "N_samples":
+            self.thisptr.N_samples = val
+        elif var == "Trajectories":
+            self.thisptr.Trajectories = val
+        elif var == "I_init":
+            self.thisptr.I_init = val
+        elif var == "S_init":
+            self.thisptr.S_init = val
+        elif var == "H_init":
+            self.thisptr.H_init = val
+        elif var == "F_init":
+            self.thisptr.F_init = val
+        elif var == "R_init":
+            self.thisptr.R_init = val
+        elif var == "E_init":
+            self.thisptr.E_init = val
+        elif var == "t_final":
+            self.thisptr.t_final = val
 
-    def setTrajectories(self, val):
-        self.thisptr.Trajectories = val
-        
-    def getTrajectories(self):
-        return self.thisptr.Trajectories
-
-    def setI_init(self, val):
-        self.thisptr.I_init = val
-        
-    def getI_init(self):
-        return self.thisptr.I_init
-
-    def setS_init(self, val):
-        self.thisptr.S_init = val
-        
-    def getS_init(self):
-        return self.thisptr.S_init
-
-    def setH_init(self, val):
-        self.thisptr.H_init = val
-        
-    def getH_init(self):
-        return self.thisptr.H_init
-
-    def setF_init(self, val):
-        self.thisptr.F_init = val
-        
-    def getF_init(self):
-        return self.thisptr.F_init
-
-    def setR_init(self, val):
-        self.thisptr.R_init = val
-
-    def getR_init(self):
-        return self.thisptr.R_init
-
-    def setE_init(self, val):
-        self.thisptr.E_init = val
-        
-    def getE_init(self):
-        return self.thisptr.E_init
-
-    def setT_final(self, val):
-        self.thisptr.t_final = val
-
-    def getT_final(self):
-        return self.thisptr.t_final
-
+    def get(self, var, val):
+        if var == "N_samples":
+            return self.thisptr.N_samples
+        elif var == "Trajectories":
+            return self.thisptr.Trajectories
+        elif var == "I_init":
+            return self.thisptr.I_init
+        elif var == "S_init":
+            return self.thisptr.S_init
+        elif var == "H_init":
+            return self.thisptr.H_init
+        elif var == "F_init":
+            return self.thisptr.F_init
+        elif var == "R_init":
+            return self.thisptr.R_init
+        elif var == "E_init":
+            return self.thisptr.E_init
+        elif var == "t_final":
+            return self.thisptr.t_final
 
 cdef extern from "StochCalc.h":
     float c_StochCalc "StochCalc" (StochParams *myStochParams,

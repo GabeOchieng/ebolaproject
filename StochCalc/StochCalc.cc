@@ -12,10 +12,6 @@ float StochCalc(StochParams *myStochParams, ModelParams *myModel,
                 std::string OutputFileName) {
   FILE * outFile;
 
-  if (OutputFileName != "NONE") {
-    outFile = fopen (OutputFileName.c_str(), "w");
-  }
-
   int Trajectories;
   double beta_I, beta_H, beta_F, alpha, gamma_h, theta_1, gamma_dh;
   double delta_1, delta_2, gamma_f, gamma_i, gamma_d, gamma_ih;
@@ -24,7 +20,7 @@ float StochCalc(StochParams *myStochParams, ModelParams *myModel,
   double t = 0.0;
   double t_final;
   int N_samples;
-  double Damage = 0;  // Total number of deaths.
+  double total_deaths = 0;  // Total number of deaths.
 
   /* Parameter Definitions. */
   N_samples = myStochParams->N_samples;
@@ -213,7 +209,8 @@ float StochCalc(StochParams *myStochParams, ModelParams *myModel,
       }
       /* Reaction 4 (H -> F) */
       else if (rand_num < prob_1 + prob_2 + prob_3 + prob_4 && R_tot > 0) {
-        --H; 
+        total_deaths += 1; // Increment number of deaths.
+        --H;
         ++F;
       }
       /* Reaction 5 (F -> R) */
@@ -231,6 +228,7 @@ float StochCalc(StochParams *myStochParams, ModelParams *myModel,
       /* Reaction 7 (I -> F) */
       else if (rand_num < prob_1 + prob_2 + prob_3 + prob_4 + prob_5 + prob_6 \
                + prob_7 && R_tot > 0) {
+        total_deaths += 1; // Increment number of deaths.
         --I; 
         ++F;
       }
@@ -282,12 +280,6 @@ float StochCalc(StochParams *myStochParams, ModelParams *myModel,
       R_avg[j] = (R_avg[j] * (i - 1) + R_array[j]) / i;
     }
 
-    /* Calculate the total number of deaths. */
-    for (int j = 0; j < N_samples+1; ++j) {
-      Damage += F_avg[j];
-    }
-    Damage = Damage / (N_samples + 1);
-
     /* Calculate the standard deviations in two passes. */
     for (int j = 0; j < N_samples+1; ++j) {
       S_sigma[j] += (S_array[j] - S_avg[j]) * (S_array[j] - S_avg[j]);
@@ -308,7 +300,13 @@ float StochCalc(StochParams *myStochParams, ModelParams *myModel,
     }
   }
 
+  /* Calculate the average total deaths per trajectory. */
+  total_deaths = total_deaths / Trajectories;
+
+  /* Check for desired user output file. */
   if (OutputFileName != "NONE") {
+    outFile = fopen (OutputFileName.c_str(), "w");
+
     /* Print results to the output file. */
     fprintf(outFile, "t (days), S(avg), E(avg), I(avg), H(avg), F(avg), R(avg)\n");
     for (int i = 0; i < N_samples; ++i) {
@@ -329,5 +327,5 @@ float StochCalc(StochParams *myStochParams, ModelParams *myModel,
     fclose(outFile);
   }
 
-  return Damage * t_final * gamma_f;
+  return total_deaths;
 }
