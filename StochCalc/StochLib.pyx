@@ -49,7 +49,7 @@ cdef class pyModelParams:
         elif var == "delta_2":
             self.thisptr.delta_2 = val
 
-    def get(self, var, val):
+    def get(self, var):
         if var == "beta_I":
             return self.thisptr.beta_I
         elif var == "beta_H":
@@ -102,7 +102,7 @@ cdef class pyStochParams:
         elif var == "t_final":
             self.thisptr.t_final = val
 
-    def get(self, var, val):
+    def get(self, var):
         if var == "N_samples":
             return self.thisptr.N_samples
         elif var == "Trajectories":
