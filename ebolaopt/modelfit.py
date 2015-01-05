@@ -119,7 +119,7 @@ def fit_params(data_file, country, N, plot=False):
 
     def LLode(x):
         
-       # N = 470000.
+       # N = D.
        
     #    betaI = 0.128
     #    betaH = 0.08
@@ -190,16 +190,16 @@ def fit_params(data_file, country, N, plot=False):
     
     OrigParams = StochLib.pyModelParams()
     OrigParams.set("beta_I", estParams[0])
-    OrigParams.set("beta_H", 0.062)
-    OrigParams.set("beta_F", 0.489)
-    OrigParams.set("alpha", 1./12.)
-    OrigParams.set("gamma_h", 1./3.24)
-    OrigParams.set("gamma_f", 1./2.01)
-    OrigParams.set("gamma_i", 1./15.)
-    OrigParams.set("gamma_d", 1./13.31)
-    OrigParams.set("theta_1", 0.197)
-    OrigParams.set("delta_1", 0.5)
-    OrigParams.set("delta_2", 0.5)
+    OrigParams.set("beta_H", estParams[1])
+    OrigParams.set("beta_F", estParams[2])
+    OrigParams.set("alpha", estParams[3])
+    OrigParams.set("gamma_h", estParams[4])
+    OrigParams.set("gamma_f", estParams[6])
+    OrigParams.set("gamma_i", estParams[7])
+    OrigParams.set("gamma_d", estParams[8])
+    OrigParams.set("theta_1", estParams[10])
+    OrigParams.set("delta_1", estParams[11])
+    OrigParams.set("delta_2", estParams[12])
     return OrigParams
 
 #    betaI = estParams[0]
