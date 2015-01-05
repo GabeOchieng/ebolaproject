@@ -22,12 +22,20 @@ class Constraints:
                 for row in datareader:
                     if row[0].lower() == "total":
                         self.total = float(row[1])
+                        if self.total <= 0:
+                            raise Exception("total must be positive.")
                     elif row[0].lower() == "time":
                         self.t_interventions = float(row[1])
+                        if self.t_interventions < 0:
+                            raise Exception("time must be at least zero.")
                     elif row[0] in self.interventions.keys():
-                        self.interventions[row[0]] = (float(row[1]), float(row[2]))
+                        cost = float(row[1])
+                        if cost < 0:
+                            print "WARNING: cost is negative"
+                        effect = float(row[2])
+                        self.interventions[row[0]] = (cost, effect)
                     else:
-                        print "WARNING: Ignoring unrecognized input in %s." % filename
+                        print "WARNING: Ignoring unrecognized input %s in %s." % (row, filename)
     
         return
 
@@ -36,8 +44,7 @@ class Constraints:
         needed_resources = []
         for param in self.interventions:
             cost, effects = self.interventions[param]
-            method_name = param[0].upper() + param[1:]
-            origval = eval("OrigParams.get%s()" % method_name)
+            origval = OrigParams.get(param)
             #XXX This only considers beta_H, delta_2, and theta_1
             if param == 'beta_H' or param == 'delta_2':
                 needed = -origval/effects*cost
@@ -54,5 +61,22 @@ class Constraints:
 No optimization will be performed."""
             need_opt = False
         return need_opt, needed_resources
+
+    def represent(self):
+        """Pretty print what the resource constraints actually mean."""
+        print "Resource constraints: \n"
+        meanings = {"theta_1":("contact tracing", \
+                    "fraction of infected cases diagnosed and hospitalized"), \
+                    "beta_H":("PPE", "contact rate for hospitalized cases"), \
+                    "delta_2":("drug","survival rate of hospitalized patients")}
+        for param in self.interventions:
+            interpretation, definition = meanings[param]
+            cost, effect = self.interventions[param]
+            print interpretation + " costs %.2f" % cost + \
+                  " and affects " + definition + " by %.2f" % effect + "\n"
+
+    def filter_interventions(self, interventions):
+        #XXX
+        return
 
 

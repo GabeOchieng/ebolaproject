@@ -15,8 +15,7 @@ class TestOpt(unittest.TestCase):
         myopt = Optimizer(data_file=data_file, constraints_file=constraints_file) # Create a new optimizer object
         myopt.initialize_model() # Do the deterministic fitting
         myopt.initialize_stoch_solver() # Initialize stochastic model
-        optimum = myopt.run_optimization() # Calculate!
-        myopt.represent_allocation(optimum) # Show final result
+        optimum, cost = myopt.run_optimization(disp=True) # Calculate!
         # Check that sum of fractions is less than or equal to 1
         self.assertLessEqual(numpy.sum(optimum), 1)
 
@@ -28,20 +27,26 @@ class TestOpt(unittest.TestCase):
         with open(tempfilename, 'wb') as csvfile:
             w = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_ALL)
             w.writerow(['total', '1000000'])
-            w.writerow(['time', '200'])
+            w.writerow(['time', '150'])
             w.writerow(['beta_H', '60', '-0.01'])
             w.writerow(['delta_2', '500', '-0.05'])
             w.writerow(['theta_1', '200', '0.01'])
         myopt = Optimizer(data_file=data_file, constraints_file=tempfilename) # Create a new optimizer object
         myopt.initialize_model() # Do the deterministic fitting
         myopt.initialize_stoch_solver() # Initialize stochastic model
-        optimum = myopt.run_optimization() # Calculate!
-        myopt.represent_allocation(optimum) # Show final result
+        optimum, cost = myopt.run_optimization() # Calculate!
         # Check that sum of fractions is less than or equal to 1
         self.assertLessEqual(numpy.sum(optimum), 1)
 
         # Cleanup: remove constraints file
         subprocess.call("rm %s" % tempfilename, shell=True)
+
+    def test_print(self):
+        data_file = "ebolaopt/data/case_counts.csv"
+        constraints_file = "ebolaopt/data/constraints.csv"
+        myopt = Optimizer(data_file=data_file, constraints_file=constraints_file) # Create a new optimizer object
+        myopt.print_constraints()
+
 
 if __name__ == '__main__':
     unittest.main()
