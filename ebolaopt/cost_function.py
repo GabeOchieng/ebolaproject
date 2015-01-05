@@ -26,13 +26,14 @@ class CostFunction:
             val = self.OrigParams.get(varname)
             self.ModifiedParams.set(varname, val)
     
-    def __call__(self, resource_alloc):
+    def __call__(self, resource_alloc, epidemic_file="NONE"):
         """Convert resource allocation to model parameters and run simulation.
             Input is array representing resource allocation, 
             output is a scalar number representing cost (e.g. deaths)."""
         self.calc_interventions(resource_alloc)
         cost = StochLib.StochCalc(self.StochParams, self.OrigParams, self.ModifiedParams,
-                               self.Constraints.t_interventions, "NONE")
+                               self.Constraints.t_interventions, epidemic_file)
+                               
         if self.disp:
             self.print_output(resource_alloc, cost, str(self.log_n))
         

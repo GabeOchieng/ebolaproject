@@ -43,7 +43,8 @@ class Optimizer:
         self.need_opt, self.needed_resources = self.Constraints.check_total(self.OrigParams)
     
     def initialize_stoch_solver(self, N_samples=200, trajectories=10, \
-                               t_final=250., I_init=3, S_init=199997):
+                               t_final=250., I_init=3, S_init=199997, \
+                                epidemic_file_no_iv="epidemic_no_iv.csv", **kwds):
         """Initialize stochastic calculation parameters."""
         self.StochParams = StochLib.pyStochParams()
         self.StochParams.set("N_samples", N_samples)
@@ -56,6 +57,16 @@ class Optimizer:
         self.StochParams.set("E_init", 0)
         self.StochParams.set("t_final", t_final)
         
+        # First run one simulation with no interventions and store to text file
+        #XXX Hackish! Fix me!!!
+        actual_t_interventions = self.Constraints.t_interventions
+        self.Constraints.t_interventions = t_final + 1
+        costfunc_object = CostFunction(self.StochParams, self.OrigParams, \
+                                       self.Constraints)
+        n = len(self.Constraints.interventions.keys())
+        self.deaths_before = costfunc_object(numpy.ones(n)*1./float(n), epidemic_file=epidemic_file_no_iv)
+        self.Constraints.t_interventions = actual_t_interventions
+        
         # If the intervention time is after t_final, do not run optimization
         if self.Constraints.t_interventions >= t_final:
             print "WARNING: Intervention time is greater than final time. \
@@ -63,7 +74,11 @@ No optimization will be performed."
             self.need_opt = False
             self.needed_resources = None
 
-    def run_optimization(self, disp=False):
+        # Filter valid interventions
+        if 'valid_interventions' in kwds:
+            self.Constraints.filter_interventions(kwds['valid_interventions'])
+
+    def run_optimization(self, disp=False, epidemic_file_opt_iv="epidemic_opt_iv.csv"):
         """Call the Scipy optimization function. Returns both the optimal
         resource allocation and its cost."""
         
@@ -80,24 +95,12 @@ No optimization will be performed."
         
         x0 = numpy.ones(n)*1./float(n) # Start by distributing resources uniformly
         if self.need_opt:
-            maxfun = 500 # XXX Arbitrary?
+            maxiter = 500 # XXX Arbitrary?
         else:
             if self.needed_resources is not None:
                 x0 = self.needed_resources/self.Constraints.total
-            maxfun = 1 # Just run it once
-        
-#        # Each fraction of resource allocation must be >= 0
-#        def ineq_maker(index):
-#            return lambda x: x[index]
-#        cons = [ineq_maker(i) for i in range(n)]
-#        # Sum of resource allocation fractions must be less than 1
-#        def sum1func(x):
-#            return 1. - numpy.sum(x)
-#        cons.append(sum1func)
-#
-#        self.xmin = scipy.optimize.fmin_cobyla(self.costfunc_object, x0, cons, \
-#                                               disp=0, maxfun=maxfun)
-#
+            maxiter = 1 # Just run it once
+
 #        self.costfunc_object([1, 0, 0])
 #        self.costfunc_object([0, 1, 0])
 #        self.costfunc_object([0, 0, 1])
@@ -108,13 +111,13 @@ No optimization will be performed."
         for i in range(n):
             constraints.append({'type':'ineq', 'fun': lambda x: x[i]})
         
-        options = {'maxiter':maxfun, 'disp':False}
+        options = {'maxiter':maxiter, 'disp':False}
 
         result = scipy.optimize.minimize(self.costfunc_object, x0, method='COBYLA',\
                     constraints=constraints, options=options)
         self.xmin = result['x']
 
-        self.final_cost = self.costfunc_object(self.xmin)
+        self.final_cost = self.costfunc_object(self.xmin, epidemic_file=epidemic_file_opt_iv)
 
         # Always print the optimum
         print "Optimal resource allocation and cost:"
