@@ -46,6 +46,8 @@ axarr[1, 1].set_title('Ebola Susceptibilty Data - Optimization Applied')
 axarr[1, 1].set_xlabel('Time [days]')
 axarr[1,1].set_ylabel('Number Susceptibility')
 
+figManager = plt.get_current_fig_manager()
+figManager.window.showMaximized()
 plt.legend()
 fig = plt.gcf()
 fig.canvas.set_window_title('Ebola Data Projections For Country Chosen')
