@@ -72,6 +72,20 @@ cdef class pyModelParams:
             return self.thisptr.delta_1
         elif var == "delta_2":
             return self.thisptr.delta_2
+            
+    def __repr__(self):
+        output = "beta_I = %.2f" % self.thisptr.beta_I
+        output += "\nbeta_H = %.2f" % self.thisptr.beta_H
+        output += "\nbeta_F = %.2f" % self.thisptr.beta_F
+        output += "\nalpha = %.2f" % self.thisptr.alpha
+        output += "\ngamma_h = %.2f" % self.thisptr.gamma_h
+        output += "\ngamma_f = %.2f" % self.thisptr.gamma_f
+        output += "\ngamma_i = %.2f" % self.thisptr.gamma_i
+        output += "\ngamma_d = %.2f" % self.thisptr.gamma_d
+        output += "\ntheta_1 = %.2f" % self.thisptr.theta_1
+        output += "\ndelta_1 = %.2f" % self.thisptr.delta_1
+        output += "\ndelta_2 = %.2f" % self.thisptr.delta_2
+        return output
 
 cdef class pyStochParams:
     cdef StochParams* thisptr # hold a c++ instance

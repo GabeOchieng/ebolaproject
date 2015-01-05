@@ -24,16 +24,9 @@ def optimize(**kwds):
     optimum, cost = myopt.run_optimization(**filter_kwds(run_kwds)) # Calculate!
     return optimum, cost
 
-#def run_simulation(StochParams, OrigParams, Constraints, resource_alloc, disp=False):
-#    """Only run the simulation for a given set of model parameters."""
-#    return
-#
+
 def fit_data(data_file, country, N, plot=False):
     """Only fit the raw epidemic trajectory data."""
     OrigParams = fit_params(data_file, country, N, plot=False)
-    
-    return
-#
-#def analyze_output():
-#    """Do additional output analysis."""
-#    return
+    print repr(OrigParams)
+    return OrigParams
