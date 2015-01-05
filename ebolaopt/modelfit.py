@@ -46,8 +46,8 @@ def parse_data(filename, country):
                     day = int(datetime.datetime.strptime(row[0], '%Y-%m-%d').strftime('%j'))
                     days.append(day)
                     cases.append(count)
-        days = numpy.array(days)
-        cases = numpy.array(cases)
+        days = np.array(days)
+        cases = np.array(cases)
     
     return days, cases
 
