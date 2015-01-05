@@ -308,22 +308,15 @@ float StochCalc(StochParams *myStochParams, ModelParams *myModel,
     outFile = fopen (OutputFileName.c_str(), "w");
 
     /* Print results to the output file. */
-    fprintf(outFile, "t (days), S(avg), E(avg), I(avg), H(avg), F(avg), R(avg)\n");
+    fprintf(outFile, "t (days), S(avg), S(std dev), E(avg), E(std dev), I(avg), "
+            "I(std dev), H(avg), H(std dev), F(avg), F(std dev), R(avg), R(std dev)\n");
     for (int i = 0; i < N_samples; ++i) {
-      fprintf(outFile, "%.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f\n", t_array[i], \
-              S_avg[i], E_avg[i], I_avg[i], H_avg[i], F_avg[i], R_avg[i]);
+      fprintf(outFile, "%.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, "
+              "%.2f, %.2f, %.2f\n", t_array[i], S_avg[i], S_sigma[i], E_avg[i], 
+              E_sigma[i], I_avg[i], I_sigma[i], H_avg[i], H_sigma[i], F_avg[i], 
+              F_sigma[i], R_avg[i], R_sigma[i]);
     }
     
-    fprintf(outFile,"\n");
-    
-    fprintf(outFile, "t (days), S(std dev), E(std dev), I(std dev), H(std dev), "
-            "F(std dev), R(std dev)\n");
-    for (int i = 0; i < N_samples; ++i) {
-      fprintf(outFile, "%.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f\n", t_array[i], \
-              S_sigma[i], E_sigma[i], I_sigma[i], H_sigma[i], F_sigma[i], \
-              R_sigma[i]);
-    }
-
     fclose(outFile);
   }
 
