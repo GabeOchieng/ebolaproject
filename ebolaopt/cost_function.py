@@ -43,8 +43,7 @@ class CostFunction:
 
     def calc_interventions(self, resource_alloc):
         """Calculate the ModifiedParams that correspond to resource_alloc. """
-        fraction_params = ["beta_I", "beta_H", "beta_F", "theta_1", "delta_1", \
-                           "delta_2"]
+        fraction_params = ["theta_1", "delta_1", "delta_2"]
         
         total = self.Constraints.total
         for i, param in enumerate(self.Constraints.interventions):

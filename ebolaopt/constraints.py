@@ -66,19 +66,6 @@ No optimization will be performed."""
             need_opt = False
         return need_opt, needed_resources
 
-    def represent(self):
-        """Pretty print what the resource constraints actually mean."""
-        print "Resource constraints: \n"
-        meanings = {"theta_1":("contact tracing", \
-                    "fraction of infected cases diagnosed and hospitalized"), \
-                    "beta_H":("PPE", "contact rate for hospitalized cases"), \
-                    "delta_2":("drug","survival rate of hospitalized patients")}
-        for param in self.interventions:
-            interpretation, definition = meanings[param]
-            cost, effect = self.interventions[param]
-            print interpretation + " costs %.2f" % cost + \
-                  " and affects " + definition + " by %.2f" % effect + "\n"
-
     def filter_interventions(self, interventions):
         """Only allow some interventions to be used."""
         self.interventions = {}
@@ -86,4 +73,14 @@ No optimization will be performed."""
             self.interventions[intervention] = self.all_interventions[intervention]
         return
 
+def constraints_help():
+    meanings = {"theta_1":("contact tracing", \
+                       "fraction of infected cases diagnosed and hospitalized"), \
+            "beta_H":("PPE", "contact rate for hospitalized cases"), \
+            "delta_2":("drug","survival rate of hospitalized patients")}
+    s = "{0:<10}{1:<17}{2:<40}\n".format("Variable", "Intervention", "Effect")
+    s += "-"*60 + "\n"
+    for var in meanings.keys():
+       s += "{0:<10}{1:<17}{2:<40}\n".format(var, meanings[var][0], meanings[var][1])
+    print s
 

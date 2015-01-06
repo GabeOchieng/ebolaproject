@@ -42,7 +42,7 @@ def parse_data(filename, country):
     
     return days, cases
 
-def fit_params(data_file, country, N, plot=False):
+def fit_params(data_file, country, N, plot_fit=False):
     #Ensure F to be a float
     N=float(N)    
     #reading file data for a given country
@@ -90,7 +90,7 @@ def fit_params(data_file, country, N, plot=False):
     NF = np.array(NF)
     NR = np.array(NR)
     
-    if plot:
+    if plot_fit:
         plt.clf()
         plt.plot(days, cases, 'o',label = 'Data')
         plt.plot(days, NI+NH+NF+NR,'r--',label = 'Before Optimization')
@@ -155,8 +155,6 @@ def fit_params(data_file, country, N, plot=False):
     
     results = minimize(LLode, x0,constraints=cons, method='COBYLA')
     
-    print results.x
-    
     estParams = results.x
     
     betaI = estParams[0]
@@ -185,7 +183,7 @@ def fit_params(data_file, country, N, plot=False):
     NF = np.array(NF)
     NR = np.array(NR)
     
-    if plot:
+    if plot_fit:
         plt.plot(days, NI+NH+NF+NR,'k',label = 'After Optimization')
         plt.legend()
         plt.title('Model Parameter Fitting')

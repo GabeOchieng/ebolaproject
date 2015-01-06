@@ -41,12 +41,9 @@ class TestOpt(unittest.TestCase):
         # Cleanup: remove constraints file
         subprocess.call("rm %s" % tempfilename, shell=True)
 
-    def test_print(self):
-        data_file = "ebolaopt/data/case_counts.csv"
-        constraints_file = "ebolaopt/data/constraints.csv"
-        myopt = Optimizer(data_file=data_file, constraints_file=constraints_file) # Create a new optimizer object
-        myopt.print_constraints()
-
+    def test_plot(self):
+        from ebolaopt import plot_output
+        plot_output()
 
 if __name__ == '__main__':
     unittest.main()
