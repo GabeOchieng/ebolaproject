@@ -77,7 +77,7 @@ def constraints_help():
     meanings = {"theta_1":("contact tracing", \
                        "fraction of infected cases diagnosed and hospitalized"), \
             "beta_H":("PPE", "contact rate for hospitalized cases"), \
-            "delta_2":("drug","survival rate of hospitalized patients")}
+            "delta_2":("drug","fatality rate of hospitalized patients")}
     s = "{0:<10}{1:<17}{2:<40}\n".format("Variable", "Intervention", "Effect")
     s += "-"*60 + "\n"
     for var in meanings.keys():
