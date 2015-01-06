@@ -140,6 +140,19 @@ float StochCalc(StochParams *myStochParams, ModelParams *myModel,
         gamma_i = interventions->gamma_i;
         gamma_d = interventions->gamma_d;
       }
+      else {
+        beta_I = myModel->beta_I;
+        beta_H = myModel->beta_H;
+        beta_F = myModel->beta_F;
+        alpha = myModel->alpha;
+        gamma_h = myModel->gamma_h;
+        theta_1 = myModel->theta_1;
+        delta_1 = myModel->delta_1;
+        delta_2 = myModel->delta_2;
+        gamma_f = myModel->gamma_f;
+        gamma_i = myModel->gamma_i;
+        gamma_d = myModel->gamma_d;
+      }
 
       /* Total reaction rate. */
       double R_tot;

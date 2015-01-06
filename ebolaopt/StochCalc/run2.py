@@ -5,13 +5,13 @@ import StochLib
 StochParams = StochLib.pyStochParams()
 ModelParams = StochLib.pyModelParams()
 Interventions = StochLib.pyModelParams()
-t_interventions = 251    # The day the interventions start.
-OutputFileName = "output_before.txt"  # Filename for output. "NONE" gives no file.
+t_interventions = 200    # The day the interventions start.
+OutputFileName = "output_after.txt"  # Filename for output. "NONE" gives no file.
 
 # StochParams holds the parameters needed for the stochastic
 # solver. Initialize like this:
 StochParams.set("N_samples", 200)
-StochParams.set("Trajectories", 50)
+StochParams.set("Trajectories", 100)
 StochParams.set("I_init", 3)
 StochParams.set("S_init", 199997)
 StochParams.set("H_init", 0)
@@ -57,7 +57,7 @@ Interventions.set("gamma_h", 1./3.24)
 Interventions.set("gamma_f", 1./2.01)
 Interventions.set("gamma_i", 1./15.)
 Interventions.set("gamma_d", 1./13.31)
-Interventions.set("theta_1", 0.197)
+Interventions.set("theta_1", 1.)
 Interventions.set("delta_1", 0.5)
 Interventions.set("delta_2", 0.)
 
