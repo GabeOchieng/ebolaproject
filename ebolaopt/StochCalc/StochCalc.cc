@@ -302,15 +302,15 @@ float StochCalc(StochParams *myStochParams, ModelParams *myModel,
       F_sigma[j] += (F_array[j] - F_avg[j]) * (F_array[j] - F_avg[j]);
       R_sigma[j] += (R_array[j] - R_avg[j]) * (R_array[j] - R_avg[j]);
     }
+  }
 
-    for (int j = 0; j < N_samples+1; ++j) {
-      S_sigma[j] = pow(S_sigma[j] / N_samples, 0.5);
-      E_sigma[j] = pow(E_sigma[j] / N_samples, 0.5);
-      I_sigma[j] = pow(I_sigma[j] / N_samples, 0.5);
-      H_sigma[j] = pow(H_sigma[j] / N_samples, 0.5);
-      F_sigma[j] = pow(F_sigma[j] / N_samples, 0.5);
-      R_sigma[j] = pow(R_sigma[j] / N_samples, 0.5);
-    }
+  for (int j = 0; j < N_samples+1; ++j) {
+    S_sigma[j] = pow(S_sigma[j] / (Trajectories - 1), 0.5);
+    E_sigma[j] = pow(E_sigma[j] / (Trajectories - 1), 0.5);
+    I_sigma[j] = pow(I_sigma[j] / (Trajectories - 1), 0.5);
+    H_sigma[j] = pow(H_sigma[j] / (Trajectories - 1), 0.5);
+    F_sigma[j] = pow(F_sigma[j] / (Trajectories - 1), 0.5);
+    R_sigma[j] = pow(R_sigma[j] / (Trajectories - 1), 0.5);
   }
 
   /* Calculate the average total deaths per trajectory. */
@@ -323,7 +323,7 @@ float StochCalc(StochParams *myStochParams, ModelParams *myModel,
     /* Print results to the output file. */
     fprintf(outFile, "t (days), S(avg), S(std dev), E(avg), E(std dev), I(avg), "
             "I(std dev), H(avg), H(std dev), F(avg), F(std dev), R(avg), R(std dev)\n");
-    for (int i = 0; i < N_samples; ++i) {
+    for (int i = 0; i < N_samples+1; ++i) {
       fprintf(outFile, "%.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, %.2f, "
               "%.2f, %.2f, %.2f\n", t_array[i], S_avg[i], S_sigma[i], E_avg[i], 
               E_sigma[i], I_avg[i], I_sigma[i], H_avg[i], H_sigma[i], F_avg[i], 
