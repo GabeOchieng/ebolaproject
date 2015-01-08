@@ -41,14 +41,14 @@ def optimize(disp=True, out_noiv_file="out_noiv.csv", \
              out_iv_file="out.csv", figure_file="out.png", plot=True, **kwds):
     params = setup_model(**kwds)
     xmin, final_cost = optimize_with_setup(params, disp=disp, out_noiv_file=out_noiv_file, \
-                        out_iv_file=out_iv_file, figure_file=figure_file)
+                        out_iv_file=out_iv_file, figure_file=figure_file, plot=plot)
     return xmin, final_cost
 
 def run_simulation(alloc, disp=True, out_noiv_file="out_noiv.csv", \
              out_iv_file="out.csv", figure_file="out.png", plot=True, **kwds):
     params = setup_model(**kwds)
     final_cost = run_simulation_with_setup(alloc, params, out_noiv_file=out_noiv_file, \
-                                    out_iv_file=out_iv_file, figure_file=figure_file)
+                                    out_iv_file=out_iv_file, figure_file=figure_file, plot=plot)
     return final_cost
 
 
