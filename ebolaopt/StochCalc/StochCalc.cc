@@ -113,10 +113,6 @@ float StochCalc(StochParams *myStochParams, ModelParams *myModel,
       F_avg_true[i] = R_avg_true[i] = 0;
   }
 
-  /* Initialize a random number generator and a uniform distribution. */
-  std::default_random_engine generator;
-  std::uniform_real_distribution<double> uni_dist(0.0, 1.0);
-
   int chunk = Trajectories / nthreads;
 
   // Initialize the parallel environment.
@@ -125,6 +121,11 @@ float StochCalc(StochParams *myStochParams, ModelParams *myModel,
   gamma_h, theta_1, delta_1, delta_2, gamma_f, gamma_i, gamma_d)
 {
   int tid = omp_get_thread_num();
+
+  /* Initialize a random number generator and a uniform distribution. */
+  std::default_random_engine generator;
+  std::uniform_real_distribution<double> uni_dist(0.0, 1.0);
+
   // Begin the parallel for loop.
 #pragma omp for schedule(static, chunk) nowait
 
