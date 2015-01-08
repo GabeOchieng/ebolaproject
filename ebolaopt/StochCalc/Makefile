@@ -1,5 +1,5 @@
-Args=StochCalc.cc StochCalc.h StochParams.cc StochParams.h
-Args2=ModelParams.cc ModelParams.h setup.py StochLib.pyx
+Args=StochCalc_omp.cc StochCalc_serial.cc StochCalc.h StochParams.cc
+Args2=StochParams.h ModelParams.cc ModelParams.h setup.py StochLib.pyx
 .PHONY: all clean
 all: StochLib.so
 

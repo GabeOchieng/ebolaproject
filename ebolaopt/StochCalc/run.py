@@ -11,7 +11,8 @@ ModelParams = StochLib.pyModelParams()
 Interventions = StochLib.pyModelParams()
 t_interventions = 255    # The day the interventions start.
 OutputFileName = "output_after.txt"  # Filename for output. "NONE" gives no file.
-num_threads = 5 # Number of threads to use.
+num_threads = 5 # Number of threads to use. 
+# NOTE: nthreads is ignored in the serial version.
 
 # StochParams holds the parameters needed for the stochastic
 # solver. Initialize like this:

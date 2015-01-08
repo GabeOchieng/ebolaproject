@@ -4,8 +4,20 @@ from Cython.Distutils import build_ext
 import os
 import sys
 
-extra_compile_args = ["-std=c++11", "-fopenmp", "-O3"]
-extra_link_args=["-std=c++11", "-lgomp"]
+# StochCalc_version must be set to "Serial" or "OpenMP"
+StochCalc_version = "OpenMP"
+
+if StochCalc_version == "Serial":
+    extra_compile_args = ["-std=c++11", "-O3"]
+    extra_link_args=["-std=c++11"]
+    setup_sources=["StochLib.pyx", "ModelParams.cc",
+                   "StochParams.cc", "StochCalc_serial.cc"]
+
+elif StochCalc_version == "OpenMP":
+    extra_compile_args = ["-std=c++11", "-fopenmp", "-O3"]
+    extra_link_args=["-std=c++11", "-lgomp"]
+    setup_sources=["StochLib.pyx", "ModelParams.cc",
+                   "StochParams.cc", "StochCalc_omp.cc"]
 
 # http://blog.michael.kuron-germany.de/2013/02/using-c11-on-mac-os-x-10-8/
 # Additional configuration if running Mac OS X
@@ -20,8 +32,7 @@ setup(
     name = 'Demos',
     ext_modules=[ 
         Extension("StochLib", 
-                  sources=["StochLib.pyx", "ModelParams.cc", 
-                           "StochParams.cc", "StochCalc.cc"], 
+                  sources=setup_sources, 
                   language="c++",
                   extra_compile_args=extra_compile_args,
                   extra_link_args=extra_link_args),
