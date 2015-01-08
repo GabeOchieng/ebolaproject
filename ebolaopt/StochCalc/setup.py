@@ -4,8 +4,8 @@ from Cython.Distutils import build_ext
 import os
 import sys
 
-extra_compile_args = ["-std=c++11"]
-extra_link_args=["-std=c++11"]
+extra_compile_args = ["-std=c++11", "-fopenmp", "-O3"]
+extra_link_args=["-std=c++11", "-lgomp"]
 
 # http://blog.michael.kuron-germany.de/2013/02/using-c11-on-mac-os-x-10-8/
 # Additional configuration if running Mac OS X

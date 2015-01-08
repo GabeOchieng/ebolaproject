@@ -138,11 +138,15 @@ cdef class pyStochParams:
 
 cdef extern from "StochCalc.h":
     float c_StochCalc "StochCalc" (StochParams *myStochParams,
-                                   ModelParams *myModel, ModelParams *interventions,
-                                   float t_interventions, string OutputFileName)
+                                   ModelParams *myModel, 
+				   ModelParams *interventions,
+                                   float t_interventions, 
+				   string OutputFileName,
+				   int nthreads)
 
 def StochCalc(pyStochParams myStochParams, pyModelParams myModel,
               pyModelParams interventions, float t_interventions,
-              string OutputFileName):
+              string OutputFileName, int nthreads):
     return c_StochCalc(myStochParams.thisptr, myModel.thisptr,
-                       interventions.thisptr, t_interventions, OutputFileName)
+                       interventions.thisptr, t_interventions, 
+		       OutputFileName, nthreads)

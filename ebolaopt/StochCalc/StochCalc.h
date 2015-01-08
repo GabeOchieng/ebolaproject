@@ -7,6 +7,6 @@
 
 float StochCalc(StochParams *myStochParams, ModelParams *myModel,
                 ModelParams *interventions, float t_interventions,
-                std::string OutputFileName);
+                std::string OutputFileName, int nthreads);
 
 #endif
