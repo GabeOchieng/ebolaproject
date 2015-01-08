@@ -10,11 +10,10 @@ from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as Naviga
 from matplotlib.figure import Figure 
 from matplotlib.legend_handler import HandlerLine2D
 
-def plot_output(epidemic_file_no_iv="epidemic_no_iv.csv", \
-                  epidemic_file_opt_iv="epidemic_opt_iv.csv", \
-                  out_figure="epidemic.png"):
-    my_matrix = np.loadtxt(epidemic_file_no_iv, delimiter = ',',skiprows=1)
-    my_matrix2 = np.loadtxt(epidemic_file_opt_iv, delimiter = ',',skiprows=1)
+def plot_output(out_noiv_file="out_noiv.csv", out_iv_file="out.csv", \
+                figure_file="out.png"):
+    my_matrix = np.loadtxt(out_noiv_file, delimiter = ',',skiprows=1)
+    my_matrix2 = np.loadtxt(out_iv_file, delimiter = ',',skiprows=1)
 
     f, axarr = plt.subplots(2, 2)
 
@@ -28,24 +27,24 @@ def plot_output(epidemic_file_no_iv="epidemic_no_iv.csv", \
     for plotx_arr, label in zip(plotx, labels):	
         axarr[1, 0].plot(my_matrix2[:,0], plotx_arr, label=label)
 
-    axarr[0, 0].set_title('Ebola Infections Reported Over Time - No Optimization')
+    axarr[0, 0].set_title('Ebola Infections Reported Over Time - No Intervention')
     axarr[0, 0].set_xlabel('Time [days]')
     axarr[0, 0].set_ylabel('Number Infected')
     axarr[0,0].legend(loc=0)
 
     axarr[0, 1].plot(my_matrix[:,0], my_matrix[:,1],label='Suscept')
-    axarr[0, 1].set_title('Ebola Susceptibilty Data - No Optimization')
+    axarr[0, 1].set_title('Ebola Susceptibilty Data - No Intervention')
     axarr[0, 1].set_xlabel('Time [days]')
     axarr[0,1].set_ylabel('Number Susceptibility')
     axarr[0,1].legend(loc=0)
         
-    axarr[1, 0].set_title('Ebola Infections Reported Over Time - Optimization Applied')
+    axarr[1, 0].set_title('Ebola Infections Reported Over Time - Optimized Interventions')
     axarr[1, 0].set_xlabel('Time [days]')
     axarr[1, 0].set_ylabel('Number Infected')
     axarr[1,0].legend(loc=0)
 
     axarr[1, 1].plot(my_matrix2[:,0], my_matrix2[:,1],label='Suscept')
-    axarr[1, 1].set_title('Ebola Susceptibilty Data - Optimization Applied')
+    axarr[1, 1].set_title('Ebola Susceptibilty Data - Optimized Interventions')
     axarr[1, 1].set_xlabel('Time [days]')
     axarr[1,1].set_ylabel('Number Susceptibility')
 
@@ -54,5 +53,5 @@ def plot_output(epidemic_file_no_iv="epidemic_no_iv.csv", \
     plt.legend()
     fig = plt.gcf()
     fig.canvas.set_window_title('Ebola Data Projections For Country Chosen')
-    plt.savefig(out_figure)
+    plt.savefig(figure_file)
     plt.show()

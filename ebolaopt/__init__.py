@@ -1,51 +1,55 @@
-# Wrapper functions for convenient user interface.
-
-import numpy
-from ebolaopt.optimizer import Optimizer
-import StochCalc.StochLib as StochLib
+# Python2.7
 from ebolaopt.modelfit import fit_params
-
-from ebolaopt.constraints import constraints_help
+from ebolaopt.constraints import setup_constraints
+from ebolaopt.run_simulations import run_no_interventions, run_optimization, \
+    run_with_interventions, setup_stoch_params
 from ebolaopt.plot import plot_output
 
-def optimize(plot=True, out_figure="epidemic.png", **kwds):
-    """This method runs the data fitting, optimization, printing, and plotting."""
+def setup_model(data_file="ebolaopt/data/case_counts.csv", \
+          constraints_file="ebolaopt/data/constraints.csv", \
+          plot_fit=True, N_samples=200, trajectories=20, t_final=250., \
+          N=200000, I_init=3, valid_interventions='all'):
+    OrigParams = fit_params(data_file, "Sierra Leone", N, plot_fit=plot_fit)
+    StochParams = setup_stoch_params(N_samples, trajectories, t_final, N, I_init)
+    MyConstraints = setup_constraints(constraints_file, valid_interventions)
+    params = (OrigParams, StochParams, MyConstraints)
+    return params
 
-    def filter_kwds(kwd_names):
-        kwds_subset = {}
-        for key in kwd_names:
-            if kwds.has_key(key):
-                kwds_subset[key] = kwds[key]
-        return kwds_subset
-    
-    opt_kwds = ['data_file', 'constraints_file', 'country']
-    model_kwds = ['plot_fit']
-    stoch_kwds = ['N_samples', 'trajectories', 't_final', 'I_init', 'S_init', \
-                  'valid_interventions', 'epidemic_file_no_iv']
-    run_kwds = ['disp', 'epidemic_file_opt_iv']
-    myopt = Optimizer(**filter_kwds(opt_kwds)) # Create a new optimizer object
-    myopt.initialize_model(**filter_kwds(model_kwds)) # Do the deterministic fitting
-    myopt.initialize_stoch_solver(**filter_kwds(stoch_kwds)) # Initialize stochastic model
-    optimum, cost = myopt.run_optimization(**filter_kwds(run_kwds)) # Calculate!
+######################
 
-    #XXX Inelegant, fix me?
+def optimize_with_setup(params, disp=True, out_noiv_file="out_noiv.csv", \
+                        out_iv_file="out.csv", figure_file="out.png", plot=True):
+    OrigParams, StochParams, MyConstraints = params
+    cost_noiv = run_no_interventions(OrigParams, StochParams, out_noiv_file)
+    xmin, final_cost = run_optimization(OrigParams, StochParams, MyConstraints, disp, out_iv_file)
     if plot:
-        if 'epidemic_file_no_iv' in kwds:
-            epidemic_file_no_iv=kwds['epidemic_file_no_iv']
-        else:
-            epidemic_file_no_iv="epidemic_no_iv.csv"
-        if 'epidemic_file_opt_iv' in kwds:
-            epidemic_file_opt_iv=kwds['epidemic_file_opt_iv']
-        else:
-            epidemic_file_opt_iv="epidemic_opt_iv.csv"
-        plot_output(epidemic_file_no_iv=epidemic_file_no_iv, \
-                     epidemic_file_opt_iv=epidemic_file_opt_iv, \
-                     out_figure=out_figure)
+        plot_output(out_noiv_file, out_iv_file, figure_file)
+    return xmin, final_cost
 
-    return optimum, cost
+def run_simulation_with_setup(alloc, params, out_noiv_file="out_noiv.csv", \
+                        out_iv_file="out.csv", figure_file="out.png", plot=True):
+    OrigParams, StochParams, MyConstraints = params
+    cost_noiv = run_no_interventions(OrigParams, StochParams, out_noiv_file)
+    final_cost = run_with_interventions(alloc, OrigParams, StochParams, MyConstraints, out_iv_file)
+    if plot:
+        plot_output(out_noiv_file, out_iv_file, figure_file)
+    return final_cost
 
-def fit_data(data_file, country, N, plot_fit=False):
-    """Only fit the raw epidemic trajectory data."""
-    OrigParams = fit_params(data_file, country, N, plot_fit=plot_fit)
-    print repr(OrigParams)
-    return OrigParams
+######################
+
+def optimize(disp=True, out_noiv_file="out_noiv.csv", \
+             out_iv_file="out.csv", figure_file="out.png", plot=True, **kwds):
+    params = setup_model(**kwds)
+    xmin, final_cost = optimize_with_setup(params, disp=disp, out_noiv_file=out_noiv_file, \
+                        out_iv_file=out_iv_file, figure_file=figure_file)
+    return xmin, final_cost
+
+def run_simulation(alloc, disp=True, out_noiv_file="out_noiv.csv", \
+             out_iv_file="out.csv", figure_file="out.png", plot=True, **kwds):
+    params = setup_model(**kwds)
+    final_cost = run_simulation_with_setup(alloc, params, out_noiv_file=out_noiv_file, \
+                                    out_iv_file=out_iv_file, figure_file=figure_file)
+    return final_cost
+
+
+

@@ -40,47 +40,29 @@ class Constraints:
     
         # By default, allow all interventions to be used
         self.interventions = copy.deepcopy(self.all_interventions)
-    
-        return
-
-    def check_total(self, OrigParams):
-        """Check that the total is not so large that optimization is pointless."""
-        needed_resources = []
-        for param in self.interventions:
-            cost, effects = self.interventions[param]
-            origval = OrigParams.get(param)
-            #XXX This only considers beta_H, delta_2, and theta_1
-            if param == 'beta_H' or param == 'delta_2':
-                needed = -origval/effects*cost
-            if param == 'theta_1':
-                needed = (1.-origval)/effects*cost
-            needed_resources.append(needed)
-        needed_resources = numpy.array(needed_resources)
-        
-        # Compare total needed with total resources given as constraint
-        total_needed = numpy.sum(needed_resources)
-        need_opt = True
-        if self.total > total_needed:
-            print """WARNING: There are enough resources to maximize all interventions.
-No optimization will be performed."""
-            need_opt = False
-        return need_opt, needed_resources
 
     def filter_interventions(self, interventions):
-        """Only allow some interventions to be used."""
         self.interventions = {}
         for intervention in interventions:
             self.interventions[intervention] = self.all_interventions[intervention]
-        return
 
 def constraints_help():
     meanings = {"theta_1":("contact tracing", \
-                       "fraction of infected cases diagnosed and hospitalized"), \
-            "beta_H":("PPE", "contact rate for hospitalized cases"), \
-            "delta_2":("drug","fatality rate of hospitalized patients")}
+                           "fraction of infected cases diagnosed and hospitalized"), \
+        "beta_H":("PPE", "contact rate for hospitalized cases"), \
+        "delta_2":("drug","fatality rate of hospitalized patients")}
     s = "{0:<10}{1:<17}{2:<40}\n".format("Variable", "Intervention", "Effect")
     s += "-"*60 + "\n"
     for var in meanings.keys():
-       s += "{0:<10}{1:<17}{2:<40}\n".format(var, meanings[var][0], meanings[var][1])
+        s += "{0:<10}{1:<17}{2:<40}\n".format(var, meanings[var][0], meanings[var][1])
     print s
+
+def setup_constraints(filename, valid_interventions):
+    MyConstraints = Constraints(filename)
+    
+    if valid_interventions.lower() != 'all':
+        MyConstraints.filter_interventions(valid_interventions)
+    
+    return MyConstraints
+
 

@@ -1,49 +1,21 @@
 # Python2.7
 import unittest
-import numpy
-import csv
-import subprocess
-
-from ebolaopt.optimizer import Optimizer
 
 class TestOpt(unittest.TestCase):
     
-    def test_optimization(self):
-        """Test the overall optimization."""
-        data_file = "ebolaopt/data/case_counts.csv"
-        constraints_file = "ebolaopt/data/constraints.csv"
-        myopt = Optimizer(data_file=data_file, constraints_file=constraints_file) # Create a new optimizer object
-        myopt.initialize_model() # Do the deterministic fitting
-        myopt.initialize_stoch_solver() # Initialize stochastic model
-        optimum, cost = myopt.run_optimization(disp=True) # Calculate!
-        # Check that sum of fractions is less than or equal to 1
-        self.assertLessEqual(numpy.sum(optimum), 1)
+    def test1(self):
+        from ebolaopt import optimize
+        optimize()
 
-    def test_extra_resources(self):
-        """Test what happens when there are too many resources."""
-        data_file = "ebolaopt/data/case_counts.csv"
-        # Write a constraints file
-        tempfilename = 'temp_ebolaopt.csv'
-        with open(tempfilename, 'wb') as csvfile:
-            w = csv.writer(csvfile, delimiter=',', quoting=csv.QUOTE_ALL)
-            w.writerow(['total', '1000000'])
-            w.writerow(['time', '150'])
-            w.writerow(['beta_H', '60', '-0.01'])
-            w.writerow(['delta_2', '500', '-0.05'])
-            w.writerow(['theta_1', '200', '0.01'])
-        myopt = Optimizer(data_file=data_file, constraints_file=tempfilename) # Create a new optimizer object
-        myopt.initialize_model() # Do the deterministic fitting
-        myopt.initialize_stoch_solver() # Initialize stochastic model
-        optimum, cost = myopt.run_optimization() # Calculate!
-        # Check that sum of fractions is less than or equal to 1
-        self.assertLessEqual(numpy.sum(optimum), 1)
+    def test2(self):
+        from ebolaopt import run_simulation
+        run_simulation([1, 0, 0])
 
-        # Cleanup: remove constraints file
-        subprocess.call("rm %s" % tempfilename, shell=True)
-
-    def test_plot(self):
-        from ebolaopt import plot_output
-        plot_output()
+    def test3(self):
+        from ebolaopt import setup_model, optimize_with_setup, run_simulation_with_setup
+        params = setup_model()
+        run_simulation_with_setup([1, 0, 0], params, figure_file="try1.png")
+        optimize_with_setup(params, figure_file="opt.png")
 
 if __name__ == '__main__':
     unittest.main()
