@@ -52,7 +52,6 @@ def fit_params(data_file, country, N, plot_fit=False):
     betaH = 0.08
     betaF = 0.111
     alpha = 1./10
-    #gammah = 1./4.12
     gammah = 1./4.12
     gammadh = 1./6.26
     gammaf = 1./4.50
