@@ -8,8 +8,8 @@ from ebolaopt.plot import plot_output
 def setup_model(data_file="ebolaopt/data/case_counts.csv", \
           constraints_file="ebolaopt/data/constraints.csv", \
           plot_fit=True, N_samples=200, trajectories=20, t_final=250., \
-          N=200000, I_init=3, valid_interventions='all'):
-    OrigParams = fit_params(data_file, "Sierra Leone", N, plot_fit=plot_fit)
+          N=200000, I_init=3, valid_interventions='all', country="Sierra Leone"):
+    OrigParams = fit_params(data_file, country, N, plot_fit=plot_fit)
     StochParams = setup_stoch_params(N_samples, trajectories, t_final, N, I_init)
     MyConstraints = setup_constraints(constraints_file, valid_interventions)
     params = (OrigParams, StochParams, MyConstraints)
