@@ -6,7 +6,7 @@ from Cython.Distutils import build_ext
 extra_compile_args = ["-std=c++11", "-fopenmp", "-O3"]
 extra_link_args=["-std=c++11", "-lgomp"]
 setup_sources=["ebolaopt/StochCalc/StochLib.pyx", "ebolaopt/StochCalc/ModelParams.cc",
-       "ebolaopt/StochCalc/StochParams.cc", "ebolaopt/StochCalc/StochCalc_omp.cc"]
+       "ebolaopt/StochCalc/StochParams.cc", "ebolaopt/StochCalc/StochCalc.cc"]
 
 setup(name='EbolaOpt',
       version='0.1',
