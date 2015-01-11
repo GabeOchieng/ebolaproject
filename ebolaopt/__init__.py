@@ -4,9 +4,18 @@ from ebolaopt.constraints import setup_constraints
 from ebolaopt.run_simulations import run_no_interventions, run_optimization, \
     run_with_interventions, setup_stoch_params
 from ebolaopt.plot import plot_output
+import os
 
-def setup_model(data_file="ebolaopt/data/case_counts.csv", \
-          constraints_file="ebolaopt/data/constraints.csv", \
+# For installation, get actual path to data
+# http://stackoverflow.com/questions/4519127/setuptools-package-data-folder-location
+def get_data_path(path):
+    root_path = os.path.abspath(os.path.dirname(__file__))
+    return os.path.join(root_path, 'data', path)
+
+data_file_default = get_data_path('case_counts.csv')
+constraints_file_default = get_data_path('constraints.csv')
+
+def setup_model(data_file=data_file_default, constraints_file=constraints_file_default, \
           plot_fit=True, N_samples=200, trajectories=20, t_final=250., \
           N=200000, I_init=3, valid_interventions='all', country="Sierra Leone"):
     OrigParams = fit_params(data_file, country, N, plot_fit=plot_fit)
