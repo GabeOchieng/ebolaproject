@@ -71,12 +71,13 @@ The tools used in this project are shown below:
        %   \caption{Tools used in this project.}
 	\begin{tabular}{ l | p{13cm}}
            \textbf{Purpose} & \textbf{Tool or resources} \\ \hline
-	Visualization in Python & Matlplotlib \\
+	Visualization in Python & Matplotlib \\
 	Optimization in Python & Scipy \\
 	Documentation  & Sphinx \\
-	Documentation  & Sphinx \\
+	Distribution & Distutils \\
          Testing  & Python Unittest \\
          Coupling between C++ and Python & Cython \\
+         Parallel computation & OpenMP \\
          Version Control & Git \\
          Profiling & Not sure 
          
@@ -128,10 +129,10 @@ C++ solver written to utilize only the Gillespie algorithm for the specific rate
   \item run\_optimization
   
    \emph{Functionality:} 
-  This function uses the model parameters obtained from fit\_params, and utilizes StochCalc to determine the expected/averaged number of deaths. Through optimization, it finds the optimal allocation.
+  This function uses the model parameters obtained from fit\_params, and utilizes StochCalc to determine the expected number of deaths. Through optimization, it finds the optimal resource allocation.
   
  \emph{Specifics:} 
- COBYLA method from Scipy is used for minimization. The function to be minimized is represented by a class CostFunction which calls StochCalc for calculations and initializes itself using parameters from fit\_params as well as user input. To prevent unreasonable results, two things are checked before performing the optimizations. Specifically, the prevention time is checked to make sure that the prevention time is greater than the final time of the history data. Also, the total resource is checked to ensure that it is not too much such that all the three interventions can all be maximized. Optimization is not needed if either of these cases is invalid. 
+The COBYLA method from Scipy is used for minimization. The function to be minimized is represented by a CostFunction callable object that calls StochCalc for calculations and is initialized using parameters from fit\_params as well as user input. To prevent unreasonable results, two things are checked before performing the optimizations. Specifically, the intervention time is checked to make sure that it is greater than the final time of the simulation. Also, the total resource budget is checked to ensure that it is not too much such that all of the interventions can be maximized. In either of these cases, no optimization is necessary and only one simulation is performed.
 \end{itemize}
 
 \underline{\textbf{Testing}}\vspace{0.5mm}\\
@@ -236,9 +237,9 @@ The project gave us an opportunity to experience writing a relatively large code
 \begin{center}
 	\begin{tabular}{ l | p{13cm}}
            Developer & Primary Responsibility \\ \hline
-	Jesse Ault & Utilize StochPy to solve the stochastic differential equations that model the Ebola outbreak. \\
-	Alta Fang & Wrap the optimization around the stochastic solver and handle user inputs. \\
-	Sandra Sowah & Analyze outputs from the StochPy simulations as well as from the optimization, visualize them, and generate outputs for the user. Main contributor to the documentation.\\
+	Jesse Ault & Wrote code to solve the stochastic differential equations that model the Ebola outbreak. Interfaced C++ with Python using Cython, and allowed parallel computation through OpenMP. \\
+	Alta Fang & Wrapped the optimization around the stochastic solver and handle user inputs. Made the software distributable and installable through distutils. \\
+	Sandra Sowah & Analyzed outputs from the stochastic simulations as well as from the optimization, wrote code to visualize them, and made GUI with PyQt. Main contributor to the documentation.\\
 	Yile Gu & Fit the raw data of an epidemic's history to a deterministic version of the model in order to generate model parameters which govern the stochastic equations. Main contributor to the final report.
 	\end{tabular}
 \end{center}

@@ -11,7 +11,8 @@ class TestOpt(unittest.TestCase):
     def test2(self):
         """Testing warning if too much resource is present."""
         from ebolaopt import optimize
-        optimize(plot=False, plot_fit=False, constraints_file="ebolaopt/data/constraints_test.csv")
+        from ebolaopt import get_data_path
+        optimize(plot=False, plot_fit=False, constraints_file=get_data_path("constraints_test.csv"))
     
     def test3(self):
         """Testing different countries"""
