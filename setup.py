@@ -13,7 +13,9 @@ setup(name='EbolaOpt',
       description='Resource allocation optimization over Ebola epidemic model',
       url='https://github.com/altafang/ebolaproject',
       packages=['ebolaopt', 'ebolaopt.StochCalc', 'ebolaopt.tests'],
-      package_data={'ebolaopt':['data/constraints.csv', 'data/case_counts.csv']},
+      package_data={'ebolaopt':['data/constraints.csv', \
+                                'data/case_counts.csv', \
+                                'data/constraints_test.csv']},
       ext_modules=[
                    Extension("StochLib",
                              sources=setup_sources,
