@@ -2,3 +2,5 @@ include ebolaopt/StochCalc/StochParams.h
 include ebolaopt/StochCalc/ModelParams.h
 include ebolaopt/StochCalc/StochCalc.h
 include docs/_build/latex/EbolaOpt.pdf
+include ebolaopt/data/constraints.csv
+include ebolaopt/data/case_counts.csv

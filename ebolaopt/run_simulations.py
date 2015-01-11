@@ -3,7 +3,7 @@ import numpy
 import ebolaopt.StochCalc.StochLib as StochLib
 from ebolaopt.cost_function import CostFunction
 from ebolaopt.tools import print_heading, print_output, calc_interventions
-import scipy.optimize
+from scipy.optimize import minimize
 
 def check_total(MyConstraints, OrigParams):
     """Check that the total is not so large that optimization is pointless."""
@@ -79,8 +79,8 @@ No optimization will be performed."""
         constraints.append({'type':'ineq', 'fun': lambda x: x[i]})
     options = {'disp':False}
     
-    result = scipy.optimize.minimize(costfunc_object, x0, method='COBYLA',\
-                                     constraints=constraints, options=options)
+    result = minimize(costfunc_object, x0, method='COBYLA',\
+                      constraints=constraints, options=options)
     xmin = result['x']
 
     # One last evaluation of the optimum
