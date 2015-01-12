@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Dec 10 09:12:38 2014
-
-@author: yile
-"""
+# Python 2.7
 from scipy.optimize import minimize
 from scipy import integrate
 import matplotlib.pyplot as plt
@@ -12,42 +7,54 @@ import datetime
 import csv
 import ebolaopt.StochCalc.StochLib as StochLib
 
-#####Getting the Data: Days and Cumulative Infected Cases####
+# Read in the infected cases time series data.
 def parse_data(filename, country):
     """Given the file path of the raw data csv file, extract the number of cases
-        vs. time for a given country. country name should match string in csv file.
-        """
+       vs. time for a given country. country name should match string in csv file."""
     with open(filename, 'rb') as csvfile:
         datareader = csv.reader(csvfile)
-        # First row
+
+        # Read the first row of the data.
         firstrow = datareader.next()
+        
+        # Test for an appropriate country name.
         if country in firstrow is False:
             raise ValueError("Please enter a valid country name.")
         col_ind = firstrow.index(country)
         
+        # Initialize lists to hold the time series data of the total cases.
         cases = []
         days = []
-        # Iterate over subsequent rows
+
+        # Read in the time series data.
         for row in datareader:
             if len(row) > 1:
                 count = row[col_ind]
-                if count: # If it is not empty
+
+                # Make sure the row is not empty.
+                if count:
                     count = int(count)
-                    # Convert date to an integer representing days
-                    day = int(datetime.datetime.strptime(row[0], '%Y-%m-%d').strftime('%j'))
+
+                    # Convert the date to an integer representing days.
+                    day = int(datetime.datetime.strptime(row[0], 
+                              '%Y-%m-%d').strftime('%j'))
                     days.append(day)
                     cases.append(count)
+
+        # Append the data to the lists.
         days = np.array(days)
         cases = np.array(cases)
     
     return days, cases
 
 def fit_params(data_file, country, N, plot_fit=False):
-    #Ensure F to be a float
+    # Make sure N is a float.
     N=float(N)    
-    #reading file data for a given country
+
+    # Read in the case data for the chosen country.
     days, cases = parse_data(data_file, country)
-    ##Setting Up Initial Conditions for Parameters 
+
+    # Make the initial guess for the parameter values.
     betaI = 0.128
     betaH = 0.08
     betaF = 0.111
@@ -63,41 +70,50 @@ def fit_params(data_file, country, N, plot_fit=False):
     delta2 = 0.75
     
     
-    #####Inputing the Model 
-    ####N[0] is S; N[1] is E; N[2] is I; N[3] is H; N[4] is F, N[5] is R
+    # Generate the Model.
+    # N[0] = S, # N[1] = E, 
+    # N[2] = I, # N[3] = H, 
+    # N[4] = F, # N[5] = R.
+
+    def SIRode(P, t, N, betaI, betaH, betaF, alpha, gammah, gammadh, 
+               gammaf, gammai, gammad, gammaih, theta1, delta1, delta2):
+        return(-1 / N * (betaI * P[0] * P[2] + betaH * P[0] * P[3] + betaF * \
+                             P[0] * P[4]),    
+                1 / N * (betaI * P[0] * P[2] + betaH * P[0] * P[3] + betaF * \
+                             P[0] * P[4]) - alpha * P[1],
+                alpha * P[1] - (gammah * theta1 + gammai * (1 - theta1) * (1 \
+                             - delta1) + gammad * (1 - theta1) * delta1) * P[2],
+                gammah * theta1 * P[2] - (gammadh * delta2 + gammaih * (1 - \
+                             delta2)) * P[3],
+                gammad * (1 - theta1) * delta1 * P[2] + gammadh * delta2 * \
+                             P[3] - gammaf * P[4],
+                gammai * (1 - theta1) * (1 - delta1) * P[2] + gammaih * (1 \
+                             - delta2) * P[3] + gammaf * P[4]
+                )
     
-    def SIRode(P, t, N, betaI, betaH, betaF, alpha, gammah, gammadh, gammaf, gammai, gammad, gammaih, theta1, delta1, delta2):
-        return(
-        -1/N*(betaI*P[0]*P[2]+betaH*P[0]*P[3]+betaF*P[0]*P[4]) ,    
-        +1/N*(betaI*P[0]*P[2]+betaH*P[0]*P[3]+betaF*P[0]*P[4]) - alpha*P[1] ,
-        +alpha*P[1] - (gammah*theta1 + gammai*(1-theta1)*(1-delta1) + gammad*(1-theta1)*delta1) * P[2] ,
-        +gammah*theta1*P[2] - (gammadh*delta2+gammaih*(1-delta2))*P[3] ,
-        +gammad*(1-theta1)*delta1*P[2]+gammadh*delta2*P[3]-gammaf*P[4],
-        +gammai*(1-theta1)*(1-delta1)*P[2]+gammaih*(1-delta2)*P[3]+gammaf*P[4]
-        )
-    
+    # Integrate the time series data using the initial parameter guesses.
     P = [N, 10, 0, 0, 0, 0]
-    Nt = integrate.odeint(SIRode, P, days, args=(N, betaI, betaH, betaF, alpha, gammah, gammadh, gammaf, gammai, gammad, gammaih, theta1, delta1, delta2))
+    Nt = integrate.odeint(SIRode, P, days, args=(N, betaI, betaH, betaF, 
+                          alpha, gammah, gammadh, gammaf, gammai, gammad, 
+                          gammaih, theta1, delta1, delta2))
     
     NI = [row[2] for row in Nt]
     NH = [row[3] for row in Nt]
     NF = [row[4] for row in Nt]
     NR = [row[5] for row in Nt]
-    
     NI = np.array(NI)
     NH = np.array(NH)
     NF = np.array(NF)
     NR = np.array(NR)
     
+    # Plot the initial fit with the data before optimization.
     if plot_fit:
         plt.clf()
         plt.plot(days, cases, 'o',label = 'Data')
         plt.plot(days, NI+NH+NF+NR,'r--',label = 'Before Optimization')
         
-    ###Model Fitting
-    
+    # Take the parameter guesses and return the fit with the data.
     def LLode(x):
-        
         betaI = x[0]
         betaH = x[1]
         betaF = x[2]
@@ -112,50 +128,53 @@ def fit_params(data_file, country, N, plot_fit=False):
         delta1 = x[11]
         delta2 = x[12]
     
-        Nt = integrate.odeint(SIRode, P, days, args=(N, betaI, betaH, betaF, alpha, gammah, gammadh, gammaf, gammai, gammad, gammaih, theta1, delta1, delta2))
+        # Integrate the time series data using the parameters.
+        Nt = integrate.odeint(SIRode, P, days, args=(N, betaI, betaH, betaF, 
+                              alpha, gammah, gammadh, gammaf, gammai, gammad, 
+                              gammaih, theta1, delta1, delta2))
     
         NI = [row[2] for row in Nt]
         NH = [row[3] for row in Nt]
         NF = [row[4] for row in Nt]
         NR = [row[5] for row in Nt]
-         
         NI = np.array(NI)
         NH = np.array(NH)
         NF = np.array(NF)
         NR = np.array(NR)
-        difference = cases - (NI + NH + NF + NR)
-    
+
+        difference = cases - (NI + NH + NF + NR)    
         LL = np.dot(difference, difference)
-    
+
+        # Return the error of the fit.
         return LL
     
     
-    x0 = [betaI, betaH, betaF, alpha, gammah, gammadh, gammaf, gammai, gammad, gammaih, theta1, delta1, delta2]
+    x0 = [betaI, betaH, betaF, alpha, gammah, gammadh, gammaf, 
+          gammai, gammad, gammaih, theta1, delta1, delta2]
     
     
-    ###constraints
-    cons = (    {'type': 'ineq', 'fun': lambda x: x[0]},
+    # Initialize the parameter constraints.
+    cons = ( {'type': 'ineq', 'fun': lambda x: x[0]},
              {'type': 'ineq', 'fun': lambda x: x[1]},
              {'type': 'ineq', 'fun': lambda x: x[2]},
-            {'type': 'ineq', 'fun': lambda x: x[3]},
-    {'type': 'ineq', 'fun': lambda x: x[4]}, 
-    {'type': 'ineq', 'fun': lambda x: x[5]}, 
-    {'type': 'ineq', 'fun': lambda x: x[6]}, 
-    {'type': 'ineq', 'fun': lambda x: x[7]}, 
-    {'type': 'ineq', 'fun': lambda x: x[8]},   
-    {'type': 'ineq', 'fun': lambda x: x[9]}, 
-    {'type': 'ineq', 'fun': lambda x: x[10]}, 
-     {'type': 'ineq', 'fun': lambda x: -x[10]+1}, 
-    {'type': 'ineq', 'fun': lambda x: x[11]}, 
-     {'type': 'ineq', 'fun': lambda x: -x[11]+1}, 
-    {'type': 'ineq', 'fun': lambda x: x[12]},  
-     {'type': 'ineq', 'fun': lambda x: -x[12]+1},       
-              )
+             {'type': 'ineq', 'fun': lambda x: x[3]},
+             {'type': 'ineq', 'fun': lambda x: x[4]}, 
+             {'type': 'ineq', 'fun': lambda x: x[5]}, 
+             {'type': 'ineq', 'fun': lambda x: x[6]}, 
+             {'type': 'ineq', 'fun': lambda x: x[7]}, 
+             {'type': 'ineq', 'fun': lambda x: x[8]},   
+             {'type': 'ineq', 'fun': lambda x: x[9]}, 
+             {'type': 'ineq', 'fun': lambda x: x[10]}, 
+             {'type': 'ineq', 'fun': lambda x: -x[10]+1}, 
+             {'type': 'ineq', 'fun': lambda x: x[11]}, 
+             {'type': 'ineq', 'fun': lambda x: -x[11]+1}, 
+             {'type': 'ineq', 'fun': lambda x: x[12]},  
+             {'type': 'ineq', 'fun': lambda x: -x[12]+1} )
     
+    # Perform the minimization and return the parameter guesses.
     results = minimize(LLode, x0,constraints=cons, method='COBYLA')
     
     estParams = results.x
-    
     betaI = estParams[0]
     betaH = estParams[1]
     betaF = estParams[2]
@@ -170,18 +189,22 @@ def fit_params(data_file, country, N, plot_fit=False):
     delta1 = estParams[11]
     delta2 = estParams[12]
     
-    Nt = integrate.odeint(SIRode, P, days, args=(N, betaI, betaH, betaF, alpha, gammah, gammadh, gammaf, gammai, gammad, gammaih, theta1, delta1, delta2))
+
+    # Integrate the time series forward using the optimized parameters.
+    Nt = integrate.odeint(SIRode, P, days, args=(N, betaI, betaH, betaF, 
+                          alpha, gammah, gammadh, gammaf, gammai, gammad, 
+                          gammaih, theta1, delta1, delta2))
     
     NI = [row[2] for row in Nt]
     NH = [row[3] for row in Nt]
     NF = [row[4] for row in Nt]
     NR = [row[5] for row in Nt]
-    
     NI = np.array(NI)
     NH = np.array(NH)
     NF = np.array(NF)
     NR = np.array(NR)
     
+    # Plot the final time series using the optimized parameters.
     if plot_fit:
         plt.plot(days, NI+NH+NF+NR,'k',label = 'After Optimization')
         plt.legend()
@@ -190,6 +213,8 @@ def fit_params(data_file, country, N, plot_fit=False):
         plt.ylabel('Cumulative Infections ')
         plt.show()
     
+    # Initialize a pyModelParams object with the optimized parameter
+    # guesses which will be used to call the StochCalc solver.
     OrigParams = StochLib.pyModelParams()
     OrigParams.set("beta_I", estParams[0])
     OrigParams.set("beta_H", estParams[1])

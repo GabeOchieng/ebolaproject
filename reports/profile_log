@@ -1,0 +1,223 @@
+Performing optimization:
+	beta_H	delta_2	theta_1	deaths
+0	33.33%	33.33%	33.33%	3428.50
+1	133.33%	33.33%	33.33%	3428.50
+2	33.33%	133.33%	33.33%	1449.95
+3	33.33%	133.33%	133.33%	1085.40
+4	-57.74%	157.74%	-0.00%	63301.25
+5	74.15%	13.66%	12.19%	4678.95
+6	21.83%	33.33%	11.14%	3799.45
+7	-7.43%	51.71%	55.72%	6532.55
+8	51.74%	31.78%	16.48%	2622.90
+9	60.80%	8.49%	16.12%	2993.80
+10	70.40%	29.60%	0.00%	3026.95
+11	58.45%	35.08%	6.47%	2525.65
+12	68.53%	31.47%	0.00%	4917.35
+13	62.06%	38.68%	10.08%	3187.00
+14	49.01%	41.97%	2.03%	3434.65
+15	58.96%	29.17%	4.48%	3801.05
+16	56.15%	36.93%	5.46%	3203.80
+17	59.31%	35.46%	5.22%	2542.05
+18	59.44%	32.11%	6.38%	3089.70
+19	59.22%	33.81%	6.97%	2840.20
+20	57.96%	35.67%	6.37%	2986.40
+21	58.23%	34.85%	6.24%	3688.90
+22	58.92%	34.46%	6.62%	3342.90
+23	58.22%	35.38%	6.40%	3576.40
+24	58.35%	35.03%	6.63%	2259.55
+25	58.46%	34.71%	6.83%	3230.70
+26	58.20%	35.15%	6.65%	3980.70
+27	58.40%	35.08%	6.68%	3113.05
+28	58.35%	34.83%	6.59%	3237.00
+29	58.40%	34.95%	6.65%	2678.70
+30	58.31%	35.06%	6.63%	3615.10
+31	58.36%	35.04%	6.64%	3092.25
+32	58.36%	35.02%	6.58%	2148.00
+33	58.36%	35.00%	6.58%	3825.65
+34	58.35%	35.03%	6.58%	3249.25
+35	58.38%	35.03%	6.58%	3425.60
+36	58.36%	35.03%	6.58%	3651.70
+37	58.36%	35.02%	6.57%	2743.55
+38	58.37%	35.02%	6.59%	3401.00
+39	58.36%	35.01%	6.58%	3649.50
+40	58.36%	35.01%	6.58%	3649.50
+Optimal resource allocation and cost:
+	beta_H	delta_2	theta_1	deaths
+	58.36%	35.01%	6.58%	3649.50
+         64414 function calls (64314 primitive calls) in 15.381 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+       42   14.634    0.348   14.634    0.348 {StochLib.StochCalc}
+    53798    0.522    0.000    0.522    0.000 modelfit.py:70(SIRode)
+      150    0.187    0.001    0.709    0.005 {scipy.integrate._odepack.odeint}
+      148    0.015    0.000    0.722    0.005 modelfit.py:105(LLode)
+      647    0.006    0.000    0.006    0.000 {numpy.core.multiarray.array}
+      188    0.003    0.000   14.922    0.079 cobyla.py:237(calcfc)
+        2    0.002    0.001   14.924    7.462 cobyla.py:177(_minimize_cobyla)
+       42    0.001    0.000    0.001    0.000 tools.py:9(print_output)
+       75    0.001    0.000    0.003    0.000 _strptime.py:295(_strptime)
+       41    0.001    0.000    0.001    0.000 tools.py:13(calc_interventions)
+      300    0.001    0.000    0.001    0.000 copy.py:66(copy)
+      150    0.001    0.000    0.710    0.005 odepack.py:20(odeint)
+       75    0.001    0.000    0.005    0.000 {built-in method strptime}
+       41    0.001    0.000    0.001    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+      113    0.001    0.000    0.001    0.000 {method 'strftime' of 'datetime.date' objects}
+        1    0.001    0.001    0.006    0.006 modelfit.py:16(parse_data)
+       41    0.000    0.000   14.419    0.352 cost_function.py:22(__call__)
+      148    0.000    0.000    0.000    0.000 {numpy.core._dotblas.dot}
+        2    0.000    0.000    0.000    0.000 {open}
+       15    0.000    0.000    0.000    0.000 sre_compile.py:207(_optimize_charset)
+        1    0.000    0.000    0.742    0.742 modelfit.py:46(fit_params)
+      150    0.000    0.000    0.000    0.000 copy.py:113(_copy_with_constructor)
+      148    0.000    0.000    0.000    0.000 modelfit.py:159(<lambda>)
+      517    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+  827/823    0.000    0.000    0.000    0.000 {len}
+     13/3    0.000    0.000    0.000    0.000 sre_parse.py:379(_parse)
+       77    0.000    0.000    0.000    0.000 locale.py:363(normalize)
+      214    0.000    0.000    0.000    0.000 {isinstance}
+     16/3    0.000    0.000    0.001    0.000 sre_compile.py:32(_compile)
+      585    0.000    0.000    0.000    0.000 {method 'set' of 'StochLib.pyModelParams' objects}
+       41    0.000    0.000    0.001    0.000 fromnumeric.py:1623(sum)
+       75    0.000    0.000    0.000    0.000 {method 'match' of '_sre.SRE_Pattern' objects}
+      577    0.000    0.000    0.000    0.000 {method 'get' of 'StochLib.pyModelParams' objects}
+       44    0.000    0.000    0.000    0.000 re.py:204(escape)
+      116    0.000    0.000    0.000    0.000 sre_parse.py:182(__next)
+       75    0.000    0.000    0.000    0.000 {method 'groupdict' of '_sre.SRE_Match' objects}
+      148    0.000    0.000    0.000    0.000 modelfit.py:148(<lambda>)
+      148    0.000    0.000    0.000    0.000 modelfit.py:161(<lambda>)
+        1    0.000    0.000    0.001    0.001 _strptime.py:12(<module>)
+      148    0.000    0.000    0.000    0.000 modelfit.py:163(<lambda>)
+      490    0.000    0.000    0.000    0.000 {method 'append' of 'list' objects}
+       40    0.000    0.000    0.001    0.000 run_simulations.py:77(<lambda>)
+        1    0.000    0.000    0.000    0.000 constraints.py:10(__init__)
+       77    0.000    0.000    0.000    0.000 locale.py:546(getlocale)
+      150    0.000    0.000    0.000    0.000 {getattr}
+        1    0.000    0.000   14.421   14.421 run_simulations.py:52(run_optimization)
+       77    0.000    0.000    0.000    0.000 _strptime.py:27(_getlang)
+        1    0.000    0.000    0.000    0.000 sre_compile.py:258(_mk_bitmap)
+       77    0.000    0.000    0.000    0.000 locale.py:447(_parse_localename)
+     17/4    0.000    0.000    0.000    0.000 sre_parse.py:140(getwidth)
+        8    0.000    0.000    0.000    0.000 {method 'sub' of '_sre.SRE_Pattern' objects}
+      148    0.000    0.000    0.000    0.000 modelfit.py:154(<lambda>)
+       15    0.000    0.000    0.000    0.000 sre_compile.py:178(_compile_charset)
+      148    0.000    0.000    0.000    0.000 modelfit.py:160(<lambda>)
+      148    0.000    0.000    0.000    0.000 modelfit.py:151(<lambda>)
+      148    0.000    0.000    0.000    0.000 modelfit.py:162(<lambda>)
+      148    0.000    0.000    0.000    0.000 modelfit.py:157(<lambda>)
+      120    0.000    0.000    0.000    0.000 run_simulations.py:79(<lambda>)
+      148    0.000    0.000    0.000    0.000 modelfit.py:152(<lambda>)
+        4    0.000    0.000    0.001    0.000 _strptime.py:240(pattern)
+        2    0.000    0.000   14.924    7.462 _minimize.py:37(minimize)
+       41    0.000    0.000    0.001    0.000 _methods.py:31(_sum)
+      148    0.000    0.000    0.000    0.000 modelfit.py:158(<lambda>)
+        1    0.000    0.000    0.000    0.000 cost_function.py:9(__init__)
+        1    0.000    0.000    0.000    0.000 _strptime.py:115(__calc_date_time)
+       84    0.000    0.000    0.000    0.000 sre_parse.py:201(get)
+      148    0.000    0.000    0.000    0.000 modelfit.py:149(<lambda>)
+    94/50    0.000    0.000    0.000    0.000 {method 'join' of 'str' objects}
+      7/3    0.000    0.000    0.000    0.000 sre_parse.py:301(_parse_sub)
+     13/1    0.000    0.000    0.000    0.000 copy.py:145(deepcopy)
+       45    0.000    0.000    0.000    0.000 sre_parse.py:130(__getitem__)
+        2    0.000    0.000    0.000    0.000 sre_parse.py:705(parse_template)
+        1    0.000    0.000    0.000    0.000 _strptime.py:96(__calc_month)
+        1    0.000    0.000    0.001    0.001 _strptime.py:179(__init__)
+        9    0.000    0.000    0.001    0.000 re.py:226(_compile)
+      148    0.000    0.000    0.000    0.000 modelfit.py:156(<lambda>)
+       77    0.000    0.000    0.000    0.000 {_locale.setlocale}
+        1    0.000    0.000    0.000    0.000 _strptime.py:88(__calc_weekday)
+       50    0.000    0.000    0.000    0.000 _strptime.py:236(<genexpr>)
+      148    0.000    0.000    0.000    0.000 modelfit.py:150(<lambda>)
+      150    0.000    0.000    0.000    0.000 {method 'toordinal' of 'datetime.date' objects}
+      148    0.000    0.000    0.000    0.000 modelfit.py:155(<lambda>)
+      148    0.000    0.000    0.000    0.000 modelfit.py:153(<lambda>)
+        8    0.000    0.000    0.000    0.000 {time.strftime}
+       63    0.000    0.000    0.000    0.000 sre_parse.py:195(match)
+        1    0.000    0.000    0.000    0.000 run_simulations.py:8(check_total)
+        6    0.000    0.000    0.000    0.000 {sorted}
+        1    0.000    0.000   14.639   14.639 __init__.py:29(optimize_with_setup)
+       32    0.000    0.000    0.000    0.000 sre_compile.py:51(fixup)
+       77    0.000    0.000    0.000    0.000 {method 'translate' of 'str' objects}
+       26    0.000    0.000    0.000    0.000 calendar.py:55(__getitem__)
+        6    0.000    0.000    0.000    0.000 _strptime.py:221(__seqToRE)
+       13    0.000    0.000    0.000    0.000 copy.py:267(_keep_alive)
+       67    0.000    0.000    0.000    0.000 {method 'replace' of 'str' objects}
+        3    0.000    0.000    0.000    0.000 copy.py:234(_deepcopy_tuple)
+        3    0.000    0.000    0.001    0.000 sre_compile.py:493(compile)
+        3    0.000    0.000    0.000    0.000 sre_compile.py:359(_compile_info)
+       75    0.000    0.000    0.000    0.000 {method 'weekday' of 'datetime.date' objects}
+        8    0.000    0.000    0.000    0.000 re.py:251(_compile_repl)
+        3    0.000    0.000    0.001    0.000 sre_parse.py:677(parse)
+       16    0.000    0.000    0.000    0.000 {range}
+       14    0.000    0.000    0.000    0.000 calendar.py:74(__getitem__)
+       75    0.000    0.000    0.000    0.000 {method 'iterkeys' of 'dict' objects}
+       75    0.000    0.000    0.000    0.000 {method 'end' of '_sre.SRE_Match' objects}
+        1    0.000    0.000    0.742    0.742 __init__.py:18(setup_model)
+       28    0.000    0.000    0.000    0.000 sre_parse.py:138(append)
+        1    0.000    0.000    0.000    0.000 _strptime.py:50(__init__)
+       40    0.000    0.000    0.000    0.000 {min}
+        1    0.000    0.000    0.000    0.000 {time.tzset}
+       79    0.000    0.000    0.000    0.000 {method 'lower' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 {_csv.reader}
+       16    0.000    0.000    0.000    0.000 sre_parse.py:90(__init__)
+        8    0.000    0.000    0.000    0.000 re.py:271(_subx)
+        2    0.000    0.000    0.000    0.000 tools.py:6(print_heading)
+        1    0.000    0.000    0.000    0.000 {numpy.core.multiarray.copyto}
+        1    0.000    0.000    0.000    0.000 _strptime.py:103(__calc_am_pm)
+       39    0.000    0.000    0.000    0.000 {_sre.getlower}
+        1    0.000    0.000    0.000    0.000 _strptime.py:160(__calc_timezone)
+        1    0.000    0.000    0.218    0.218 run_simulations.py:37(run_no_interventions)
+        2    0.000    0.000    0.000    0.000 {numpy.core.multiarray.zeros}
+        4    0.000    0.000    0.000    0.000 sre_parse.py:72(opengroup)
+        3    0.000    0.000    0.001    0.000 sre_compile.py:478(_code)
+        1    0.000    0.000    0.000    0.000 copy.py:253(_deepcopy_dict)
+        5    0.000    0.000    0.000    0.000 sre_parse.py:225(_class_escape)
+        9    0.000    0.000    0.001    0.000 re.py:188(compile)
+        3    0.000    0.000    0.000    0.000 sre_parse.py:216(isname)
+        3    0.000    0.000    0.000    0.000 {_sre.compile}
+        1    0.000    0.000    0.000    0.000 constraints.py:60(setup_constraints)
+       12    0.000    0.000    0.000    0.000 sre_parse.py:126(__len__)
+        1    0.000    0.000   15.381   15.381 __init__.py:55(optimize)
+        6    0.000    0.000    0.000    0.000 sre_compile.py:472(isstring)
+        1    0.000    0.000    0.000    0.000 numeric.py:141(ones)
+        9    0.000    0.000    0.000    0.000 {method 'set' of 'StochLib.pyStochParams' objects}
+        1    0.000    0.000    0.000    0.000 run_simulations.py:24(setup_stoch_params)
+        1    0.000    0.000    0.000    0.000 {numpy.core.multiarray.empty}
+        1    0.000    0.000    0.000    0.000 _strptime.py:31(LocaleTime)
+        2    0.000    0.000    0.000    0.000 {method 'get' of 'StochLib.pyStochParams' objects}
+       36    0.000    0.000    0.000    0.000 {ord}
+        5    0.000    0.000    0.000    0.000 sre_parse.py:178(__init__)
+        2    0.000    0.000    0.000    0.000 function_base.py:837(copy)
+       16    0.000    0.000    0.000    0.000 {method 'index' of 'str' objects}
+        6    0.000    0.000    0.000    0.000 sre_parse.py:257(_escape)
+        4    0.000    0.000    0.000    0.000 sre_parse.py:83(closegroup)
+       31    0.000    0.000    0.000    0.000 {id}
+        6    0.000    0.000    0.000    0.000 {method 'keys' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 optimize.py:104(__getattr__)
+        3    0.000    0.000    0.000    0.000 sre_parse.py:712(literal)
+        5    0.000    0.000    0.000    0.000 _strptime.py:212(<genexpr>)
+        9    0.000    0.000    0.000    0.000 copy.py:198(_deepcopy_atomic)
+        3    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 sre_compile.py:354(_simple)
+        3    0.000    0.000    0.000    0.000 sre_parse.py:210(isident)
+        3    0.000    0.000    0.000    0.000 sre_parse.py:67(__init__)
+        1    0.000    0.000    0.000    0.000 {method 'iteritems' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 {method '__getitem__' of 'dict' objects}
+        2    0.000    0.000    0.000    0.000 optimize.py:126(_check_unknown_options)
+        2    0.000    0.000    0.000    0.000 calendar.py:50(<lambda>)
+        1    0.000    0.000    0.001    0.001 _strptime.py:263(compile)
+        1    0.000    0.000    0.000    0.000 _strptime.py:176(TimeRE)
+        8    0.000    0.000    0.000    0.000 {max}
+        1    0.000    0.000    0.000    0.000 {thread.allocate_lock}
+        4    0.000    0.000    0.000    0.000 {method 'remove' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 six.py:175(find_module)
+        1    0.000    0.000    0.000    0.000 {chr}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 {method 'index' of 'list' objects}
+        2    0.000    0.000    0.000    0.000 {method 'extend' of 'list' objects}
+       14    0.000    0.000    0.000    0.000 sre_compile.py:24(_identityfunction)
+        1    0.000    0.000    0.000    0.000 sre_parse.py:134(__setitem__)
+        4    0.000    0.000    0.000    0.000 {callable}
+
+
