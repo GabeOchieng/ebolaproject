@@ -69,7 +69,6 @@ def fit_params(data_file, country, N, plot_fit=False):
     delta1 = 0.75
     delta2 = 0.75
     
-    
     # Generate the Model.
     # N[0] = S, # N[1] = E, 
     # N[2] = I, # N[3] = H, 
@@ -148,10 +147,8 @@ def fit_params(data_file, country, N, plot_fit=False):
         # Return the error of the fit.
         return LL
     
-    
     x0 = [betaI, betaH, betaF, alpha, gammah, gammadh, gammaf, 
           gammai, gammad, gammaih, theta1, delta1, delta2]
-    
     
     # Initialize the parameter constraints.
     cons = ( {'type': 'ineq', 'fun': lambda x: x[0]},
@@ -189,7 +186,6 @@ def fit_params(data_file, country, N, plot_fit=False):
     delta1 = estParams[11]
     delta2 = estParams[12]
     
-
     # Integrate the time series forward using the optimized parameters.
     Nt = integrate.odeint(SIRode, P, days, args=(N, betaI, betaH, betaF, 
                           alpha, gammah, gammadh, gammaf, gammai, gammad, 
