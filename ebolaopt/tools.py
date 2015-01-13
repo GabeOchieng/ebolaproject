@@ -8,6 +8,7 @@ def print_heading(MyConstraints):
 
 def print_output(alloc, cost, linenum=""):
     percentages = 100.*numpy.array(alloc)
+    linenum = str(linenum)
     print linenum + "\t" + "\t".join(["%.2f%%" % x for x in percentages]) + "\t%.2f" % cost
 
 def calc_interventions(alloc, OrigParams, MyConstraints):

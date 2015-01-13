@@ -12,8 +12,8 @@ class CostFunction:
         self.OrigParams = OrigParams
         self.MyConstraints = MyConstraints
         self.disp = disp
-        self.log_list = []
         self.n_threads = n_threads
+        self.n = 0
         
         if disp:
             print "Performing optimization:"
@@ -27,12 +27,9 @@ class CostFunction:
                                   self.n_threads)
                                
         if self.disp:
-            print_output(alloc, cost, str(len(self.log_list)))
+            print_output(alloc, cost, str(self.n))
         
-        self.log_list.append((alloc, cost))
+        self.n += 1
         return cost
-
-    def clear_log(self):
-        self.log_list = []
 
 
