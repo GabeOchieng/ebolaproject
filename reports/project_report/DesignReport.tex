@@ -220,7 +220,8 @@ Unitest has been used throughout our software design process to test our python 
 \textbf{Test 3:} Does the optimization work correctly for different countries?\vspace{3mm}\\
 \textbf{Test 4:} Does the optimization still work when all resources are allocated to one intervention?\vspace{3mm}\\
 \textbf{Test 5:} Does the optimization still work when the StochCalc solver is used in parallel?\vspace{3mm}\\
-\textbf{Test 6:} Does the optimization actually return better results than non-optimal resource allocation cases? More details about the results from this test are include in the Simulation Results and Discussion section.
+\textbf{Test 6:} Does the optimization actually return better results than non-optimal resource allocation cases? More details about the results from this test are include in the Simulation Results and Discussion section.\vspace{3mm}\\
+\textbf{Test 7:} Does the ``valid\_interventions'' keyword work as expected?
 }\\
 
 \textbf{test\_stochcalc.py:} \hangindent=1cm{This test suite is used to test the StochCalc solver and Cython interface.\vspace{3mm}\\
@@ -379,13 +380,13 @@ We also learned about the utility of version control as we used github through t
 \hangindent=1cm{Wrote the C++ stochastic equation solver StochCalc to solve the stochastic formulation of the governing ODEs. Parallelized StochCalc using OpenMP. Wrote the Cython interface for calling the C++ solver from our Python code. Wrote Unittests for the StochCalc solver and Cython. Profiled the code using cProfile.}\\
 
 \textbf{Alta Fang:}\\
-\hangindent=1cm{Wrapped the resource allocation optimization around the stochastic solver and handled user inputs. Generated the primary user interface. Made the software distributable and installable through distutils.}\\
+\hangindent=1cm{Wrapped the resource allocation optimization around the stochastic solver. Created the python user interface that handles user inputs and outputs. Contributed to optimization Unittests. Made the software installable through distutils.}\\
 
 \textbf{Sandra Sowah:}\\
 \hangindent=1cm{Analyzed outputs from the stochastic simulations and optimization loop and wrote code to visualize the outputs. Developed the GUI using PyQt.}\\
 
 \textbf{Yile Gu:}\\
-\hangindent=1cm{Wrote code to fit the raw data of an epidemic's history to a deterministic version of the compartmental model. Generated best fit model parameters for the stochastic solver. Wrote Unittests for testing the model fitting.}\\
+\hangindent=1cm{Wrote code to fit the raw data of an epidemic's history to a deterministic version of the compartmental model. Generated best fit model parameters for the stochastic solver. Wrote Unittests for testing the model fitting and contributed to optimization Unittests.}\\
 
 \textbf{Yile and Jesse:}\\
 \hangindent=1cm{Generated the final report.}\\
@@ -400,6 +401,6 @@ We also learned about the utility of version control as we used github through t
 \item{Gillepsie DT. ``A general method for numerically simulating the stochastic time evolution of coupled chemical reactions.'' Journal of Computational Physics. (1976)}
 \item{Maarleveld. ``StochPy: a comprehensive, user-friendly tool for simulating stochastic biological processes.'' PLoS One. (2013)}
 \item{Zaric et al. ``Resource allocation for epidemic control over short time horizons.'' Mathematical Biosciences. (2001)}
-\item{Kasaie et al. ``Simulation optimization for allocation of epidemic-control resources.'' IIE Transactions on Healthcare Systems Engineering (2013)}
+\item{Kasaie et al. ``Simulation optimization for allocation of epidemic-control resources.'' IIE Transactions on Healthcare Systems Engineering. (2013)}
 \end{enumerate}
 \end{document}
