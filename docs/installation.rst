@@ -16,7 +16,8 @@ EbolaOpt requires:
 A unix-based operating system (e.g. Linux or Mac OS X) is assumed.
 
 If you do not already have python2.7, numpy, scipy, and matplotlib, the Anaconda
-distribution is a convenient way to install them.
+distribution (https://store.continuum.io/cshop/anaconda/) is a convenient way 
+to install them.
 
 How to Install
 --------------

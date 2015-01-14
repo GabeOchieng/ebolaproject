@@ -44,7 +44,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'EbolaOpt'
-copyright = u'2014, Jesse Ault, Alta Fang, Yile Gu, Sandra Sowah'
+copyright = u'2014-2015, Jesse Ault, Alta Fang, Yile Gu, Sandra Sowah'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
