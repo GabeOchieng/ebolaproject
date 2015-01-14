@@ -3,7 +3,7 @@ Class Objects
 The class objects used for the Ebola Disease modelling were created to store data parameters. These objects support both attribute references and instantiation (valid attribute names, data attributes and methods).
 
 
-constraints
+Constraints
 ^^^^^^^^^^^^^^^
 ::
 
@@ -19,7 +19,7 @@ constraints
 |		*all_interventions* = dictionary of keyword listing and the associated cost and effects
 
 
-costFunction
+CostFunction
 ^^^^^^^^^^^^^^^
 ::
 
@@ -42,7 +42,7 @@ costFunction
 |		*cost* = value, cost associated with improving an intervention with no optimization applied               
 
 
-modelParams
+ModelParams
 ^^^^^^^^^^^^^^^
 ::
 
@@ -64,7 +64,7 @@ modelParams
 |		double *gamma_d* = value; the mean duration from hospitalization to death
 
 
-stochCalc
+StochCalc
 ^^^^^^^^^^^
 ::
 
@@ -81,7 +81,7 @@ stochCalc
 |	Output:    
 |		string *OutputFileName* = output filename, *format: .txt*
 
-stochParams
+StochParams
 ^^^^^^^^^^^ 
 ::
 
