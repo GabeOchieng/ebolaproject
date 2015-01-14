@@ -9,20 +9,49 @@ print_heading(MyConstraints):
 
 Class Objects
 --------------
+The class objects used for the Ebola Disease modelling were created to store data parameters. These objects support both attribute references and instantiation (valid attribute names, data attributes and methods).
 
-cost_function:
+
+Constraints
 ^^^^^^^^^^^^^^^
+Source Code: *constraints.py*
+
+|	A callable object to hold optimization parameters: total resources, resource costs and effects, and time to start interventions.
+|
+|	Inputs:
+|		*filename* = input file to parse the parameters
+|		*total* = value, must be a positive value
+|		*cost* = value, cannot be negative
+|		*t_interventions* = value, time before/after *t_final*  for simulations with/without interventions applied respectively
+|		*all_interventions* = array listing of 'beta_H', 'delta_2', 'theta_1
 
 
-Constraints(filename)
-^^^^^^^^^^^^^^^^^^^^^^^
+CostFunction
+^^^^^^^^^^^^^^^
+Source Code: *const_function.py*
+
+|	Returns a display of print out of resource allocation and cost in real-time computation if disp=True. A callable object that must be minimized as part of the optimization computation based on the interventions, associated costs, and resource allocation.  
+|
+|	Inputs:
+|		*OrigParams* = list of parameters
+|		*StochParams* = object containing a list of parameters for stochastic modelling
+|		*MyConstraints* = keyword
+|		*disp* = False (Default)
+|			   = True (generates the plot profile in a pop-out window)
+|		*n_threads* = 1 (Default), Number of processors to use, OpenMP Parallelization)
+|		*Log_list* = array listing during computation, Default = []
+|		*alloc* = values
+|		*cost* = values
+|		*out_file* = “NONE” (Default), other option generates and output text file                           
 
 
 ModelParams
 ^^^^^^^^^^^^^^^
 Source Code: *ModelParams.h*
 
-|	Returns an array of parameters from the Ebola modelling data in *Legrand, J. et al (2006)*. The parameters defined are consistent with the parameters defined in *Legrand, J. et al (2006)*.
+|	Returns object containing a list of parameters from the Ebola modelling data in *Legrand, J. et al (2006)* based on the country chosen for running the simulation. The parameters defined are consistent with the parameters defined in *Legrand, J. et al (2006)*.
+|
+|	Inputs:
 |		double *beta_I* = value; transmission coefficient in the community
 |		double *beta_H* = value; transmission coefficient at the hospital
 |		double *beta_F* = value; transmission coefficient during funerals
@@ -36,12 +65,27 @@ Source Code: *ModelParams.h*
 |		double *gamma_d* = value; the mean duration from hospitalization to death
 
 
+StochCalc
+^^^^^^^^^^^^^^^
+Source Code: *StochCalc.h*
+
+|	Returns an output file, *OutputFileName* ,  with the Ebola modelling paramters defined. All number values returned are in the *float* format. An output file output is generated with the *StochParams*, *ModelParams*, and *t_interventions* array listing.
+|
+|	Inputs:
+|		*StochParams* = object containing a list of parameters for stochastic modelling
+|		*ModelParams* = object containing a list of parameters from the Ebola modelling data for a specific country chosen
+|		float *t_interventions* = value, time before/after *t_final*  for simulations with/without interventions applied respectively
+|		string *OutputFileName* = output filename, *format: .txt*
+|		string (int *nthreads*) = string, number of processors to use for OpenMP Parallelization
+
 
 StochParams
 ^^^^^^^^^^^^^^^
 Source Code: *StochParams.h*
 
 |	Returns an object containing a list of parameters for stochastic modelling. The parameters defined are consistent with the parameters defined in *Legrand, J. et al (2006)*.
+|
+|	Inputs:
 |		int *N_samples* = value; number of times to sample the stochastic run to query results for generating the output
 |		int *Trajectories* = value; number of times the stoachstic simulation is run for a consistency and stability
 |		int *I_init* = value; initial values for the number of infectious cases in the community
@@ -51,14 +95,3 @@ Source Code: *StochParams.h*
 |		int *R_init* = value; initial values for the number of individuals removed from the chain of transmission
 |		int *E_init* = value; initial values for the number of exposed individuals
 |		double *t_final* = value; limit of time series data calculated in days
-
-
-
-
-ModelParams:
-^^^^^^^^^^^^^
-
-
-
-StochCalc:
-^^^^^^^^^^^^^
