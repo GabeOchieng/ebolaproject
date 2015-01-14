@@ -1,7 +1,0 @@
-For the current version, just run "make" and then "./run.py".
-
-If you need to change the parameters, just edit the run.py
-parameter sections.
-
-Run "make clean" to clean up the current directory. Double check
-first that the Makefile won't remove any of your files though.

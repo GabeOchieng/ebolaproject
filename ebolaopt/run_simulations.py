@@ -5,8 +5,8 @@ from ebolaopt.cost_function import CostFunction
 from ebolaopt.tools import print_heading, print_output, calc_interventions
 from scipy.optimize import minimize
 
-def check_total(MyConstraints, OrigParams):
-    """Check that the total is not so large that optimization is pointless."""
+def calc_needed_resources(MyConstraints, OrigParams):
+    """Calculate maximum needed resources to max out the interventions."""
     needed_resources = []
     for param in MyConstraints.interventions:
         cost, effects = MyConstraints.interventions[param]
@@ -59,7 +59,7 @@ No optimization will be performed."
         return None, cost
     
     # Check to make sure there aren't too many resources
-    needed_resources = check_total(MyConstraints, OrigParams)
+    needed_resources = calc_needed_resources(MyConstraints, OrigParams)
     if MyConstraints.total >= numpy.sum(needed_resources):
         print """WARNING: There are enough resources to maximize all interventions.
 No optimization will be performed."""

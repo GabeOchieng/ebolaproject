@@ -1,14 +1,24 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.12.8)  10 JAN 2015 23:32
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2014.7.29)  13 JAN 2015 11:28
 entering extended mode
- restricted \write18 enabled.
- %&-line parsing enabled.
-**DesignReport.tex
-(./DesignReport.tex
+**F:/Backup*Before*Reinstalling/Documents/APC524/Final*Project/project_report/D
+esignReport.tex
+
+("F:/Backup Before Reinstalling/Documents/APC524/Final Project/project_report/D
+esignReport.tex"
 LaTeX2e <2011/06/27>
-Babel <3.9h> and hyphenation patterns for 4 languages loaded.
-(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
+abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
+croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
+lician, german, german-x-2013-05-26, greek, gujarati, hindi, hungarian, iceland
+ic, indonesian, interlingua, irish, italian, kannada, kurmanji, latin, latvian,
+ lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, n
+german-x-2013-05-26, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
+ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
+an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
+ishmax, welsh, loaded.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\article.cls"
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
-(/usr/share/texlive/texmf-dist/tex/latex/base/size11.clo
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\size11.clo"
 File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count79
@@ -23,10 +33,10 @@ File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty"
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \@emptytoks=\toks14
 \symAMSa=\mathgroup4
@@ -34,24 +44,24 @@ Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsmath.sty"
 Package: amsmath 2013/01/14 v2.14 AMS math features
 \@mathmargin=\skip43
 
 For additional information on amsmath, use the `?' option.
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amstext.sty"
 Package: amstext 2000/06/29 v2.01
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsgen.sty"
 File: amsgen.sty 1999/11/30 v2.0
 \@emptytoks=\toks15
 \ex@=\dimen103
 ))
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsbsy.sty"
 Package: amsbsy 1999/11/29 v1.2d
 \pmbraise@=\dimen104
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsmath\amsopn.sty"
 Package: amsopn 1999/12/14 v2.01 operator names
 )
 \inf@bad=\count87
@@ -92,31 +102,31 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
 LaTeX Info: Redefining \[ on input line 2665.
 LaTeX Info: Redefining \] on input line 2666.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
 Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
 \KV@toks@=\toks20
 )
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
 Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
 
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
 Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 )
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
-File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 
-(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
 \Gread@gobject=\count99
@@ -124,72 +134,45 @@ Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 \Gin@req@height=\dimen112
 \Gin@req@width=\dimen113
 )
-(/usr/share/texlive/texmf-dist/tex/latex/tools/enumerate.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\enumerate.sty"
 Package: enumerate 1999/03/05 v3.00 enumerate extensions (DPC)
 \@enLab=\toks21
 )
-(/usr/share/texlive/texmf-dist/tex/latex/subfigure/subfigure.sty
-Package: subfigure 2002/03/15 v2.1.5 subfigure package
-\subfigtopskip=\skip46
-\subfigcapskip=\skip47
-\subfigcaptopadj=\dimen114
-\subfigbottomskip=\skip48
-\subfigcapmargin=\dimen115
-\subfiglabelskip=\skip49
-\c@subfigure=\count100
-\c@lofdepth=\count101
-\c@subtable=\count102
-\c@lotdepth=\count103
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\epstopdf.sty"
+Package: epstopdf 2010/02/09 v2.5 Conversion with epstopdf on the fly (HO)
 
-****************************************
-* Local config file subfigure.cfg used *
-****************************************
-(/usr/share/texlive/texmf-dist/tex/latex/subfigure/subfigure.cfg)
-\subfig@top=\skip50
-\subfig@bottom=\skip51
-)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
-LaTeX Warning: Unused global option(s):
-    [letter].
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\grfext.sty"
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
 
-(./DesignReport.aux)
-\openout1 = `DesignReport.aux'.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\kvdefinekeys.sty"
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\kvoptions.sty"
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\kvsetkeys.sty"
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
 
-(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count104
-\scratchdimen=\dimen116
-\scratchbox=\box28
-\nofMPsegments=\count105
-\nofMParguments=\count106
-\everyMPshowfont=\toks22
-\MPscratchCnt=\count107
-\MPscratchDim=\dimen117
-\MPnumerator=\count108
-\makeMPintoPDFobject=\count109
-\everyMPtoPDFconversion=\toks23
-) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
-)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\etexcmds.sty"
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
 
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifluatex.sty"
 Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
 )
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\pdftexcmds.sty"
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
 )
@@ -198,267 +181,381 @@ Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
-Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
-
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
-Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
-Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
-))
-(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
-Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
-Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
-Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
-Package etexcmds Info: Could not find \expanded.
-(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
-(etexcmds)             that some package has redefined \expanded.
-(etexcmds)             In the latter case, load this package earlier.
-)))
 Package grfext Info: Graphics extension search list:
 (grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 452.
-
-(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
 ))
-LaTeX Font Info:    Try loading font information for U+msa on input line 22.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\eucal.sty"
+Package: eucal 2009/06/22 v3.00 Euler Script fonts
+LaTeX Font Info:    Overwriting math alphabet `\EuScript' in version `bold'
+(Font)                  U/eus/m/n --> U/eus/b/n on input line 33.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\listings.sty"
+\lst@mode=\count100
+\lst@gtempboxa=\box28
+\lst@token=\toks22
+\lst@length=\count101
+\lst@currlwidth=\dimen114
+\lst@column=\count102
+\lst@pos=\count103
+\lst@lostspace=\dimen115
+\lst@width=\dimen116
+\lst@newlines=\count104
+\lst@lineno=\count105
+\lst@maxwidth=\dimen117
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
+File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
+\c@lstnumber=\count106
+\lst@skipnumbers=\count107
+\lst@framebox=\box29
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\listings.cfg"
+File: listings.cfg 2014/09/06 1.5e listings configuration
+))
+Package: listings 2014/09/06 1.5e (Carsten Heinz)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\color.sty"
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\subfigure\subfigure.sty"
+Package: subfigure 2002/07/30 v2.1.4 subfigure package
+\subfigtopskip=\skip46
+\subfigcapskip=\skip47
+\subfigcaptopadj=\dimen118
+\subfigbottomskip=\skip48
+\subfigcapmargin=\dimen119
+\subfiglabelskip=\skip49
+\c@subfigure=\count108
+\c@lofdepth=\count109
+\c@subtable=\count110
+\c@lotdepth=\count111
+
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\subfigure\subfigure.cfg")
+\subfig@top=\skip50
+\subfig@bottom=\skip51
+)
+
+LaTeX Warning: Unused global option(s):
+    [letter].
+
+
+("F:\Backup Before Reinstalling\Documents\APC524\Final Project\project_report\D
+esignReport.aux")
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 24.
+LaTeX Font Info:    ... okay on input line 24.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count112
+\scratchdimen=\dimen120
+\scratchbox=\box30
+\nofMPsegments=\count113
+\nofMParguments=\count114
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count115
+\MPscratchDim=\dimen121
+\MPnumerator=\count116
+\makeMPintoPDFobject=\count117
+\everyMPtoPDFconversion=\toks24
+)
+\c@lstlisting=\count118
+LaTeX Font Info:    Try loading font information for U+msa on input line 30.
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 22.
+LaTeX Font Info:    Try loading font information for U+msb on input line 30.
 
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 22--23
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 24--26
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 27--29
-
- []
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 30--31
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 32--33
+Underfull \hbox (badness 10000) in paragraph at lines 32--34
 
  []
 
-<cmodel.pdf, id=1, 722.7pt x 542.025pt>
-File: cmodel.pdf Graphic file (type pdf)
- <use cmodel.pdf>
-Package pdftex.def Info: cmodel.pdf used on input line 36.
-(pdftex.def)             Requested size: 227.62204pt x 170.71396pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 42--43
+Underfull \hbox (badness 10000) in paragraph at lines 35--37
 
  []
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 60--61
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
+Underfull \hbox (badness 10000) in paragraph at lines 59--60
+
+ []
+
+[2]
+Underfull \hbox (badness 10000) in paragraph at lines 110--111
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 62--63
+Underfull \hbox (badness 10000) in paragraph at lines 127--128
+
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 132--134
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 64--65
+Underfull \hbox (badness 10000) in paragraph at lines 135--137
+
+ []
+
+[4]
+Underfull \hbox (badness 10000) in paragraph at lines 175--176
+
+ []
+
+LaTeX Font Info:    Try loading font information for U+eus on input line 177.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\ueus.fd"
+File: ueus.fd 2013/01/14 v3.01 Euler Script
+)
+Underfull \hbox (badness 10000) in paragraph at lines 177--178
 
  []
 
 
-Overfull \hbox (99.61646pt too wide) in paragraph at lines 72--85
- [] 
- []
-
-[2 <./cmodel.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 87--88
+Underfull \hbox (badness 10000) in paragraph at lines 179--180
 
  []
 
-<Design_FlowChart.pdf, id=24, 722.7pt x 542.025pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 181--182
+
+ []
+
+<Design_FlowChart.pdf, id=22, 722.7pt x 542.025pt>
 File: Design_FlowChart.pdf Graphic file (type pdf)
  <use Design_FlowChart.pdf>
-Package pdftex.def Info: Design_FlowChart.pdf used on input line 92.
+Package pdftex.def Info: Design_FlowChart.pdf used on input line 186.
 (pdftex.def)             Requested size: 455.24408pt x 341.4362pt.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 100.
-
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 100.
- [3 <./Design_FlowChart.pdf>] <cython.pdf, id=139, 722.7pt x 361.35pt>
-File: cython.pdf Graphic file (type pdf)
- <use cython.pdf>
-Package pdftex.def Info: cython.pdf used on input line 123.
-(pdftex.def)             Requested size: 455.24408pt x 227.62413pt.
- [4 <./cython.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 137--138
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 139--140
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 161--162
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 163--164
-
- []
-
-<speed_up.pdf, id=154, 722.7pt x 542.025pt>
-File: speed_up.pdf Graphic file (type pdf)
- <use speed_up.pdf>
-Package pdftex.def Info: speed_up.pdf used on input line 167.
-(pdftex.def)             Requested size: 455.24408pt x 341.4362pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 172--173
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 174--175
-
- []
 
 [5]
+Underfull \hbox (badness 10000) in paragraph at lines 191--192
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 193--196
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 197--200
+
+ []
+
+[6 <F:/Backup Before Reinstalling/Documents/APC524/Final Project/project_report
+/Design_FlowChart.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 201--204
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 205--207
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 208--212
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 213--221
+
+ []
+
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 222--230
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 231--252
+
+ []
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
+File: lstlang1.sty 2014/09/06 1.5e listings language file
+) [8]
+Underfull \hbox (badness 10000) in paragraph at lines 314--315
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 316--318
+
+ []
+
+[9]
 Package epstopdf Info: Source file: <model_fit.eps>
-(epstopdf)                    date: 2015-01-10 18:44:26
+(epstopdf)                    date: 2015-01-11 00:38:54
 (epstopdf)                    size: 34844 bytes
 (epstopdf)             Output file: <model_fit-eps-converted-to.pdf>
-(epstopdf)                    date: 2015-01-10 20:35:27
+(epstopdf)                    date: 2015-01-11 00:38:54
 (epstopdf)                    size: 33212 bytes
-(epstopdf)             Command: <repstopdf --outfile=model_fit-eps-converted-to
-.pdf model_fit.eps>
-(epstopdf)             \includegraphics on input line 179.
+(epstopdf)             Command: <epstopdf --outfile=model_fit-eps-converted-to.
+pdf model_fit.eps>
+(epstopdf)             \includegraphics on input line 322.
 Package epstopdf Info: Output file is already uptodate.
- <model_fit-eps-converted-to.pdf, id=158, 1182.4175pt x 641.39626pt>
+ <model_fit-eps-converted-to.pdf, id=157, 1182.4175pt x 641.39626pt>
 File: model_fit-eps-converted-to.pdf Graphic file (type pdf)
 
 <use model_fit-eps-converted-to.pdf>
-Package pdftex.def Info: model_fit-eps-converted-to.pdf used on input line 179.
+Package pdftex.def Info: model_fit-eps-converted-to.pdf used on input line 322.
 
-(pdftex.def)             Requested size: 252.94499pt x 137.20264pt.
- [6 <./speed_up.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 192--193
+(pdftex.def)             Requested size: 469.75499pt x 254.81187pt.
 
- []
-
-Package epstopdf Info: Source file: <optimal.eps>
-(epstopdf)                    date: 2015-01-10 18:47:46
-(epstopdf)                    size: 89363 bytes
-(epstopdf)             Output file: <optimal-eps-converted-to.pdf>
-(epstopdf)                    date: 2015-01-10 20:33:11
-(epstopdf)                    size: 33816 bytes
-(epstopdf)             Command: <repstopdf --outfile=optimal-eps-converted-to.p
-df optimal.eps>
-(epstopdf)             \includegraphics on input line 198.
-Package epstopdf Info: Output file is already uptodate.
-<optimal-eps-converted-to.pdf, id=175, 1182.4175pt x 641.39626pt>
-File: optimal-eps-converted-to.pdf Graphic file (type pdf)
-
-<use optimal-eps-converted-to.pdf>
-Package pdftex.def Info: optimal-eps-converted-to.pdf used on input line 198.
-(pdftex.def)             Requested size: 505.89pt x 274.41505pt.
-Package epstopdf Info: Source file: <not_optimal.eps>
-(epstopdf)                    date: 2015-01-10 18:46:09
-(epstopdf)                    size: 88131 bytes
-(epstopdf)             Output file: <not_optimal-eps-converted-to.pdf>
-(epstopdf)                    date: 2015-01-10 20:33:10
-(epstopdf)                    size: 33356 bytes
-(epstopdf)             Command: <repstopdf --outfile=not_optimal-eps-converted-
-to.pdf not_optimal.eps>
-(epstopdf)             \includegraphics on input line 200.
-Package epstopdf Info: Output file is already uptodate.
-
-<not_optimal-eps-converted-to.pdf, id=176, 1182.4175pt x 641.39626pt>
-File: not_optimal-eps-converted-to.pdf Graphic file (type pdf)
-
-<use not_optimal-eps-converted-to.pdf>
-Package pdftex.def Info: not_optimal-eps-converted-to.pdf used on input line 20
-0.
-(pdftex.def)             Requested size: 505.89pt x 274.41505pt.
-
-Overfull \hbox (41.135pt too wide) in paragraph at lines 198--201
+Overfull \hbox (1.34999pt too wide) in paragraph at lines 322--324
  [][] 
  []
 
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 329.
 
-Overfull \hbox (41.135pt too wide) in paragraph at lines 198--201
- [] 
- []
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 329.
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 230--231
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 232--233
+Underfull \hbox (badness 10000) in paragraph at lines 336--337
 
  []
 
+[10 <F:/Backup Before Reinstalling/Documents/APC524/Final Project/project_repor
+t/model_fit-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <optimal.eps>
+(epstopdf)                    date: 2015-01-11 00:38:54
+(epstopdf)                    size: 89363 bytes
+(epstopdf)             Output file: <optimal-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-01-11 00:38:54
+(epstopdf)                    size: 33816 bytes
+(epstopdf)             Command: <epstopdf --outfile=optimal-eps-converted-to.pd
+f optimal.eps>
+(epstopdf)             \includegraphics on input line 342.
+Package epstopdf Info: Output file is already uptodate.
 
-Underfull \hbox (badness 10000) in paragraph at lines 235--236
+<optimal-eps-converted-to.pdf, id=202, 1182.4175pt x 641.39626pt>
+File: optimal-eps-converted-to.pdf Graphic file (type pdf)
+
+<use optimal-eps-converted-to.pdf>
+Package pdftex.def Info: optimal-eps-converted-to.pdf used on input line 342.
+(pdftex.def)             Requested size: 433.62pt x 235.20871pt.
+Package epstopdf Info: Source file: <not_optimal.eps>
+(epstopdf)                    date: 2015-01-11 00:38:54
+(epstopdf)                    size: 88131 bytes
+(epstopdf)             Output file: <not_optimal-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-01-11 00:38:54
+(epstopdf)                    size: 33356 bytes
+(epstopdf)             Command: <epstopdf --outfile=not_optimal-eps-converted-t
+o.pdf not_optimal.eps>
+(epstopdf)             \includegraphics on input line 344.
+Package epstopdf Info: Output file is already uptodate.
+
+<not_optimal-eps-converted-to.pdf, id=203, 1182.4175pt x 641.39626pt>
+File: not_optimal-eps-converted-to.pdf Graphic file (type pdf)
+
+<use not_optimal-eps-converted-to.pdf>
+Package pdftex.def Info: not_optimal-eps-converted-to.pdf used on input line 34
+4.
+(pdftex.def)             Requested size: 433.62pt x 235.20871pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 349--351
 
  []
 
-[7 <./model_fit-eps-converted-to.pdf>] [8 <./optimal-eps-converted-to.pdf> <./n
-ot_optimal-eps-converted-to.pdf>] [9] (./DesignReport.aux) ) 
+
+Underfull \hbox (badness 10000) in paragraph at lines 353--354
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 355--357
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 358--360
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 361--363
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 364--366
+
+ []
+
+[11] [12 <F:/Backup Before Reinstalling/Documents/APC524/Final Project/project_
+report/optimal-eps-converted-to.pdf> <F:/Backup Before Reinstalling/Documents/A
+PC524/Final Project/project_report/not_optimal-eps-converted-to.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 367--369
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 370--372
+
+ []
+
+[13]
+("F:\Backup Before Reinstalling\Documents\APC524\Final Project\project_report\D
+esignReport.aux") ) 
 Here is how much of TeX's memory you used:
- 2611 strings out of 494985
- 34773 string characters out of 6180356
- 91411 words of memory out of 5000000
- 5784 multiletter control sequences out of 15000+600000
- 9846 words of font info for 37 fonts, out of 8000000 for 9000
- 36 hyphenation exceptions out of 8191
- 38i,12n,26p,1296b,292s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
-9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on DesignReport.pdf (9 pages, 418136 bytes).
+ 4085 strings out of 493921
+ 56713 string characters out of 3144876
+ 180931 words of memory out of 3000000
+ 7308 multiletter control sequences out of 15000+200000
+ 10614 words of font info for 41 fonts, out of 3000000 for 9000
+ 841 hyphenation exceptions out of 8191
+ 42i,14n,40p,1535b,1220s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfon
+ts/cm/cmbx10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmbx12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/c
+m/cmex10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/
+cmmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
+mi8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10
+.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb
+><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:
+/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/P
+rogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Pro
+gram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb><C:/Progr
+am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/euler/eusm10.pfb>
+Output written on DesignReport.pdf (13 pages, 387213 bytes).
 PDF statistics:
- 357 PDF objects out of 1000 (max. 8388607)
- 119 compressed objects within 2 object streams
+ 347 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
