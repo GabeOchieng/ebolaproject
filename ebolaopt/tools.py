@@ -12,6 +12,10 @@ def print_output(alloc, cost, linenum=""):
     print linenum + "\t" + "\t".join(["%.2f%%" % x for x in percentages]) + "\t%.2f" % cost
 
 def calc_interventions(alloc, OrigParams, MyConstraints):
+    """Calculate the model parameters corresponding to a particular resource
+    allocation and return a ModelParams object instance holding the parameters."""
+    # NOTE: delta_1 is currently not a supported intervention but is included
+    # here in case we decide to support it in the future.
     fraction_params = ["theta_1", "delta_1", "delta_2"]
     
     # Unfortunately copy.deepcopy doesn't work with cython, so manually

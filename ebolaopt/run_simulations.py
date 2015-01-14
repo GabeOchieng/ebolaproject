@@ -11,7 +11,7 @@ def calc_needed_resources(MyConstraints, OrigParams):
     for param in MyConstraints.interventions:
         cost, effects = MyConstraints.interventions[param]
         origval = OrigParams.get(param)
-        #XXX This only considers beta_H, delta_2, and theta_1
+        # NOTE: This only considers beta_H, delta_2, and theta_1
         if param == 'beta_H' or param == 'delta_2':
             needed = -origval/effects*cost
         if param == 'theta_1':
@@ -22,6 +22,7 @@ def calc_needed_resources(MyConstraints, OrigParams):
 
 #XXX Move this into StochCalc?
 def setup_stoch_params(N_samples, trajectories, t_final, N, I_init):
+    """Generate a StochParams object instance."""
     StochParams = StochLib.pyStochParams()
     StochParams.set("N_samples", N_samples)
     StochParams.set("Trajectories", trajectories)
@@ -35,6 +36,7 @@ def setup_stoch_params(N_samples, trajectories, t_final, N, I_init):
     return StochParams
 
 def run_no_interventions(OrigParams, StochParams, out_file, n_threads=1):
+    """Run the simulations once with no interventions."""
     t_interventions = StochParams.get('t_final') + 1
     cost = StochLib.StochCalc(StochParams, OrigParams, OrigParams,
                               t_interventions, out_file, n_threads)
@@ -42,6 +44,7 @@ def run_no_interventions(OrigParams, StochParams, out_file, n_threads=1):
 
 def run_with_interventions(alloc, OrigParams, StochParams, MyConstraints, \
                            out_file, n_threads=1):
+    """Run the simulations once with the specified interventions."""
     ModifiedParams = calc_interventions(alloc, OrigParams, MyConstraints)
     cost = StochLib.StochCalc(StochParams, OrigParams, ModifiedParams,
                               MyConstraints.t_interventions, out_file, n_threads)
@@ -51,6 +54,7 @@ def run_with_interventions(alloc, OrigParams, StochParams, MyConstraints, \
 
 def run_optimization(OrigParams, StochParams, MyConstraints, disp, out_file, \
                      n_threads=1):
+    """Run the resource allocation optimization."""
     # Check to make sure intervention time is less than final time
     if MyConstraints.t_interventions >= StochParams.get('t_final'):
         print "WARNING: Intervention time is greater than final time. \

@@ -48,6 +48,8 @@ def parse_data(filename, country):
     return days, cases
 
 def fit_params(data_file, country, N, plot_fit=False):
+    """Perform fitting of the deterministic model to the given cases data,
+    generate a ModelParams object instance holding the parameters, and return it."""
     # Make sure N is a float.
     N=float(N)    
 
@@ -70,9 +72,9 @@ def fit_params(data_file, country, N, plot_fit=False):
     delta2 = 0.75
     
     # Generate the Model.
-    # N[0] = S, # N[1] = E, 
-    # N[2] = I, # N[3] = H, 
-    # N[4] = F, # N[5] = R.
+    # P[0] = S, # P[1] = E,
+    # P[2] = I, # P[3] = H,
+    # P[4] = F, # P[5] = R.
 
     def SIRode(P, t, N, betaI, betaH, betaF, alpha, gammah, gammadh, 
                gammaf, gammai, gammad, gammaih, theta1, delta1, delta2):

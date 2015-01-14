@@ -47,6 +47,7 @@ class Constraints:
             self.interventions[intervention] = self.all_interventions[intervention]
 
 def constraints_help():
+    """Print out information about what the interventions mean."""
     meanings = {"theta_1":("contact tracing", \
                            "fraction of infected cases diagnosed and hospitalized"), \
         "beta_H":("PPE", "contact rate for hospitalized cases"), \
@@ -58,6 +59,7 @@ def constraints_help():
     print s
 
 def setup_constraints(filename, valid_interventions):
+    """Generate a Constraints object instance."""
     MyConstraints = Constraints(filename)
     
     if valid_interventions != 'all':
