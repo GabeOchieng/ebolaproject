@@ -1,5 +1,5 @@
-Caveats, Warnings, and Pitfalls
-===============================
+Warnings and Pitfalls
+=====================
 
 Getting Different Results Each Time
 -----------------------------------

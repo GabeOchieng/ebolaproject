@@ -20,12 +20,16 @@ impact on controlling an Ebola epidemic.
 For the most recent version of EbolaOpt, visit our github page at 
 https://github.com/altafang/ebolaproject.
 
-Contents:
-=========
+An html version of this documentation (if you are not looking at it already)
+is at http://www.princeton.edu/~alta/ebolaproject/.
+
+Contents
+========
 
 .. toctree::
    :maxdepth: 3
 
+   background
    installation
    getting_started
    warnings
@@ -33,11 +37,12 @@ Contents:
    classobjects
 
 
+.. commenting out the indices and tables thing
 
-Indices and tables
-==================
+    Indices and tables
+    ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+    * :ref:`genindex`
+    * :ref:`modindex`
+    * :ref:`search`
 

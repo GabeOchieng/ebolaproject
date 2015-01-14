@@ -66,17 +66,48 @@ Here, the value after "total" is the total resource budget and the value after
 "time" is the time at which interventions are introduced. Finally, the values 
 after each intervention name correspond to their costs and effects respectively.
 
+Suppose you also would like to specify the cases data. Create a file called
+"cases.csv" containing data with the following format (truncated for brevity)::
+
+    "Date","Guinea","Liberia","Nigeria","Sierra Leone","Spain","United States"
+    "2014-03-22",49,,,,,
+    "2014-03-24",86,,,,,
+    "2014-03-25",86,,,,,
+    "2014-03-26",86,,,,,
+    "2014-03-27",103,8,,6,,
+
 Next, run the following in python::
 
     from ebolaopt import optimize
-    alloc, cost = optimize(constraints_file="constraints.csv", t_final=300, \
+    alloc, cost = optimize(constraints_file="constraints.csv", \
+                           data_file="cases.csv", t_final=300, \
                            country="Liberia", out_iv_file="liberia_iv.csv", \
-                           out_noiv_file="liberia_noiv.csv", figure_file="liberia.png")
+                           out_noiv_file="liberia_noiv.csv", \
+                           figure_file="liberia.png", \
+                           valid_interventions=["beta_H", "theta_1"])
                            
-This tells the optimization to read the constraints from "constraints.csv",
-do model fitting of Liberia's cases data, run the simulations until 300 days, 
-and output simulation results to files named "liberia_iv.csv", "liberia_noiv.csv",
-and "liberia.png".
+This tells EbolaOpt to read the constraints from "constraints.csv",
+do model fitting of the data in "cases.csv" under the "Liberia" column, 
+run simulations until 300 days, only consider the interventions beta_H and 
+theta_1 when computing the resource allocation optimization, and output 
+simulation results to files named "liberia_iv.csv", "liberia_noiv.csv", and 
+"liberia.png".
 
+Interventions
+-------------
 
+Currently EbolaOpt supports 3 interventions, listed in the following table:
+
+=========  ===================================== ===================================================
+Parameter  Intervention                          Effect
+=========  ===================================== ===================================================
+beta_H     PPE & other supplies                  Contact rate for hospitalized cases
+delta_2    Hypothetical drug                     Fatality rate of hospitalized patients
+theta_1    Contact tracing & community awareness Fraction of infected cases diagnosed & hospitalized
+=========  ===================================== ===================================================
+
+You can print this table out from inside of python with the following::
+
+    from ebolaopt.constraints import constraints_help
+    constraints_help()
 
