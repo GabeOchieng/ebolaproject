@@ -13,15 +13,17 @@ EbolaOpt requires:
 * matplotlib
 * PyQt (optional)
 
-If you do not already have python2.7, numpy, scipy, and matplotlib, the Anaconda 
+A unix-based operating system (e.g. Linux or Mac OS X) is assumed.
+
+If you do not already have python2.7, numpy, scipy, and matplotlib, the Anaconda
 distribution is a convenient way to install them.
 
 How to Install
 --------------
 
-On Unix machines (e.g. Linux or Mac OS X), download EbolaOpt-0.1.tar.gz 
-from our github repository at https://github.com/altafang/ebolaproject and
-go into the directory into which you downloaded it. Then execute::
+Download EbolaOpt-0.1.tar.gz from the releases/ directory of our github 
+repository at https://github.com/altafang/ebolaproject and go into the 
+directory into which you downloaded it. Then execute::
 
     tar -xvf EbolaOpt-0.1.tar.gz
     cd EbolaOpt-0.1/
