@@ -184,10 +184,12 @@ def fit_params(data_file, country, N, plot_fit=False):
     
     if plot_fit:
         plt.plot(days, NI+NH+NF+NR,'k',label = 'After Optimization')
-        plt.legend()
-        plt.title('Model Parameter Fitting')
-        plt.xlabel('Time (Days)')
-        plt.ylabel('Cumulative Infections ')
+        plt.legend(fontsize=23)
+        plt.title('Model Parameter Fitting',fontsize=23)
+        plt.xlabel('Time (Days)',fontsize=23)
+        plt.ylabel('Cumulative Infections ',fontsize=23)
+        plt.tick_params(axis='both', which='major', labelsize=20)
+        plt.tick_params(axis='both', which='minor', labelsize=18)        
         plt.show()
     
     OrigParams = StochLib.pyModelParams()
