@@ -17,6 +17,9 @@ of different intervention distributions, the software determines how a fixed
 quantity of resources can be allocated in order to have the greatest positive 
 impact on controlling an Ebola epidemic.
 
+For the most recent version of EbolaOpt, visit our github page at 
+https://github.com/altafang/ebolaproject.
+
 Contents:
 =========
 
@@ -25,6 +28,7 @@ Contents:
 
    installation
    getting_started
+   warnings
    documentation
    classobjects
 
