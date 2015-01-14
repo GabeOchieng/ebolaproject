@@ -178,6 +178,8 @@ At the heart of the code is the stochastic equation solver which actually calcul
 
 Thus, we sought an alternative to StochPy that would: a) be much faster, and b) be simpler to interface with our Python code. This led us to implement our own stochastic equation solver, StochCalc, in C++, using Cython to manage the interface with our Python code. After a serial version of StochCalc was implemented, along with a simple interface, profiling demonstrated significant speedups relative to the StochPy solver, which will be described below. Furthermore, we also realized that the stochastic solver was an ideal candidate for parallelization, since each trajectory is independent of the others. Thus, without changing the interface, the implementation of StochCalc was parallelized using OpenMP, resulting in further speed increases.\\
 
+To find the optimum parameters that give the best fit, we used the optimization package in Scipy. There are many different minimization methods provided, and we chose COBYLA because it allows for the inclusion of constraints. For constraints used here, consistent with the previous literature [1-2], all the parameters need to be positive and the ones representing fractions need to be smaller than 1 in addition.
+
 TODO: Add descriptions of the design process for the other components of the software.\\
 
 After successfully interfacing all of the software components of our software together, the software package may be visualized using the Unified Modeling Language (UML). This is shown in figure~\ref{fig:UML}.
@@ -339,9 +341,9 @@ To demonstrate that the optimal resource allocation obtained from this software 
 \begin{figure}
 	\centering
 	\subfigure[]{
-	\includegraphics[width = 6.0 in]{optimal.eps}}
+	\includegraphics[width = 7.0 in]{optimal.eps}}
 	\subfigure[]{
-	\includegraphics[width = 6.0 in]{not_optimal.eps}}
+	\includegraphics[width = 7.0 in]{not_optimal.eps}}
 \caption{Projected Ebola cases with and without interventions. In (a), the optimum resource allocation is used. In (b), all of the resources are allocated to $\beta_H$. In both cases we see that the interventions halt the exponential growth of cases, but the optimum resource allocation has a greater effect.}
 \label{allocation}
 \end{figure}
