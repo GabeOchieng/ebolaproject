@@ -32,9 +32,10 @@ Contents
    background
    installation
    getting_started
-   warnings
-   documentation
+   functions 
    classobjects
+   warnings
+
 
 
 .. commenting out the indices and tables thing
