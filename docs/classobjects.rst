@@ -12,7 +12,7 @@ Constraints
 |	A callable object to hold optimization parameters: total resources, resource costs and effects, and time to start interventions.
 |
 |	Inputs:
-|		*filename* = input file (constraints_file_default) to parse the parameters, format: .csv
+|		*filename* = input file (constraints_file_default) to parse the parameters, *format: .csv*
 |		*total* = value, total budget based on the number of resources to allocate
 |		*cost* = value, cost associated with improving an intervention with no optimization applied
 |		*t_interventions* = value, time before/after *t_final*  for simulations with/without interventions applied respectively
