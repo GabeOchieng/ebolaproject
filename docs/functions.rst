@@ -1,7 +1,7 @@
 Functions
 ===============
 
-Calc_interventions
+calc_interventions
 ^^^^^^^^^^^^^^^^^^
 ::
 
@@ -12,7 +12,7 @@ Returns the ModifiedParams results taken from the StochCalc.ModelParamList . Cal
 	OrigParams = list of parameters
 MyConstraints = keyword
 
-Check_total
+check_total
 ^^^^^^^^^^^^^^^^^^
 ::
 
@@ -25,7 +25,7 @@ needed_resources = array listing of parameters for optimization
 MyConstraints = keyword
 
 
-Constraints_help
+constraints_help
 ^^^^^^^^^^^^^^^^^^
 ::
 
@@ -37,7 +37,7 @@ Returns the parameters used. A help file to describe the meanings of the paramet
 "delta_2" = "fatality rate of hospitalized patients", 2 < value < 40
 
 
-Fit_params
+fit_params
 ^^^^^^^^^^^
 ::
 
@@ -49,7 +49,7 @@ days = array listing for the specific day containing data on the number of cases
 	cases = array listing containing the number of cases reported
 
 	
-Get_data_path
+get_data_path
 ^^^^^^^^^^^
 ::
 
@@ -66,7 +66,7 @@ N= array listing of parameters from Legrand paper, values must be float
 OrigParams = list of parameters
 
 
-Parse_data
+parse_data
 ^^^^^^^^^^^
 ::
 
@@ -77,7 +77,7 @@ Returns an array listing of the day and cases associated with that particular da
 	days = array listing for the specific day containing data on the number of cases
 	cases = array listing containing the number of cases reported
 
-Plot_output
+plot_output
 ^^^^^^^^^^^
 ::
 
@@ -91,7 +91,7 @@ plot=False (Default)
 figure_file = output figure file, format = .png
 
 
-Print_heading
+print_heading
 ^^^^^^^^^^^
 ::
 
@@ -101,7 +101,7 @@ Prints the constraint values used for the interventions applied.
 MyConstraints = keyword
 
 
-Print_output
+print_output
 ^^^^^^^^^^^^
 ::
 
@@ -113,7 +113,7 @@ Makes an array from the alloc given from the interventions allocation percentage
 	linenum = “” (Default, prints all lines)
 		= number (Prints until that line number is reached) 
 
-Optimize
+optimize
 ^^^^^^^^^^^^
 ::
 
@@ -136,7 +136,7 @@ plot=False (Default)
 
 
 	
-Optimize_with_setup
+optimize_with_setup
 ^^^^^^^^^^^^
 ::
 
@@ -165,7 +165,7 @@ Returns an interpolated value based on the specific fit ordinary differential eq
 N= array listing of parameters from Legrand paper, values must be float
 
 
-Run_no_interventions
+run_no_interventions
 ^^^^^^^^^^^^^^^^^^^^
 ::
 
@@ -182,7 +182,7 @@ out_file = “NONE” (Default), other option generates and output text file
 t_interventions = value, must be at least zero
 
 
-Run_optimization
+run_optimization
 ^^^^^^^^^^^^
 ::
 
@@ -202,7 +202,7 @@ out_file = “NONE” (Default), other option generates and output text file
 t_interventions = value, must be at least zero
 
 
-Run_simulation
+run_simulation
 ^^^^^^^^^^^^
 ::
 
@@ -222,7 +222,7 @@ plot=False (Default)
 figure_file = output figure file, format = .png
 
 
-Run_simulation_with_setup
+run_simulation_with_setup
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
@@ -242,7 +242,7 @@ Run_simulation_with_setup
 |		figure_file = output figure file, format = .png
 
 
-Run_with_interventions
+run_with_interventions
 ^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
@@ -262,7 +262,7 @@ Run_with_interventions
 |		*cost* = value, cost associated with improving an intervention with no optimization applied
 
 
-Setup_constraints
+setup_constraints
 ^^^^^^^^^^^^^^^^^^
 ::
 
@@ -278,7 +278,7 @@ Setup_constraints
 |		*MyConstraints* = constraints object in a file of praters generated from the *Constraints* object
 
 
-Setup_model
+setup_model
 ^^^^^^^^^^^^
 ::
 
@@ -304,7 +304,7 @@ Setup_model
 |		*params* = a tuple of selected Ebola objects specific to the *country* option selected
 
 
-Setup_stoch_params
+setup_stoch_params
 ^^^^^^^^^^^^^^^^^^
 ::
 
