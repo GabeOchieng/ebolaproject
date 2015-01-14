@@ -35,8 +35,11 @@ CostFunction
 |			   = True, generates the plot profile in a pop-out window
 |		*n_threads* = 1 (Default), Number of processors to use, OpenMP Parallelization
 |		*alloc* = an array list containing specified values for the resource allocation to be implemented
-|		*cost* = value, cost associated with improving an intervention with no optimization applied
-|		*out_file* = “NONE” (Default), other option generates and output text file                           
+|		*out_file* = “NONE” (Default), other option generates and output text file     
+|		*n* = number assigned to each step during the printout generation   
+|
+|	Output:    
+|		*cost* = value, cost associated with improving an intervention with no optimization applied               
 
 
 ModelParams
@@ -73,9 +76,10 @@ StochCalc
 |		*StochParams* = object containing a list of parameters for stochastic modelling
 |		*ModelParams* = object containing a list of parameters from the Ebola modelling data for a specific country chosen
 |		float *t_interventions* = value, time before/after *t_final*  for simulations with/without interventions applied respectively
-|		string *OutputFileName* = output filename, *format: .txt*
 |		string (int *nthreads*) = string, number of processors to use for OpenMP Parallelization
-
+|
+|	Output:    
+|		string *OutputFileName* = output filename, *format: .txt*
 
 StochParams
 ^^^^^^^^^^^ 
