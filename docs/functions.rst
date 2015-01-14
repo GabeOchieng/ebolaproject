@@ -7,10 +7,16 @@ calc_interventions
 
 	Source Code: tools.py
 
-Returns the ModifiedParams results taken from the StochCalc.ModelParamList . Calculates the values for the interventions to use in the analysis based on the parameters called for computation. Constraint information is taken from MyConstraints and OrigParams in StochLib.pyModelParams() is taken to generate ModifiedParams. Parameters used are "theta_1", "delta_1", "delta_2" which correspond to xxx.
-	alloc = values
-	OrigParams = list of parameters
-MyConstraints = keyword
+|	Returns the *ModifiedParams* results taken from the *StochCalc.ModelParamList* . Calculates the values for the interventions to use in the analysis based on the parameters called for computation. Constraint information is taken from *MyConstraints* and *OrigParams* in *StochLib.pyModelParams()* is taken to generate ModifiedParams.
+|
+|	Inputs:
+|		*alloc* = an array list containing specified values for the resource allocation to be implemented
+|		*OrigParams* = list of parameters before interventions are applied to the simulation model
+|		*StochParams* = object containing a list of parameters for stochastic modelling
+|		*MyConstraints* = constraints object in a file of praters generated from the *Constraints* object
+|
+|	Output:   
+|		*ModifiedParams* = new copy list of parameters before interventions are applied to the simulation model
 
 check_total
 ^^^^^^^^^^^^^^^^^^
@@ -57,7 +63,7 @@ get_data_path
 
 |	Returns the *path* directory of both *data_file_default* and *constraints_file_default*. The *data_file_default* and *constraints_file_default* are used to generate the *path* directory for subsequent use with other functions and class objects.
 |
-|	Input:
+|	Inputs:
 |		*data_file_default* = default data file used to find the path directory
 |		*constraints_file_default* = default constraints file used to find the path directory
 |
@@ -103,8 +109,10 @@ print_heading
 
 	Source Code: tools.py
 
-Prints the constraint values used for the interventions applied. 
-MyConstraints = keyword
+|	Prints the header line for the constraints file. 
+|
+|	Input:
+|		*MyConstraints* = constraints object in a file of praters generated from the *Constraints* object
 
 
 print_output
@@ -113,11 +121,14 @@ print_output
 
 	Source Code: tools.py
 
-Makes an array from the alloc given from the interventions allocation percentages and cost associated with each allocation. The number of lines printed to the output is based on the value of linenum.
-	alloc = values
-	cost = values
-	linenum = “” (Default, prints all lines)
-		= number (Prints until that line number is reached) 
+|	Prints a formatted output display to the screen for the runs displaying the resource allocation and costs.
+|
+|	Inputs:
+|		*cost* = value, cost associated with improving an intervention with no optimization applied
+|		*alloc* = an array list containing specified values for the resource allocation to be implemented
+|		*linenum* = empty string (Default), line number printing is ignored
+|			      = number string, prints line numbers for the table output display on the screen
+
 
 optimize
 ^^^^^^^^^^^^
@@ -125,41 +136,45 @@ optimize
 
 	Source Code: __init__.py
 
-Returns optimized final_cost with applied to the model. A optimization analysis is then performed using the input arguments given and the result generated is the cost associated with a specific intervention applied. Generated values are sent to the output files.
-alloc = values
-params = array listing of OrigParams, StochParams, MyConstraints
-OrigParams = list of parameters
-MyConstraints = keyword
-	StochParams = list of parameters from the stochastic analysis
-	out_noiv_file= output file: no interventions, format=.csv
-out_iv_file= output file: interventions applied, format=.csv
-n_threads=1 (Number of processors to use, OpenMP Parallelization)
-disp=False (Default)
-	= True (generates the plot profile in a pop-out window)
-figure_file = output figure file, format = .png
-plot=False (Default)
-	= True (generates the plot profile in a pop-out window)
-
+|	Returns optimized *final_cost* with interventions applied to the model. A combined optimized analysis (using **optimize_with_setup** and **setup_model**) is then performed and the generated values are sent to the output files.
+|
+|	Inputs:
+|		*disp* = False (Default)
+|			   = True, generates the plot profile in a pop-out window
+|		*out_noiv_file* = output file: no interventions applied, *format=.csv*
+|		*out_iv_file* = output file: interventions applied, *format=.csv*
+|		*n_threads* = 1 (Default), Number of processors to use, OpenMP Parallelization
+|		*plot* = False (Default)
+|			   = True, generates the plot profile in a pop-out window
+|		*figure_file* = output figure file, *format = .png*
+|		*\**kwds* = used to reference input arguments in **setup_model** function
+|
+|	Output:    		
+|		*final_cost* = value, death metric for computing associated cost (number of dead people) after optimized simulation 
 
 	
 optimize_with_setup
-^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
 ::
 
 	Source Code: __init__.py
 
-Returns the optimized final_cost and resource allocation associated with the final_cost.  This function computes the final_cost values after optimization has been performed based on the parameters given from setup_model.
-	params = array listing of OrigParams, StochParams, MyConstraints
-OrigParams = list of parameters
-MyConstraints = keyword
-	StochParams = list of parameters from the stochastic analysis
-	out_noiv_file= output file: no interventions, format=.csv
-out_iv_file= output file: interventions applied, format=.csv
-n_threads=1 (Number of processors to use, OpenMP Parallelization)
-disp=False (Default)
-	= True (generates the plot profile in a pop-out window)
-figure_file = output figure file, format = .png
-
+|	Returns the *xmin* and *final_cost*.  This function computes the *final_cost* values after optimization has been performed based on the parameters given from setup_model.
+|
+|	Inputs:
+|		*disp* = False (Default)
+|			   = True, generates the plot profile in a pop-out window
+|		*out_noiv_file* = output file: no interventions applied, *format=.csv*
+|		*out_iv_file* = output file: interventions applied, *format=.csv*
+|		*n_threads* = 1 (Default), Number of processors to use, OpenMP Parallelization
+|		*plot* = False (Default)
+|			   = True, generates the plot profile in a pop-out window
+|		*figure_file* = output figure file, *format = .png*
+|		*params* = a tuple of selected Ebola objects specific to the *country* option selected
+|
+|	Output:    		
+|		*xmin* = value, optimized resource allocation and distribution 
+|		*final_cost* = value, death metric for computing associated cost (number of dead people) after optimized simulation 
 
 SIRode
 ^^^^^^^^^^^^
