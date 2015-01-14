@@ -160,6 +160,8 @@ Throughout the design process, we attempted to select the appropriate software t
         \hline
         Profiling & cProfile \\ 
         \hline
+        Graphical User Interface & PyQt \\
+        \hline
 	\end{tabular}
 \end{center}
 \end{table}
@@ -178,9 +180,9 @@ At the heart of the code is the stochastic equation solver which actually calcul
 
 Thus, we sought an alternative to StochPy that would: a) be much faster, and b) be simpler to interface with our Python code. This led us to implement our own stochastic equation solver, StochCalc, in C++, using Cython to manage the interface with our Python code. After a serial version of StochCalc was implemented, along with a simple interface, profiling demonstrated significant speedups relative to the StochPy solver, which will be described below. Furthermore, we also realized that the stochastic solver was an ideal candidate for parallelization, since each trajectory is independent of the others. Thus, without changing the interface, the implementation of StochCalc was parallelized using OpenMP, resulting in further speed increases.\\
 
-To find the optimum parameters that give the best fit, we used the optimization package in Scipy. There are many different minimization methods provided, and we chose COBYLA because it allows for the inclusion of constraints. For constraints used here, consistent with the previous literature [1-2], all the parameters need to be positive and the ones representing fractions need to be smaller than 1 in addition.
+To find the optimum parameters that give the best fit, we used the optimization package in Scipy. There are many different minimization methods provided, and we chose COBYLA because it allows for the inclusion of constraints. For constraints used here, consistent with the previous literature [1-2], all the parameters need to be positive and the ones representing fractions need to be smaller than 1. \\
 
-TODO: Add descriptions of the design process for the other components of the software.\\
+The resource allocation optimization code structure was designed to be as modular as possible, since it required interfacing with model fitting, stochastic simulations, and output plotting. Scipy was used since it was a standard and easy-to-use tool to solve optimization problems, with an interface that allowed easy switching between different algorithms to tackle the same problem. Inspiration for our software's optimization wrapping was drawn from Mystic, a python optimization software package (https://github.com/uqfoundation/mystic) that one of us previously contributed to developing. However, we opted not to actually use Mystic to do our optimization in order to reduce the number of dependences of our software package and because Mystic's handling of constrained optimization did not seem to be sufficiently robust and well-developed. \\
 
 After successfully interfacing all of the software components of our software together, the software package may be visualized using the Unified Modeling Language (UML). This is shown in figure~\ref{fig:UML}.
 \begin{figure}
@@ -202,7 +204,7 @@ After successfully interfacing all of the software components of our software to
 
 {\textbf{run\_optimization}}\vspace{3mm}\\
 \hangindent=1cm{\textbf{Functionality:} The run\_optimization function uses the model parameter values calculated by the fit\_params function and calls the StochCalc function to determine the total number of expected deaths. Using an optimization loop, it finds the optimal resource allocation for minimizing the total number of deaths. \vspace{3mm}\\
-\textbf{Specifics:} The COBYLA method from SciPy is once again used for minimization. The function to be minimized is represented by a CostFunction callable object that calls StochCalc for calculations ans is initialized using parameters from fit\_params as well as user input. To prevent unreasonable results, two tests are performed before the optimization. Specifically, the intervention time is checked to make sure it is less than the final time of the simulation. Also, the total resource budget is checked to ensure that all of the interventions will not be maximized. In either of those cases, no optimization is be necessary, and only one simulation is performed.}\\
+\textbf{Specifics:} The COBYLA method from SciPy is once again used for minimization. The function to be minimized is represented by a CostFunction callable object that calls StochCalc for calculations and is initialized using parameters from fit\_params as well as user input. To prevent unreasonable results, two tests are performed before the optimization. Specifically, the intervention time is checked to make sure it is less than the final time of the simulation. Also, the total resource budget is checked to ensure that all of the interventions will not be maximized. In either of those cases, no optimization is be necessary, and only one simulation is performed.}\\
 
 \underline{\textbf{Testing}}\vspace{0.5mm}\\
 Unitest has been used throughout our software design process to test our python scripts. Test files are located in the \emph{ebolaopt/tests} folder. \\
@@ -213,8 +215,8 @@ Unitest has been used throughout our software design process to test our python 
 }
 
 \textbf{test\_optimization.py:} \hangindent=1cm{This test suite is used to test the resource allocations functions, including run\_optimization.\vspace{3mm}\\
-\textbf{Test 1:} Does the optimization correctly fail if the intervention time is greater than the final time?\vspace{3mm}\\
-\textbf{Test 2:} Does the optimization correctly fail if the total resources are too large?\vspace{3mm}\\
+\textbf{Test 1:} Does the optimization correctly stop if the intervention time is greater than the final time?\vspace{3mm}\\
+\textbf{Test 2:} Does the optimization correctly stop if the total resources are too large?\vspace{3mm}\\
 \textbf{Test 3:} Does the optimization work correctly for different countries?\vspace{3mm}\\
 \textbf{Test 4:} Does the optimization still work when all resources are allocated to one intervention?\vspace{3mm}\\
 \textbf{Test 5:} Does the optimization still work when the StochCalc solver is used in parallel?\vspace{3mm}\\
@@ -349,7 +351,9 @@ To demonstrate that the optimal resource allocation obtained from this software 
 \end{figure}
 
 \underline{\textbf{Lessons Learned from the Project}}\vspace{0.5mm}\\
-This software design project gave several of us our first opportunity to develop a large software package as a team. Specifically, the team perspective forced us to focus on the importance of writing a code with good modularity and intelligent interfaces. We also learned about the utility of version control as we used github through the entire development process. Practically speaking, we were exposed to many new tools, including Sphinx, Distutils, Cython, and cProfile. In addition, we learned to think from the perspective of the user when developing this software package. Finally, this project gave us a fresh look at how well-designed software can be used to solve important real-world problems. \\
+This software design project gave several of us our first opportunity to develop a large software package as a team. Specifically, the team perspective forced us to focus on the importance of writing a code with good modularity and intelligent interfaces. Thinking about and clearly writing out the input and output of each part of the code helped with arranging everything into modular functions that allowed easy addition of new features and modification for different use cases. This lesson was learned by finding that a first attempt at organizing the optimization code was difficult to extend, resulting in revisions that gave a significantly improved second draft of the code. \\
+
+We also learned about the utility of version control as we used github through the entire development process. Practically speaking, we were exposed to many new tools, including Sphinx, Distutils, Cython, and cProfile. In addition, we learned to think from the perspective of the user when developing this software package. Finally, this project gave us a fresh look at how well-designed software can be used to solve important real-world problems. \\
 
 
 \underline{\textbf{Distribution of Labor}}\vspace{0.5mm}\\
@@ -358,7 +362,7 @@ This software design project gave several of us our first opportunity to develop
 \hangindent=1cm{Wrote the C++ stochastic equation solver StochCalc to solve the stochastic formulation of the governing ODEs. Parallelized StochCalc using OpenMP. Wrote the Cython interface for calling the C++ solver from our Python code. Wrote Unittests for the StochCalc solver and Cython. Profiled the code using cProfile.}\\
 
 \textbf{Alta Fang:}\\
-\hangindent=1cm{Wrapped the optimization around the stochastic solver and handled the user inputs. Generated the primary user interface. Made the software distributable and installable through distutils. Wrote Unittests for the optimization code.}\\
+\hangindent=1cm{Wrapped the resource allocation optimization around the stochastic solver and handled user inputs. Generated the primary user interface. Made the software distributable and installable through distutils.}\\
 
 \textbf{Sandra Sowah:}\\
 \hangindent=1cm{Analyzed outputs from the stochastic simulations and optimization loop and wrote code to visualize the outputs. Developed the GUI using PyQt.}\\
