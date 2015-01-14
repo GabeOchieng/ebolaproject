@@ -55,8 +55,14 @@ get_data_path
 
 	Source Code: __init__.py
 
-Returns the path directory. The data_file_default and constraints_file_default are also generated for their respective directories.
-	path = directory listing of the files
+|	Returns the *path* directory of both *data_file_default* and *constraints_file_default*. The *data_file_default* and *constraints_file_default* are used to generate the *path* directory for subsequent use with other functions and class objects.
+|
+|	Input:
+|		*data_file_default* = default data file used to find the path directory
+|		*constraints_file_default* = default constraints file used to find the path directory
+|
+|	Output: 
+|		*path* = directory listing of the files
  
  
 Commands from modelfit.py:
@@ -83,12 +89,12 @@ plot_output
 
 	Source Code: plot.py
 
-Returns a figure plot in a window. Data from the simulations run for the optimized option with interventions and the no intervention simulation is plotted for comparison.
-out_noiv_file= output file: no interventions, format=.csv
-out_iv_file= output file: interventions applied, format=.csv
-plot=False (Default)
-	= True (generates the plot profile in a pop-out window)
-figure_file = output figure file, format = .png
+|	Returns a figure plot in a window. Data from the simulations run for the optimized option with interventions and the no intervention simulation is plotted for comparison.
+|
+|	Inputs:
+|		*out_noiv_file* = output file: no interventions applied, *format=.csv*
+|		*out_iv_file* = output file: interventions applied, *format=.csv*
+|		*figure_file* = output figure file, *format = .png*
 
 
 print_heading
@@ -171,15 +177,16 @@ run_no_interventions
 
 	Source Code: run_simulations.py
 
-Returns cost when there have been no interventions applied to the model.  A stochastic analysis is then performed using the input arguments given and the result generated is the cost associated with a specific intervention applied.
-	alloc = values
-cost = value
-	OrigParams = list of parameters
-MyConstraints = keyword
-StochParams = list of parameters from the stochastic analysis
-n_threads=1 (Number of processors to use, OpenMP Parallelization)
-out_file = “NONE” (Default), other option generates and output text file
-t_interventions = value, must be at least zero
+|	Returns *cost* when there have been no interventions applied to the model.  A stochastic analysis is then performed using the input arguments given and the result generated is the cost associated with a specific intervention applied.
+|
+|	Inputs:
+|		*OrigParams* = list of parameters before interventions are applied to the simulation model
+|		*StochParams* = object containing a list of parameters for stochastic modelling
+|		*n_threads* = 1 (Default), Number of processors to use, OpenMP Parallelization
+|		*out_file* = “NONE” (Default), other option generates and output text file   
+|
+|	Output:    		
+|		*cost* = value, cost associated with improving an intervention with no optimization applied
 
 
 run_optimization
@@ -188,38 +195,45 @@ run_optimization
 
 	Source Code: run_simulations.py
 
-Returns the optimized final_cost and resource allocation associated with the final_cost.  This function computes the final_cost values after optimization has been performed based on the parameters given from StochParams. Error handling is performed for values that do not correspond to cases where optimization is not needed.
-alloc = values
-	cost = value
-	final_cost = value generated after optimization is performed if needed
-OrigParams = list of parameters
-MyConstraints = keyword
-disp=False (Default)
-	= True (generates the plot profile in a pop-out window)
-	StochParams = list of parameters from the stochastic analysis
-n_threads=1 (Number of processors to use, OpenMP Parallelization)
-out_file = “NONE” (Default), other option generates and output text file
-t_interventions = value, must be at least zero
+|	Returns the optimized *final_cost* and resource allocation associated with the *final_cost*.  This function computes the *final_cost* values after optimization has been performed based on the parameters given from *StochParams*. Error handling is performed for values that do not correspond to cases where optimization is not needed.
+|
+|	Inputs:
+|		*OrigParams* = list of parameters before interventions are applied to the simulation model
+|		*StochParams* = object containing a list of parameters for stochastic modelling
+|		*MyConstraints* = constraints object in a file of praters generated from the *Constraints* object
+|		*disp* = False (Default)
+|			   = True, generates the plot profile in a pop-out window
+|		*n_threads* = 1 (Default), Number of processors to use, OpenMP Parallelization
+|		*out_file* = “NONE” (Default), other option generates and output text file   
+|
+|	Output:    		
+|		*final_cost* = value, death metric for computing associated cost (number of dead people) after optimized simulation 
+
 
 
 run_simulation
-^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
 ::
 
 	Source Code: __init__.py
   
-Returns final_cost with/without interventions applied to the model based on an updated params listing. A stochastic analysis is then performed using the input arguments given and the result generated is the cost associated with a specific intervention applied. A figure plot for the trends when interventions have been applied compared to when interventions are not applied is generated. The figure is then saved to an output file.
-alloc = values
-params = array listing of OrigParams, StochParams, MyConstraints
-OrigParams = list of parameters
-MyConstraints = keyword
-	StochParams = list of parameters from the stochastic analysis
-	out_noiv_file= output file: no interventions, format=.csv
-out_iv_file= output file: interventions applied, format=.csv
-n_threads=1 (Number of processors to use, OpenMP Parallelization)
-plot=False (Default)
-	= True (generates the plot profile in a pop-out window)
-figure_file = output figure file, format = .png
+|	Returns *final_cost* with/without interventions applied to the model based on an updated params listing. A combined optimized stochastic analysis (using **run_simulation_with_setup** and **setup_model**) is then performed using the input arguments given and specific intervention applied. A figure plot for the trends when interventions have been applied compared to when interventions are not applied is generated. The figure is then saved to an output file.
+|
+|	Inputs:
+|		*alloc* = an array list containing specified values for the resource allocation to be implemented
+|		*params* = a tuple of selected Ebola objects specific to the *country* option selected
+|		*disp* = False (Default)
+|			   = True, generates the plot profile in a pop-out window
+|		*out_noiv_file* = output file: no interventions applied, *format=.csv*
+|		*out_iv_file* = output file: interventions applied, *format=.csv*
+|		*n_threads* = 1 (Default), Number of processors to use, OpenMP Parallelization
+|		*plot* = False (Default)
+|			   = True, generates the plot profile in a pop-out window
+|		*figure_file* = output figure file, *format = .png*
+|		*\**kwds* = used to reference input arguments in **setup_model** function
+|
+|	Output:    		
+|		*final_cost* = value, death metric for computing associated cost (number of dead people) after optimized simulation 
 
 
 run_simulation_with_setup
@@ -228,18 +242,20 @@ run_simulation_with_setup
 
 	Source Code: __init__.py
   
-|	Returns final_cost with/without interventions applied to the model. A stochastic analysis is then performed using the input arguments given and the result generated is the cost associated with a specific intervention applied. A figure plot for the trends when interventions have been applied compared to when interventions are not applied is generated. The figure is then saved to an output file.
-|		alloc = values
-|		params = array listing of OrigParams, StochParams, MyConstraints
-|		OrigParams = list of parameters
-|		MyConstraints = keyword
-|		StochParams = list of parameters from the stochastic analysis
-|		out_noiv_file= output file: no interventions, format=.csv
-|		out_iv_file= output file: interventions applied, format=.csv
-|		n_threads=1 (Number of processors to use, OpenMP Parallelization)
-|		plot=False (Default)
-|			= True (generates the plot profile in a pop-out window)
-|		figure_file = output figure file, format = .png
+|	Returns *final_cost* with/without interventions applied to the model. An optimized stochastic analysis is then performed using the input arguments given and the result is generated. A figure plot for the trends when interventions have been applied compared to when interventions are not applied is generated. The figure is then saved to an output file.
+|
+|	Inputs:
+|		*alloc* = an array list containing specified values for the resource allocation to be implemented
+|		*params* = a tuple of selected Ebola objects specific to the *country* option selected
+|		*out_noiv_file* = output file: no interventions applied, *format=.csv*
+|		*out_iv_file* = output file: interventions applied, *format=.csv*
+|		*n_threads* = 1 (Default), Number of processors to use, OpenMP Parallelization
+|		*plot* = False (Default)
+|			   = True, generates the plot profile in a pop-out window
+|		*figure_file* = output figure file, *format = .png*
+|
+|	Output:    		
+|		*final_cost* = value, death metric for computing associated cost (number of dead people) after optimized simulation 
 
 
 run_with_interventions
