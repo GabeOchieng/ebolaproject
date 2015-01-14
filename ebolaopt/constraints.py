@@ -60,7 +60,7 @@ def constraints_help():
 def setup_constraints(filename, valid_interventions):
     MyConstraints = Constraints(filename)
     
-    if valid_interventions.lower() != 'all':
+    if valid_interventions != 'all':
         MyConstraints.filter_interventions(valid_interventions)
     
     return MyConstraints

@@ -110,4 +110,17 @@ You can print this table out from inside of python with the following::
 
     from ebolaopt.constraints import constraints_help
     constraints_help()
+    
+Run Simulation Without Optimization
+-----------------------------------
+
+Suppose you just want to run the simulation once for a particular resource 
+allocation. This can be done in the following manner::
+
+    from ebolaopt import run_simulation
+    cost = run_simulation([1, 0, 0])
+    
+In this example, we run the simulation assuming all resources are dedicated
+to beta_H. Note that the values in the allocation array correspond to the
+valid intervention names in alphabetical order. 
 
