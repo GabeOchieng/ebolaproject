@@ -26,6 +26,7 @@ Contents:
    installation
    getting_started
    documentation
+   classobjects
 
 
 
