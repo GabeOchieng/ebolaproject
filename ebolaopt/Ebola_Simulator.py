@@ -455,14 +455,14 @@ class Ui_MainWindow(object):
 		global data_file
 		path = str(QtGui.QFileDialog.getOpenFileName())
 		result = os.path.basename(path);
-		data_file = result
+		data_file = path
 		
 
 	def openFileDialog_Constraints():
 		global constraints_file
 		path = str(QtGui.QFileDialog.getOpenFileName())
 		result = os.path.basename(path);
-		constraints_file = result
+		constraints_file = path
 
 		
 	def Ebola_Simulator():  
