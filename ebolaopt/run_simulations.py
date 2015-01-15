@@ -21,17 +21,18 @@ def calc_needed_resources(MyConstraints, OrigParams):
     return needed_resources
 
 #XXX Move this into StochCalc?
-def setup_stoch_params(N_samples, trajectories, t_final, N, I_init):
+def setup_stoch_params(N_samples, trajectories, t_final, N, I_init, \
+                       H_init, F_init, R_init, E_init):
     """Generate a StochParams object instance."""
     StochParams = StochLib.pyStochParams()
     StochParams.set("N_samples", N_samples)
     StochParams.set("Trajectories", trajectories)
     StochParams.set("I_init", I_init)
     StochParams.set("S_init", N - I_init)
-    StochParams.set("H_init", 0)
-    StochParams.set("F_init", 0)
-    StochParams.set("R_init", 0)
-    StochParams.set("E_init", 0)
+    StochParams.set("H_init", H_init)
+    StochParams.set("F_init", F_init)
+    StochParams.set("R_init", R_init)
+    StochParams.set("E_init", E_init)
     StochParams.set("t_final", t_final)
     return StochParams
 

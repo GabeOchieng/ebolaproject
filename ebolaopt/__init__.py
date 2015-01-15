@@ -17,9 +17,11 @@ constraints_file_default = get_data_path('constraints.csv')
 
 def setup_model(data_file=data_file_default, constraints_file=constraints_file_default, \
           plot_fit=True, N_samples=200, trajectories=20, t_final=250., \
-          N=200000, I_init=3, valid_interventions='all', country="Sierra Leone"):
+          N=200000, I_init=3, valid_interventions='all', country="Sierra Leone", \
+          H_init=0, F_init=0, R_init=0, E_init=0):
     OrigParams = fit_params(data_file, country, N, plot_fit=plot_fit)
-    StochParams = setup_stoch_params(N_samples, trajectories, t_final, N, I_init)
+    StochParams = setup_stoch_params(N_samples, trajectories, t_final, N, I_init, \
+                                     H_init, F_init, R_init, E_init)
     MyConstraints = setup_constraints(constraints_file, valid_interventions)
     params = (OrigParams, StochParams, MyConstraints)
     return params
@@ -61,7 +63,7 @@ def optimize(disp=True, out_noiv_file="out_noiv.csv", \
                         n_threads=n_threads)
     return xmin, final_cost
 
-def run_simulation(alloc, disp=True, out_noiv_file="out_noiv.csv", \
+def run_simulation(alloc, out_noiv_file="out_noiv.csv", \
                    out_iv_file="out_iv.csv", figure_file="out.png", plot=True, \
                    n_threads=1, **kwds):
     params = setup_model(**kwds)

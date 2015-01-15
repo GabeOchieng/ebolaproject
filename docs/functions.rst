@@ -1,5 +1,5 @@
 Functions
-===============
+=========
 
 calc_interventions
 ^^^^^^^^^^^^^^^^^^
@@ -12,11 +12,10 @@ calc_interventions
 |	Inputs:
 |		*alloc* = an array containing specified values for the resource allocation to be implemented
 |		*OrigParams* = *ModelParams* object holding parameters before interventions are applied to the simulation model
-|		*StochParams* = object containing parameters for stochastic modelling
 |		*MyConstraints* = *Constraints* object holding constraints information
 |
 |	Output:   
-|		*ModifiedParams* = new object holding parameters after interventions are applied to the simulation model
+|		*ModifiedParams* = new *ModelParams* object holding parameters after interventions are applied to the simulation model
 
 calc_needed_resources
 ^^^^^^^^^^^^^^^^^^^^^
@@ -25,10 +24,13 @@ calc_needed_resources
 	Source Code: run_simulations.py
 
 Returns an array listing of needed_resources. The function checks to make sure that the total given is not so large that optimization is pointless.
-	total = total resource budget
-needed_resources = array of resource allocation
-	OrigParams = object holding original parameters
+Arguments:
 MyConstraints = *Constraints* object instance
+	OrigParams = object holding original parameters
+    
+    Output:
+    needed_resources = array of resource allocation
+
 
 
 constraints_help
@@ -38,9 +40,6 @@ constraints_help
 	Source Code: constraints.py
 
 Prints the intervention options. Describes the meanings of the parameters applied. Takes no arguments.
-"theta_1" = "fraction of infected cases diagnosed and hospitalized"
-"beta_H" = "contact rate for hospitalized cases"
-"delta_2" = "fatality rate of hospitalized patients"
 
 
 fit_params
@@ -52,29 +51,28 @@ fit_params
 Returns an object containing the list of parameters for a specific country.
         data_file = path of cases data file
         country = name of country
-		N= total population
+        N= total population
         plot_fit=False (default). Specify whether to show a plot of the fitting.
 
 	
 get_data_path
-^^^^^^^^^^^
+^^^^^^^^^^^^^
 ::
 
 	Source Code: __init__.py
 
-|	Returns the *path* directory of the current file. It is used to generate the *path* directory of the constraints and case default files.
+|	Returns the *path* directory of the built-in data. It is used to generate the *path* directory of the constraints and cases default files.
 |
 |	Inputs:
-|		*data_file_default* = default data file used to find the path directory
-|		*constraints_file_default* = default constraints file used to find the path directory
+|		*path* = name of the file in the data directory
 |
 |	Output: 
-|		*path* = directory listing of the files
+|		*path* = full path of the data file
  
 
 
 parse_data
-^^^^^^^^^^^
+^^^^^^^^^^
 ::
 
 	Source Code: modelfit.py
@@ -104,15 +102,15 @@ plot_output
 
 
 print_heading
-^^^^^^^^^^^
+^^^^^^^^^^^^^
 ::
 
 	Source Code: tools.py
 
-|	Prints the header line for the constraints file. 
+|	Prints the header line saying what the interventions are.
 |
 |	Input:
-|		*MyConstraints* = constraints object in a file of praters generated from the *Constraints* object
+|		*MyConstraints* = *Constraints* object holding constraints parameters
 
 
 print_output
@@ -123,15 +121,16 @@ print_output
 
 |	Prints a formatted output display to the screen for the runs displaying the resource allocation and costs.
 |
-|	Inputs:
-|		*cost* = value, cost associated with improving an intervention with no optimization applied
-|		*alloc* = an array list containing specified values for the resource allocation to be implemented
+|	Input Arguments:
+|		*alloc* = an array containing specified values for the resource allocation implemented
+|		*cost* = value, number of deaths
+ Keyword Arguments:
 |		*linenum* = empty string (Default), line number printing is ignored
 |			      = number string, prints line numbers for the table output display on the screen
 
 
 optimize
-^^^^^^^^^^^^
+^^^^^^^^
 ::
 
 	Source Code: __init__.py
@@ -139,18 +138,34 @@ optimize
 |	Returns optimized *final_cost* with interventions applied to the model. A combined optimized analysis (using **optimize_with_setup** and **setup_model**) is then performed and the generated values are sent to the output files.
 |
 |	Inputs:
-|		*disp* = False (Default)
-|			   = True, generates the plot profile in a pop-out window
+|		*disp* = True (Default), prints every step of the optimization
+|			   = False
 |		*out_noiv_file* = output file: no interventions applied, *format=.csv*
 |		*out_iv_file* = output file: interventions applied, *format=.csv*
 |		*n_threads* = 1 (Default), Number of processors to use, OpenMP Parallelization
-|		*plot* = False (Default)
-|			   = True, generates the plot profile in a pop-out window
+|		*plot* = True (Default), generates the final plot in a pop-out window
+|			   = False
 |		*figure_file* = output figure file, *format = .png*
-|		*\**kwds* = used to reference input arguments in **setup_model** function
+|		*data_file* = data file of cases vs. time for various countries
+|		*plot_fit* = True (Default), plots data fitting figure in window
+|			       = False, plotting option is ignored
+|		*N_samples* = value; number of times to sample the stochastic run to query results for generating the output
+|		*trajectories* = value; number of times the stoachstic simulation is run for consistency and stability
+|		*constraints_file* = constraints filename of a csv file with total budget and intervention time and costs
+|		*N* = value, size of the total population of susceptible persons
+|		*valid_interventions* = array listing of all interventions applicable, Default = ‘all’; other options: eg. ["theta_1", "delta_2"]
+|		*I_init* = value; initial values for the number of infectious cases in the community
+|		*S_init* = value; initial values for the number of susceptible individuals
+|		*H_init* = value; initial values for the number of hospitalized cases
+|		*F_init* = value; initial values for the number of cases who are dead but not yet buried
+|		*R_init* = value; initial values for the number of individuals removed from the chain of transmission
+|		*E_init* = value; initial values for the number of exposed individuals
+|		*country* = specified country based on Ebola data, Default = “Sierra Leone”
+|				  = other options: “Liberia”, “Guinea”
+|		*t_final* = value; limit of time series data calculated in days
 |
 |	Output:    		
-|		*final_cost* = value, death metric for computing associated cost (number of dead people) after optimized simulation 
+|		*final_cost* = value, death metric of associated cost (number of dead people) after optimized simulation
 
 	
 optimize_with_setup
@@ -161,29 +176,22 @@ optimize_with_setup
 
 |	Returns the *xmin* and *final_cost*.  This function computes the *final_cost* values after optimization has been performed based on the parameters given from setup_model.
 |
-|	Inputs:
-|		*disp* = False (Default)
-|			   = True, generates the plot profile in a pop-out window
+Input Arguments:
+|		*params* = a tuple of selected Ebola parameter objects specific to the *country* option selected
+
+|	Keyword Arguments:
+|		*disp* = True (Default), prints every step of the optimization
+|			   = False
 |		*out_noiv_file* = output file: no interventions applied, *format=.csv*
 |		*out_iv_file* = output file: interventions applied, *format=.csv*
 |		*n_threads* = 1 (Default), Number of processors to use, OpenMP Parallelization
-|		*plot* = False (Default)
-|			   = True, generates the plot profile in a pop-out window
+|		*plot* = True (Default), generates the final plot in a pop-out window
+|			   = False
 |		*figure_file* = output figure file, *format = .png*
-|		*params* = a tuple of selected Ebola objects specific to the *country* option selected
 |
 |	Output:    		
-|		*xmin* = value, optimized resource allocation and distribution 
-|		*final_cost* = value, death metric for computing associated cost (number of dead people) after optimized simulation 
-
-SIRode
-^^^^^^^^^^^^
-::
-
-	Source Code: modelfit.py
-
-Returns an interpolated value based on the specific fit ordinary differential equation (ODE) equation. The ODE equation is then integrated to generate discrete values for the time series data taken from the array listing file containing days and cases. All parameters listed for this equation are consistent with the parameters used in the Legrand paper.
-N= array listing of parameters from Legrand paper, values must be float
+|		*xmin* = value, optimized resource allocation/distribution
+|		*final_cost* = value, death metric of associated cost (number of dead people) after optimized simulation
 
 
 run_no_interventions
@@ -195,31 +203,30 @@ run_no_interventions
 |	Returns *cost* when there have been no interventions applied to the model.  A stochastic analysis is then performed using the input arguments given and the result generated is the cost associated with a specific intervention applied.
 |
 |	Inputs:
-|		*OrigParams* = list of parameters before interventions are applied to the simulation model
-|		*StochParams* = object containing a list of parameters for stochastic modelling
+|		*OrigParams* = object of parameters before interventions are applied to the simulation model
+|		*StochParams* = object containing parameters for stochastic modelling
+|		*out_file* = name of simulation output file
 |		*n_threads* = 1 (Default), Number of processors to use, OpenMP Parallelization
-|		*out_file* = “NONE” (Default), other option generates and output text file   
 |
 |	Output:    		
-|		*cost* = value, cost associated with improving an intervention with no optimization applied
+|		*cost* = value, death metric of associated cost (number of dead people) after optimized simulation
 
 
 run_optimization
-^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 ::
 
 	Source Code: run_simulations.py
 
-|	Returns the optimized *final_cost* and resource allocation associated with the *final_cost*.  This function computes the *final_cost* values after optimization has been performed based on the parameters given from *StochParams*. Error handling is performed for values that do not correspond to cases where optimization is not needed.
+|	Returns the optimized *final_cost* and resource allocation associated with the *final_cost*.  This function computes the *final_cost* values after optimization has been performed based on the parameters given from *StochParams*. Error handling is performed for values that correspond to cases where optimization is not needed.
 |
 |	Inputs:
-|		*OrigParams* = list of parameters before interventions are applied to the simulation model
+|		*OrigParams* = object of parameters before interventions are applied to the simulation model
 |		*StochParams* = object containing a list of parameters for stochastic modelling
 |		*MyConstraints* = constraints object in a file of praters generated from the *Constraints* object
-|		*disp* = False (Default)
-|			   = True, generates the plot profile in a pop-out window
+|		*disp* = True or False, whether to generates the plot profile in a pop-out window
+|		*out_file* = name of simulation output file
 |		*n_threads* = 1 (Default), Number of processors to use, OpenMP Parallelization
-|		*out_file* = “NONE” (Default), other option generates and output text file   
 |
 |	Output:    		
 |		*final_cost* = value, death metric for computing associated cost (number of dead people) after optimized simulation 
@@ -227,7 +234,7 @@ run_optimization
 
 
 run_simulation
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 ::
 
 	Source Code: __init__.py
@@ -236,19 +243,32 @@ run_simulation
 |
 |	Inputs:
 |		*alloc* = an array list containing specified values for the resource allocation to be implemented
-|		*params* = a tuple of selected Ebola objects specific to the *country* option selected
-|		*disp* = False (Default)
-|			   = True, generates the plot profile in a pop-out window
-|		*out_noiv_file* = output file: no interventions applied, *format=.csv*
-|		*out_iv_file* = output file: interventions applied, *format=.csv*
+|		*out_noiv_file* = "out_noiv.csv" (Default). Output file: no interventions applied, *format=.csv*
+|		*out_iv_file* = "out_iv.csv" (Default). Output file: interventions applied, *format=.csv*
 |		*n_threads* = 1 (Default), Number of processors to use, OpenMP Parallelization
-|		*plot* = False (Default)
-|			   = True, generates the plot profile in a pop-out window
+|		*plot* = True (Default), generates the plot profile in a pop-out window
+|			   = False
 |		*figure_file* = output figure file, *format = .png*
-|		*\**kwds* = used to reference input arguments in **setup_model** function
+|		*data_file* = data file of cases vs. time for various countries
+|		*plot_fit* = True (Default), plots data fitting figure in window
+|			       = False, plotting option is ignored
+|		*N_samples* = value; number of times to sample the stochastic run to query results for generating the output
+|		*trajectories* = value; number of times the stoachstic simulation is run for consistency and stability
+|		*constraints_file* = constraints filename of a csv file with total budget and intervention time and costs
+|		*N* = value, size of the total population of susceptible persons
+|		*valid_interventions* = array listing of all interventions applicable, Default = ‘all’; other options: eg. ["theta_1", "delta_2"]
+|		*I_init* = value; initial values for the number of infectious cases in the community
+|		*S_init* = value; initial values for the number of susceptible individuals
+|		*H_init* = value; initial values for the number of hospitalized cases
+|		*F_init* = value; initial values for the number of cases who are dead but not yet buried
+|		*R_init* = value; initial values for the number of individuals removed from the chain of transmission
+|		*E_init* = value; initial values for the number of exposed individuals
+|		*country* = specified country based on Ebola data, Default = “Sierra Leone”
+|				  = other options: “Liberia”, “Guinea”
+|		*t_final* = value; limit of time series data calculated in days
 |
 |	Output:    		
-|		*final_cost* = value, death metric for computing associated cost (number of dead people) after optimized simulation 
+|		*final_cost* = value, death metric of associated cost (number of dead people) after optimized simulation
 
 
 run_simulation_with_setup
@@ -261,12 +281,12 @@ run_simulation_with_setup
 |
 |	Inputs:
 |		*alloc* = an array list containing specified values for the resource allocation to be implemented
-|		*params* = a tuple of selected Ebola objects specific to the *country* option selected
-|		*out_noiv_file* = output file: no interventions applied, *format=.csv*
-|		*out_iv_file* = output file: interventions applied, *format=.csv*
+|		*params* = tuple of parameters (the output from *setup_model*).
+|		*out_noiv_file* = "out_noiv.csv" (Default). Output file: no interventions applied, *format=.csv*
+|		*out_iv_file* = "out_iv.csv" (Default). Output file: interventions applied, *format=.csv*
 |		*n_threads* = 1 (Default), Number of processors to use, OpenMP Parallelization
-|		*plot* = False (Default)
-|			   = True, generates the plot profile in a pop-out window
+|		*plot* = True (Default), generates the plot profile in a pop-out window
+|			   = False
 |		*figure_file* = output figure file, *format = .png*
 |
 |	Output:    		
@@ -274,7 +294,7 @@ run_simulation_with_setup
 
 
 run_with_interventions
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
 ::
 
 	Source Code: run_simulations.py
@@ -286,31 +306,31 @@ run_with_interventions
 |		*OrigParams* = list of parameters before interventions are applied to the simulation model
 |		*StochParams* = object containing a list of parameters for stochastic modelling
 |		*MyConstraints* = constraints object in a file of praters generated from the *Constraints* object
+|		*out_file* = name of simulation output file
 |		*n_threads* = 1 (Default), Number of processors to use, OpenMP Parallelization
-|		*out_file* = “NONE” (Default), other option generates and output text file
 |
 |	Output:    		
-|		*cost* = value, cost associated with improving an intervention with no optimization applied
+|		*cost* = value, death metric of associated cost (number of dead people) after optimized simulation
 
 
 setup_constraints
-^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^
 ::
 
 	Source Code: constraints.py
   
-|	Returns all the *MyConstraints* object to be used for subsequent analysis. It checks to make sure that valid constraints are selected and used as input for the analysis.
+|	Returns an *MyConstraints* object to be used for subsequent analysis. Filters constraints with the *valid_interventions* keyword so that optimization is only run over the specified valid interventions.
 |
 |	Inputs:
-|		*filename* = input file (constraints_file_default) to parse the parameters, *format: .csv*
-|		*valid_interventions* = array listing of all interventions applicable, Default = ‘all’; other options: eg. ["theta_1", "delta_2"]
+|		*filename* = input file with parameters to be parsed, *format: .csv*
+|		*valid_interventions* = array listing of all interventions applicable, Default = ‘all’; other options: e.g. ["theta_1", "delta_2"]
 |
 |	Output:    		
-|		*MyConstraints* = constraints object in a file of praters generated from the *Constraints* object
+|		*MyConstraints* = *Constraints* object holding the relevant parameters
 
 
 setup_model
-^^^^^^^^^^^^
+^^^^^^^^^^^
 ::
 
 	Source Code: __init__.py
@@ -318,21 +338,26 @@ setup_model
 |	Returns *params*, a tuple of selected parameters specific to the country option selected. The Ebola model chosen is then used for the deterministic and stochastic simulation.
 |
 |	Inputs:
-|		*data_file* = default data file used to find the path directory
+|		*data_file* = data file of cases vs. time for various countries
 |		*plot_fit* = True (Default), plots data fitting figure in window
 |			       = False, plotting option is ignored
 |		*N_samples* = value; number of times to sample the stochastic run to query results for generating the output
-|		*trajectories* = value; number of times the stoachstic simulation is run for a consistency and stability
-|		*constraints_file* = default constraints file used to find the path directory
+|		*trajectories* = value; number of times the stoachstic simulation is run for consistency and stability
+|		*constraints_file* = constraints filename of a csv file with total budget and intervention time and costs
 |		*N* = value, size of the total population of susceptible persons
 |		*valid_interventions* = array listing of all interventions applicable, Default = ‘all’; other options: eg. ["theta_1", "delta_2"]
 |		*I_init* = value; initial values for the number of infectious cases in the community
+|		*S_init* = value; initial values for the number of susceptible individuals
+|		*H_init* = value; initial values for the number of hospitalized cases
+|		*F_init* = value; initial values for the number of cases who are dead but not yet buried
+|		*R_init* = value; initial values for the number of individuals removed from the chain of transmission
+|		*E_init* = value; initial values for the number of exposed individuals
 |		*country* = specified country based on Ebola data, Default = “Sierra Leone”
 |				  = other options: “Liberia”, “Guinea”
-|		*t_final* = value; limit of time series data calculated in days|
+|		*t_final* = value; limit of time series data calculated in days
 |
 |	Output:    		
-|		*params* = a tuple of selected Ebola objects specific to the *country* option selected
+|		*params* = a tuple of selected Ebola parameter objects specific to the *country* option selected
 
 
 setup_stoch_params
@@ -352,7 +377,7 @@ setup_stoch_params
 |		*F_init* = value; initial values for the number of cases who are dead but not yet buried
 |		*R_init* = value; initial values for the number of individuals removed from the chain of transmission
 |		*E_init* = value; initial values for the number of exposed individuals
-|		*t_final* = value; limit of time series data calculated in days|
+|		*t_final* = value; limit of time series data calculated in days
 |
 |	Output:    		
-|		*StochParams* = object containing a list of parameters for stochastic modelling
+|		*StochParams* = object containing parameters for stochastic modelling
