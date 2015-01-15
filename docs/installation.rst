@@ -11,11 +11,11 @@ EbolaOpt requires:
 * numpy
 * scipy
 * matplotlib
-* PyQt (optional)
+* PyQt (installs as PyQt4) for the GUI
 
 A unix-based operating system (e.g. Linux or Mac OS X) is assumed.
 
-If you do not already have python2.7, numpy, scipy, and matplotlib, the Anaconda
+If you do not already have python2.7, numpy, scipy, matplotlib, and PyQt the Anaconda
 distribution (https://store.continuum.io/cshop/anaconda/) is a convenient way 
 to install them.
 

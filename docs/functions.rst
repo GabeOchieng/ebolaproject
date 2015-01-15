@@ -7,28 +7,28 @@ calc_interventions
 
 	Source Code: tools.py
 
-|	Returns the *ModifiedParams* results taken from the *StochCalc.ModelParamList* . Calculates the values for the interventions to use in the analysis based on the parameters called for computation. Constraint information is taken from *MyConstraints* and *OrigParams* in *StochLib.pyModelParams()* is taken to generate ModifiedParams.
+|	Returns a *ModelParams* object. Calculates the values for the interventions to use in the analysis based on the parameters called for computation. Constraint information is taken from *MyConstraints* and *OrigParams* is an instance of *StochLib.ModelParams* that is taken to generate ModifiedParams.
 |
 |	Inputs:
-|		*alloc* = an array list containing specified values for the resource allocation to be implemented
-|		*OrigParams* = list of parameters before interventions are applied to the simulation model
-|		*StochParams* = object containing a list of parameters for stochastic modelling
-|		*MyConstraints* = constraints object in a file of praters generated from the *Constraints* object
+|		*alloc* = an array containing specified values for the resource allocation to be implemented
+|		*OrigParams* = *ModelParams* object holding parameters before interventions are applied to the simulation model
+|		*StochParams* = object containing parameters for stochastic modelling
+|		*MyConstraints* = *Constraints* object holding constraints information
 |
 |	Output:   
-|		*ModifiedParams* = new copy list of parameters before interventions are applied to the simulation model
+|		*ModifiedParams* = new object holding parameters after interventions are applied to the simulation model
 
-check_total
-^^^^^^^^^^^^^^^^^^
+calc_needed_resources
+^^^^^^^^^^^^^^^^^^^^^
 ::
 
 	Source Code: run_simulations.py
 
 Returns an array listing of needed_resources. The function checks to make sure that the total given is not so large that optimization is pointless.
-	total = value, must be less than 100,000.
-needed_resources = array listing of parameters for optimization
-	OrigParams = list of parameters
-MyConstraints = keyword
+	total = total resource budget
+needed_resources = array of resource allocation
+	OrigParams = object holding original parameters
+MyConstraints = *Constraints* object instance
 
 
 constraints_help
@@ -37,22 +37,23 @@ constraints_help
 
 	Source Code: constraints.py
 
-Returns the parameters used. A help file to describe the meanings of the parameters applied, the allowable range of values for each constraint and acceptable formatting. Takes no arguments.
-"theta_1" = "fraction of infected cases diagnosed and hospitalized", value < 10
-"beta_H" = "contact rate for hospitalized cases", 1 < value < 17
-"delta_2" = "fatality rate of hospitalized patients", 2 < value < 40
+Prints the intervention options. Describes the meanings of the parameters applied. Takes no arguments.
+"theta_1" = "fraction of infected cases diagnosed and hospitalized"
+"beta_H" = "contact rate for hospitalized cases"
+"delta_2" = "fatality rate of hospitalized patients"
 
 
 fit_params
-^^^^^^^^^^^
+^^^^^^^^^^
 ::
 
 	Source Code: modelfit.py
 
-Returns an array listing containing the list of parameter for a specific country. 
-		N= array listing of parameters from Legrand paper, values must be float
-days = array listing for the specific day containing data on the number of cases
-	cases = array listing containing the number of cases reported
+Returns an object containing the list of parameters for a specific country.
+        data_file = path of cases data file
+        country = name of country
+		N= total population
+        plot_fit=False (default). Specify whether to show a plot of the fitting.
 
 	
 get_data_path
@@ -61,7 +62,7 @@ get_data_path
 
 	Source Code: __init__.py
 
-|	Returns the *path* directory of both *data_file_default* and *constraints_file_default*. The *data_file_default* and *constraints_file_default* are used to generate the *path* directory for subsequent use with other functions and class objects.
+|	Returns the *path* directory of the current file. It is used to generate the *path* directory of the constraints and case default files.
 |
 |	Inputs:
 |		*data_file_default* = default data file used to find the path directory
@@ -70,12 +71,6 @@ get_data_path
 |	Output: 
 |		*path* = directory listing of the files
  
- 
-Commands from modelfit.py:
-LLode(x):
-Returns OrigParams. The parameters are first initialized using guesses of the values. The guessed values are then fit with the data, integrated, and then the error of the initial guesses are minimized. Optimal parameters are then generated for use in the computation after the process is iterated until the error is below one percent. All parameter definitions are consistent with the Legrand paper.
-N= array listing of parameters from Legrand paper, values must be float
-OrigParams = list of parameters
 
 
 parse_data
@@ -84,8 +79,13 @@ parse_data
 
 	Source Code: modelfit.py
 
-Returns an array listing of the day and cases associated with that particular day for s specific country. The function takes the directory listing of the file path of the raw data csv file and extracts the number of cases versus time for a given country. Requirement: country name should match the string in the .csv file.
-	filename = input file with country string header, must be in .csv format
+Returns an array listing of the day and cases associated with that particular day for a specific country. The function takes the directory listing of the file path of the raw data csv file and extracts the number of cases versus time for a given country. Requirement: country name should match the string in the .csv file.
+	
+    Inputs:
+    filename = input file with country string header, must be in .csv format
+    country = 
+    
+    Outputs:
 	days = array listing for the specific day containing data on the number of cases
 	cases = array listing containing the number of cases reported
 
@@ -95,7 +95,7 @@ plot_output
 
 	Source Code: plot.py
 
-|	Returns a figure plot in a window. Data from the simulations run for the optimized option with interventions and the no intervention simulation is plotted for comparison.
+|	Generates a figure plot in a window. Data from the simulations run for the optimized option with interventions and the no intervention simulation is plotted for comparison.
 |
 |	Inputs:
 |		*out_noiv_file* = output file: no interventions applied, *format=.csv*

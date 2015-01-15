@@ -27,7 +27,7 @@ def setup_model(data_file=data_file_default, constraints_file=constraints_file_d
 ######################
 
 def optimize_with_setup(params, disp=True, out_noiv_file="out_noiv.csv", \
-                        out_iv_file="out.csv", figure_file="out.png", plot=True, \
+                        out_iv_file="out_iv.csv", figure_file="out.png", plot=True, \
                         n_threads=1):
     OrigParams, StochParams, MyConstraints = params
     cost_noiv = run_no_interventions(OrigParams, StochParams, out_noiv_file, \
@@ -39,7 +39,7 @@ def optimize_with_setup(params, disp=True, out_noiv_file="out_noiv.csv", \
     return xmin, final_cost
 
 def run_simulation_with_setup(alloc, params, out_noiv_file="out_noiv.csv", \
-                        out_iv_file="out.csv", figure_file="out.png", plot=True, \
+                        out_iv_file="out_iv.csv", figure_file="out.png", plot=True, \
                         n_threads=1):
     OrigParams, StochParams, MyConstraints = params
     cost_noiv = run_no_interventions(OrigParams, StochParams, out_noiv_file, \
@@ -53,7 +53,7 @@ def run_simulation_with_setup(alloc, params, out_noiv_file="out_noiv.csv", \
 ######################
 
 def optimize(disp=True, out_noiv_file="out_noiv.csv", \
-             out_iv_file="out.csv", figure_file="out.png", plot=True, \
+             out_iv_file="out_iv.csv", figure_file="out.png", plot=True, \
              n_threads=1, **kwds):
     params = setup_model(**kwds)
     xmin, final_cost = optimize_with_setup(params, disp=disp, out_noiv_file=out_noiv_file, \
@@ -62,7 +62,7 @@ def optimize(disp=True, out_noiv_file="out_noiv.csv", \
     return xmin, final_cost
 
 def run_simulation(alloc, disp=True, out_noiv_file="out_noiv.csv", \
-                   out_iv_file="out.csv", figure_file="out.png", plot=True, \
+                   out_iv_file="out_iv.csv", figure_file="out.png", plot=True, \
                    n_threads=1, **kwds):
     params = setup_model(**kwds)
     final_cost = run_simulation_with_setup(alloc, params, out_noiv_file=out_noiv_file, \
