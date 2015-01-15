@@ -467,19 +467,19 @@ class Ui_MainWindow(object):
 		
 	def Ebola_Simulator():  
 		if self.checkBox.isChecked():
-			plot_fit = 'True'
+			plot_fit = True
 		else:
-			plot_fit = 'False'
+			plot_fit = False
 
 		if self.checkBox_2.isChecked():
-			disp = 'True'
+			disp = True
 		else:
-			disp = 'False'
+			disp = False
 		
 		if self.checkBox_3.isChecked():
-			plot = 'True'
+			plot = True
 		else:
-			plot = 'False'
+			plot = False
 				
 		N=int(self.lineEdit.text())
 		N_samples=int(self.lineEdit_2.text())
@@ -487,17 +487,26 @@ class Ui_MainWindow(object):
 		I_init=int(self.lineEdit_4.text())
 		trajectories=int(self.lineEdit_5.text())
 		n_threads=int(self.lineEdit_6.text())
-		valid_interventions=[str(self.comboBox_2.currentText())]
+
 		country=str(self.comboBox.currentText())
 		out_iv_file=str(self.lineEdit_7.text())
 		out_noiv_file=str(self.lineEdit_8.text())
 		figure_file=str(self.lineEdit_9.text())
 
+		valid_interventions=[str(self.comboBox_2.currentText())]
+		
+		if 'all' == self.comboBox_2.currentText():
+			valid_interventions= str(self.comboBox_2.currentText())
+		else:
+			valid_interventions= str(self.comboBox_2.currentText()).split()	
+		
 		print [N_samples, t_final, I_init, trajectories, n_threads, N, valid_interventions, country, constraints_file, data_file, disp, plot_fit, plot, out_iv_file, out_noiv_file, figure_file]
-
-		#alloc, cost = optimize(N=N,N_samples=N_samples, t_final=t_final, I_init=I_init, trajectories=trajectories,\
-		#valid_interventions=valid_interventions, country=country, constraints_file=constraints_file, data_file=data_file,
-		# disp, plot_fit, plot, n_threads=n_threads)
+		
+		from ebolaopt import optimize
+		
+		alloc, cost = optimize(N=N,N_samples=N_samples, t_final=t_final, I_init=I_init, trajectories=trajectories,\
+        valid_interventions=valid_interventions, country=country, constraints_file=constraints_file, data_file=data_file,\
+         disp=disp, plot_fit=plot_fit, plot=plot, n_threads=n_threads)
 		
         self.retranslateUi(MainWindow)
         QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL(_fromUtf8("clicked()")), Ebola_Simulator)
@@ -535,9 +544,9 @@ class Ui_MainWindow(object):
         self.comboBox.setItemText(2, _translate("MainWindow", "Liberia", None))
         self.label_8.setText(_translate("MainWindow", "valid_iv", None))
         self.comboBox_2.setItemText(0, _translate("MainWindow", "all", None))
-        self.comboBox_2.setItemText(1, _translate("MainWindow", "beta_H\', \'delta_2", None))
-        self.comboBox_2.setItemText(2, _translate("MainWindow", "beta_H\', \'theta_1", None))
-        self.comboBox_2.setItemText(3, _translate("MainWindow", "delta_2\', \'theta_1", None))
+        self.comboBox_2.setItemText(1, _translate("MainWindow", "beta_H delta_2", None))
+        self.comboBox_2.setItemText(2, _translate("MainWindow", "beta_H theta_1", None))
+        self.comboBox_2.setItemText(3, _translate("MainWindow", "delta_2 theta_1", None))
         self.comboBox_2.setItemText(4, _translate("MainWindow", "delta_2", None))
         self.comboBox_2.setItemText(5, _translate("MainWindow", "beta_H", None))
         self.comboBox_2.setItemText(6, _translate("MainWindow", "theta_1", None))
