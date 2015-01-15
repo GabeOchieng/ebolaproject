@@ -32,6 +32,7 @@ Contents
    background
    installation
    getting_started
+   gui
    functions 
    classobjects
    warnings
