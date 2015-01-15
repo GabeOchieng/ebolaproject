@@ -472,14 +472,14 @@ class Ui_MainWindow(object):
 			plot_fit = False
 
 		if self.checkBox_2.isChecked():
-			disp = True
-		else:
-			disp = False
-		
-		if self.checkBox_3.isChecked():
 			plot = True
 		else:
 			plot = False
+		
+		if self.checkBox_3.isChecked():
+			disp = True
+		else:
+			disp = False
 				
 		N=int(self.lineEdit.text())
 		N_samples=int(self.lineEdit_2.text())
